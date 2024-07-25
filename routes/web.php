@@ -7,6 +7,14 @@ Route::get('/', function () {
     return view('layouts.master');
 });
 
+Route::get('/dashboard1', function () {
+    return view('admin.dashboard.index');
+});
+
+Route::get('/client', function () {
+    return view('admin.client.add');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
