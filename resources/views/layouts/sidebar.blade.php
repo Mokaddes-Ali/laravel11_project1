@@ -73,13 +73,13 @@
                             <li>
                                 <a href="#sidebarEmail" data-bs-toggle="collapse">
                                     <i data-feather="mail"></i>
-                                    <span> Email </span>
+                                    <span> Client </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarEmail">
                                     <ul class="nav-second-level">
-                                        <li><a href="email-inbox.html">Inbox</a></li>
-                                        <li><a href="email-read.html">Read Email</a></li>
+                                        <li><a href="/client">Add Client</a></li>
+                                        <li><a href="/client">Manage Client</a></li>
                                         <li><a href="email-compose.html">Compose Email</a></li>
                                     </ul>
                                 </div>

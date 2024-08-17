@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
 
 Route::get('/', function () {
     return view('layouts.master');
@@ -11,9 +12,8 @@ Route::get('/dashboard1', function () {
     return view('admin.dashboard.index');
 });
 
-Route::get('/client', function () {
-    return view('admin.client.add');
-});
+Route::get('/client', [ClientController::class, 'index'])->name('index');
+Route::post('/client/submit', [ClientController::class, 'create'])->name('create');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -26,3 +26,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
