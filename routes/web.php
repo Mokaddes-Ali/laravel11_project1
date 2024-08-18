@@ -14,6 +14,11 @@ Route::get('/dashboard1', function () {
 
 Route::get('/client', [ClientController::class, 'index'])->name('index');
 Route::post('/client/submit', [ClientController::class, 'create'])->name('create');
+Route::get('/show/client', [ClientController::class, 'show']);
+Route::get('/edit/client/{id}', [ClientController::class, 'edit']);
+Route::put('/client/update', [ClientController::class, 'update']);
+Route::get('/delete/{id}', [ClientController::class, 'destroy']);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

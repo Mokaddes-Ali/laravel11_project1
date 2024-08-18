@@ -79,7 +79,7 @@
                                 <div class="collapse" id="sidebarEmail">
                                     <ul class="nav-second-level">
                                         <li><a href="/client">Add Client</a></li>
-                                        <li><a href="/client">Manage Client</a></li>
+                                        <li><a href="/show/client">Manage Client</a></li>
                                         <li><a href="email-compose.html">Compose Email</a></li>
                                     </ul>
                                 </div>

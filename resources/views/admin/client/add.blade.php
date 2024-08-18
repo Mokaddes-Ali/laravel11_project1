@@ -10,7 +10,7 @@
         {{ session()->get('success') }}
     </div>
 @endif
-        <form method = "POST" action = "{{ url('/client/submit') }}" >
+        <form method = "POST" action = "{{ url('/client/submit') }}"  enctype="multipart/form-data">
             @csrf
             <div class="form-group">
               <label for="exampleInputEmail1">Name</label>
@@ -30,6 +30,10 @@
               <label for="exampleInputPassword1">Password</label>
               <input type="password"  name = "password"  class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Image</label>
+                <input type="file"  name = "pic"  class="form-control" id="exampleInputPassword1" placeholder="Input a Image">
+              </div>
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
           </form>
   </div>
