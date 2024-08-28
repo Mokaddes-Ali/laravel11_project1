@@ -14,11 +14,29 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->string('number')->nullable();
             $table->string('password');
             $table->string('pic')->nullable();
+            $table->unsignedBigInteger('creator')->nullable();
+            $table->unsignedBigInteger('editor')->nullable();
+            $table->string('slug', 50)->nullable();
+            $table->integer('status')->default(0);
             $table->timestamps();
+
+                // Foreign key constraints with cascadeOnUpdate and restrictOnDelete
+             $table->foreign('creator')
+                      ->references('id')
+                      ->on('users')
+                      ->cascadeOnUpdate()
+                      ->restrictOnDelete();
+
+             $table->foreign('editor')
+                      ->references('id')
+                      ->on('users')
+                      ->cascadeOnUpdate()
+                      ->restrictOnDelete();
+
         });
     }
 
