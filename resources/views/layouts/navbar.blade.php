@@ -9,7 +9,7 @@
             <li class="d-none d-lg-block">
                 <form class="app-search">
                     <div class="app-search-box dropdown">
-            
+
                         <div class="input-group">
                             <input type="search" class="form-control" placeholder="Search..." id="top-search">
                             <button class="btn input-group-text" type="submit">
@@ -22,7 +22,7 @@
                             <div class="dropdown-header noti-title">
                                 <h5 class="text-overflow mb-2">Found 05 results</h5>
                             </div>
-                
+
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="uil uil-sliders-v-alt me-1"></i>
@@ -70,7 +70,7 @@
                                 </a>
                             </div>
 
-                        </div>  
+                        </div>
                     </div>
                 </form>
             </li>
@@ -132,31 +132,31 @@
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1" height="12"> 
+                        <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1" height="12">
                         <span class="align-middle">English</span>
                     </a>
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> 
+                        <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12">
                         <span class="align-middle">German</span>
                     </a>
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> 
+                        <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12">
                         <span class="align-middle">Italian</span>
                     </a>
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> 
+                        <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12">
                         <span class="align-middle">Spanish</span>
                     </a>
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> 
+                        <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12">
                         <span class="align-middle">Russian</span>
                     </a>
 
@@ -249,7 +249,7 @@
                 <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
                     <span class="pro-user-name ms-1">
-                        Nik Patel <i class="uil uil-angle-down"></i> 
+                        Nik Patel <i class="uil uil-angle-down"></i>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -268,9 +268,12 @@
 
                     <div class="dropdown-divider"></div>
 
-                    <a href="pages-logout.html" class="dropdown-item notify-item">
+                    <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                         <i data-feather="log-out" class="icon-dual icon-xs me-1"></i><span>Logout</span>
                     </a>
+                    <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
 
                 </div>
             </li>
@@ -323,12 +326,12 @@
                     </div>
                 </a>
                 <!-- End mobile menu toggle-->
-            </li>   
+            </li>
 
             <li class="dropdown d-none d-xl-block">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     Create New
-                    <i class="uil uil-angle-down"></i> 
+                    <i class="uil uil-angle-down"></i>
                 </a>
                 <div class="dropdown-menu">
                     <!-- item-->

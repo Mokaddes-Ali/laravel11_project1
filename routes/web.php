@@ -4,13 +4,13 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 
-Route::get('/', function () {
-    return view('layouts.master');
-});
+// Route::get('/', function () {
+//     return view('layouts.master');
+// });
 
-Route::get('/dashboard1', function () {
-    return view('admin.dashboard.index');
-});
+// Route::get('/dashboard1', function () {
+//     return view('admin.dashboard.index');
+// });
 
 Route::get('/client', [ClientController::class, 'index'])->name('index');
 Route::post('/client/submit', [ClientController::class, 'create'])->name('create');
@@ -21,7 +21,7 @@ Route::get('/delete/{id}', [ClientController::class, 'destroy']);
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('layouts.master');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
