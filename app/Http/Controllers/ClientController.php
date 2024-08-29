@@ -1,8 +1,7 @@
 <?php
+ namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
-use App\Models\Client;
+ use App\Models\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -40,9 +39,9 @@ class ClientController extends Controller
             $image_rename = time() . '_' . rand(100000, 10000000) . '.' . $extension;
             $image->move(public_path('images'), $image_rename);
 
-            // Delete old image
+            // Delete old image if it's a file
             $oldImgPath = public_path('images/' . $client->pic);
-            if (file_exists($oldImgPath)) {
+            if (!empty($client->pic) && file_exists($oldImgPath) && is_file($oldImgPath)) {
                 unlink($oldImgPath);
             }
         }
@@ -98,7 +97,7 @@ class ClientController extends Controller
         $client = Client::find($id);
         if ($client) {
             $imagePath = public_path('images/' . $client->pic);
-            if (file_exists($imagePath)) {
+            if (file_exists($imagePath) && is_file($imagePath)) { // Check if it's a file
                 unlink($imagePath);
             }
 
