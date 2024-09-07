@@ -27,8 +27,8 @@
               </div>
 
             <div class="form-group">
-              <label for="exampleInputPassword1">Password</label>
-              <input type="password"  name = "password"  class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <label for="exampleInputAddress1">Address</label>
+              <input type="text"  name = "address"  class="form-control" id="exampleInputAddress1" placeholder="Address">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Image</label>

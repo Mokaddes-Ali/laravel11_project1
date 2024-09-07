@@ -80,7 +80,6 @@
                                     <ul class="nav-second-level">
                                         <li><a href="/client">Add Client</a></li>
                                         <li><a href="/show/client">Manage Client</a></li>
-                                        <li><a href="email-compose.html">Compose Email</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -93,8 +92,8 @@
                                 </a>
                                 <div class="collapse" id="sidebarProjects">
                                     <ul class="nav-second-level">
-                                        <li><a href="project-list.html">List</a></li>
-                                        <li><a href="project-detail.html">Detail</a></li>
+                                        <li><a href="/project">List</a></li>
+                                        <li><a href="/show/project">Detail</a></li>
                                     </ul>
                                 </div>
                             </li>

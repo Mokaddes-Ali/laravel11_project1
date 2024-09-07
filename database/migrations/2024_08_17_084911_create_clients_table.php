@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('number')->nullable();
-            $table->string('password');
+            $table->string('address')->nullable();
             $table->string('pic')->nullable();
             $table->unsignedBigInteger('creator')->nullable();
             $table->unsignedBigInteger('editor')->nullable();
