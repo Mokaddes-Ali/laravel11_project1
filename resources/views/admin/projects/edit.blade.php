@@ -28,39 +28,44 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ url('/client/update') }}" enctype="multipart/form-data">
+    <form  action="{{url('/project/update')}}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT') <!-- Specify PUT method -->
+     <div class="form-group">
+       <label for="exampleInputEmail1">Client Name</label>
+       <select class="form-select" name="client_id" aria-label="Default select example">
+     <option selected> Select Client Name</option>
+     @foreach ($all as $row )
+     <option value="{{$row->id}}">{{$row['name']}}</option>
+     @endforeach
+   </select>
 
-        <input type="hidden" value="{{ $record->id }}" name="id">
+     </div>
+     <div class="form-group">
+       <label for="exampleInputEmail1">Project Name</label>
+       <input type="text" value="{{$data['project_name']}}" name="project_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+      <input type="text" hidden value="{{$data['id']}}" name="id">
+     </div>
+     <div class="form-group">
+       <label for="exampleInputEmail1">Date</label>
+       <input type="date" value="{{$data['date']}}" name="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
 
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" value="{{ $record->name }}" name="name" class="form-control" id="name" placeholder="Enter Name">
-        </div>
+     </div>
 
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" value="{{ $record->email }}" name="email" class="form-control" id="email" placeholder="Enter Email">
-        </div>
+     <div class="form-group">
+       <label for="exampleInputEmail1">Project Value</label>
+       <input type="text" value="{{$data['project_value']}}" name="project_value" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 
-        <div class="form-group">
-            <label for="number">Mobile</label>
-            <input type="number" value="{{ $record->number }}" name="number" class="form-control" id="number" placeholder="Enter Mobile Number">
-        </div>
+     </div>
 
-        <div class="form-group">
-            <label for="address">Address</label>
-            <input type="text" value="{{ $record->address }}" name="address" class="form-control" id="address" placeholder="address">
-        </div>
-
-        <div class="form-group">
-            <label for="pic">Image</label>
-            <input type="file" name="pic" class="form-control" id="pic" placeholder="Input an Image">
-            <img src="{{ asset('images/' . $record->pic) }}" alt="img" width="50" height="50">
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-3">Update</button>
-    </form>
+     <div class="form-group">
+                       <label>Project Description</label>
+                       <textarea class="form-control" name="description" id="" cols="30" rows="6" required autocomplete="off">
+   {{$data['description']}}
+                       </textarea>
+                   </div>
+     <button type="submit" class="btn btn-dark mt-2">UPDATE</button>
+   </form>
+     </div>
+   </div>
 </div>
 @endsection

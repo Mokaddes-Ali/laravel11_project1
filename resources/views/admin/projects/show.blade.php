@@ -3,7 +3,7 @@
 @section('content')
 <div class="card ">
     <div class="card-header w-36 h-11">
-        Show Client
+        Show All Project List
 </div>
 @if(session()->has('success'))
 <div class="alert alert-success">
@@ -14,11 +14,11 @@
     <thead>
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Number</th>
-        <th scope="col">Address</th>
-        <th scope="col">Image</th>
+        <th scope="col">Project Name</th>
+        <th scope="col">Client Name</th>
+        <th scope="col">project value</th>
+        <th scope="col">Paid Amount</th>
+        <th scope="col">Due Amount</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -26,15 +26,13 @@
         @foreach ($all as $row)
       <tr>
         <th scope="row">{{ $row['id'] }}</th>
-        <td>{{ $row['name'] }}</td>
-        <td>{{ $row['email'] }}</td>
-        <td>{{ $row['number'] }}</td>
-        <td>{{ $row['address'] }}</td>
+        <td>{{ $row['project_name'] }}</td>
+        <td>{{ $row->client->name }}</td>
+        <td>{{ $row['project_value'] }}</td>
+        <td>{{ $row['paid_amount'] }}</td>
+        <td>{{ $row['due_amount'] }}</td>
         <td>
-            <img src="{{ asset('images/'.$row['pic']) }}" alt="img" width="50" height="50">
-        </td>
-        <td>
-            <a class="btn btn-primary btn-sm," href="{{ url('/edit/client' , $row -> id) }}">edit</a>
+            <a class="btn btn-primary btn-sm," href="{{ url('/edit/project' , $row -> id) }}">edit</a>
             <a class="btn btn-danger btn-lg" onclick="return confirm('Are You Sure Delete!')" href="{{ url('/delete', $row -> id)}}">delete</a>
         </td>
       </tr>

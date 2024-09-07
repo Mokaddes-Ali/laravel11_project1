@@ -14,7 +14,7 @@
             @csrf
             <div class="form-group">
               <label for="exampleInputEmail1">Client Name</label>
-              <select class="form-select" aria-label="Default select example">
+              <select class="form-select" name="client_id" aria-label="Default select example">
                 <option selected>Select Client</option>
                 @foreach ($all as $row )
                 <option value="{{ $row->id }}">{{ $row['name'] }}</option>
@@ -27,7 +27,7 @@
               </div>
               <div class="form-group">
                 <label for="exampleInputAddress1">Project Value</label>
-                <input type="number"  name = "project_value"  class="form-control" id="exampleInputAddress1" placeholder="Project Value">
+                <input type="text"  name = "project_value"  class="form-control" id="exampleInputAddress1" placeholder="Project Value">
               </div>
 
              <div class="form-group">
