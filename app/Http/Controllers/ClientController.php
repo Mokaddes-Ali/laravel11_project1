@@ -1,10 +1,7 @@
 <?php
 
-
-
- namespace App\Http\Controllers;
-
- use App\Models\Client;
+namespace App\Http\Controllers;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
@@ -17,8 +14,6 @@ class ClientController extends Controller
         $all = Client::all();
         return view('admin.client.show', compact('all'));
     }
-
-
     public function create(Request $request){
             $request->validate([
             'name' => 'required|max:40',
@@ -50,8 +45,6 @@ class ClientController extends Controller
             return back()->with('fail', 'Data insertion failed');
         }
     }
-
-
 
     public function edit($id){
         $record = Client::findOrFail($id);
@@ -88,7 +81,6 @@ class ClientController extends Controller
                 $image_rename=$oldimg['pic'];
             }
 
-
         $update = Client::where('id',$id)->update([
             'name' => $request->name,
             'email' => $request->email,
@@ -111,7 +103,6 @@ class ClientController extends Controller
             if (file_exists($imagePath)) { // Check if it's a file
                 unlink($imagePath);
             }
-
             $client->delete();
             return back()->with('success', 'Data deleted successfully');
         }

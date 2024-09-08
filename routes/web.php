@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 
@@ -26,6 +27,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/edit/project/{id}', [ProjectController::class, 'projectedit'])->name('projectedit');
     Route::post('/project/update', [ProjectController::class, 'projectupdate'])->name('projectupdate');
     Route::get('/delete/{id}', [ProjectController::class, 'projectdestroy'])->name('projectdestroy');
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/income', [IncomeController::class, 'incomeindex'])->name('incomeindex');
+    Route::post('/income/submit', [IncomeController::class, 'incomestore'])->name('incomestore');
+    Route::get('/show/income', [IncomeController::class, 'incomeshow'])->name('incomeshow');
+    // Route::get('/edit/project/{id}', [IncomeController::class, 'incomeedit'])->name('incomeedit');
+    // Route::post('/project/update', [IncomeController::class, 'incomeupdate'])->name('incomeupdate');
+    // Route::get('/delete/{id}', [IncomeController::class, 'incomedestroy'])->name('incomedestroy');
 });
 
 

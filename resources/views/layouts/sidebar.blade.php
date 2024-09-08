@@ -101,13 +101,13 @@
                             <li>
                                 <a href="#sidebarTasks" data-bs-toggle="collapse">
                                     <i data-feather="clipboard"></i>
-                                    <span> Tasks </span>
+                                    <span> Income </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarTasks">
                                     <ul class="nav-second-level">
-                                        <li><a href="task-list.html">List</a></li>
-                                        <li><a href="task-board.html">Kanban Board</a></li>
+                                        <li><a href="/income">Add Income</a></li>
+                                        <li><a href="/show/income">List Income</a></li>
                                     </ul>
                                 </div>
                             </li>
