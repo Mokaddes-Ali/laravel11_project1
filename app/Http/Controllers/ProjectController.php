@@ -55,11 +55,7 @@ class ProjectController extends Controller
         $all=Client::all();
         $data=Project::where('id',$id)->firstOrFail();
         return view('admin.projects.edit',compact('data','all'));
-
-
         }
-
-
 
         public function projectupdate(Request $request){
             // dd($request->all());
@@ -94,8 +90,8 @@ class ProjectController extends Controller
 
      public function projectdestroy($id){
         $id=intval($id);
-        $client = Client::find($id);
-            $client->delete();
+        $projectdelete = Project::find($id);
+        $projectdelete->delete();
             return back()->with('success', 'Data deleted successfully');
         }
  }
