@@ -35,8 +35,9 @@
               <input type="date"  name = "date"  class="form-control" id="exampleInputAddress1" placeholder="Choose Date">
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">Description</label>
-                <input type="text"  name = "description" class="form-control p-4" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Description">
+                <label>Description</label>
+                <textarea class="form-control" name="description" id="" cols="30" rows="6" required autocomplete="off">
+                   </textarea>
               </div>
             <button type="submit" class="btn btn-primary mt-3">Add</button>
           </form>

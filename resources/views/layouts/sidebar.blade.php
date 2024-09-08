@@ -87,7 +87,7 @@
                             <li>
                                 <a href="#sidebarProjects" data-bs-toggle="collapse">
                                     <i data-feather="briefcase"></i>
-                                    <span> Projects </span>
+                                 <span> Projects </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarProjects">

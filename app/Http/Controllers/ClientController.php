@@ -45,7 +45,7 @@ class ClientController extends Controller
         ]);
 
         if ($insert) {
-            return back()->with('success', 'Data inserted successfully');
+            return redirect()-> route('show') -> with('success', 'Data inserted successfully');
         } else {
             return back()->with('fail', 'Data insertion failed');
         }

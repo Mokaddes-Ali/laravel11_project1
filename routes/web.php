@@ -13,21 +13,20 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/client', [ClientController::class, 'index'])->name('index');
     Route::post('/client/submit', [ClientController::class, 'create'])->name('create');
-    Route::get('/show/client', [ClientController::class, 'show']);
+    Route::get('/show/client', [ClientController::class, 'show']) -> name('show');
     Route::get('/edit/client/{id}', [ClientController::class, 'edit']);
-    Route::put('/client/update', [ClientController::class, 'update']);
+    Route::post('/client/update', [ClientController::class, 'update']);
     Route::get('/delete/{id}', [ClientController::class, 'destroy']);
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/project', [ProjectController::class, 'index'])->name('index');
     Route::post('/project/submit', [ProjectController::class, 'store'])->name('store');
-    Route::get('/show/project', [ProjectController::class, 'show'])->name('show');
-    Route::get('/edit/project/{id}', [ProjectController::class, 'edit'])->name('edit');
-    Route::put('/project/update', [ProjectController::class, 'update'])->name('update');
-    Route::get('/delete/{id}', [ProjectController::class, 'destroy'])->name('delete');
+    Route::get('/show/project', [ProjectController::class, 'projectshow'])->name('projectshow');
+    Route::get('/edit/project/{id}', [ProjectController::class, 'projectedit'])->name('projectedit');
+    Route::post('/project/update', [ProjectController::class, 'projectupdate'])->name('projectupdate');
+    Route::get('/delete/{id}', [ProjectController::class, 'projectdestroy'])->name('projectdestroy');
 });
-
 
 
 Route::middleware('auth')->group(function () {
