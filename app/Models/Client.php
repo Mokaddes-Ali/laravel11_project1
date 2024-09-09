@@ -15,6 +15,6 @@ class Client extends Model
         'number',
         'address',
 
-        
+
     ];
 }
