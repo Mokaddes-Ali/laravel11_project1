@@ -30,8 +30,6 @@
 
     <form method="POST" action="{{ url('/client/update') }}" enctype="multipart/form-data">
         @csrf
-        @method('PUT') <!-- Specify PUT method -->
-
         <input type="hidden" value="{{ $record->id }}" name="id">
 
         <div class="form-group">
@@ -59,7 +57,6 @@
             <input type="file" name="pic" class="form-control" id="pic" placeholder="Input an Image">
             <img src="{{ asset('images/' . $record->pic) }}" alt="img" width="50" height="50">
         </div>
-
         <button type="submit" class="btn btn-primary mt-3">Update</button>
     </form>
 </div>
