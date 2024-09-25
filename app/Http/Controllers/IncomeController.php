@@ -67,5 +67,13 @@ class IncomeController extends Controller
     } catch (\Exception $e) {
     DB::rollback();
   }
+ }
+
+  public function incomeedit($id){
+    $record = Income::findOrFail($id);
+    $all = Project::where('status', 0)->orderBy('id', 'ASC')->get();
+    return view('admin.Income.edit', compact('record','all'));
+
 }
+
 }
