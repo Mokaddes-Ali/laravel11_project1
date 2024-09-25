@@ -69,11 +69,27 @@ class IncomeController extends Controller
   }
  }
 
-  public function incomeedit($id){
-    $record = Income::findOrFail($id);
-    $all = Project::where('status', 0)->orderBy('id', 'ASC')->get();
-    return view('admin.Income.edit', compact('record','all'));
-
+// Controller
+public function edit($id)
+{
+    $income = Income::findOrFail($id); // এখানে Income মডেল আপনার ইনকামের জন্য হবে
+    $allProjects = Project::all(); // এখানে Project মডেল আপনার প্রজেক্টের ডেটা নিয়ে আসবে
+    return view('admin.Income.edit', compact('income', 'allProjects'));
 }
+
+public function update(Request $request, $id)
+{
+    $income = Income::find($id);
+    $income->project_id = $request->project_id;
+    $income->date = $request->date;
+    $income->income_amount = $request->income_amount;
+    $income->bank_account_id = $request->bank_account_id;
+    $income->note = $request->note;
+
+    $income->save();
+
+    return redirect()->back()->with('success', 'Income updated successfully.');
+}
+
 
 }
