@@ -77,6 +77,13 @@ public function edit($id)
     return view('admin.Income.edit', compact('income', 'allProjects'));
 }
 
+public function destroy($id)
+{
+    $income = Income::find($id);
+    $income->delete();
+    return redirect()->back()->with('success', 'Income deleted successfully.');
+}
+
 public function update(Request $request, $id)
 {
     $income = Income::find($id);
@@ -89,6 +96,7 @@ public function update(Request $request, $id)
     $income->save();
 
     return redirect()->back()->with('success', 'Income updated successfully.');
+
 }
 
 
