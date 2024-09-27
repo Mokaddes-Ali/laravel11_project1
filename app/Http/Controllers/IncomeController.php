@@ -69,11 +69,12 @@ class IncomeController extends Controller
   }
  }
 
-// Controller
+
+ 
 public function edit($id)
 {
-    $income = Income::findOrFail($id); // এখানে Income মডেল আপনার ইনকামের জন্য হবে
-    $allProjects = Project::all(); // এখানে Project মডেল আপনার প্রজেক্টের ডেটা নিয়ে আসবে
+    $income = Income::findOrFail($id);
+    $allProjects = Project::all();
     return view('admin.Income.edit', compact('income', 'allProjects'));
 }
 
