@@ -71,12 +71,6 @@ class IncomeController extends Controller
  }
 
 
-// public function edit($id)
-// {
-//     $all = Project::where('status', 0)->get();
-//     $data = Income::where('id', $id)->firstOrFail();
-//     return view('admin.Income.edit', compact('data', 'all'));
-// }
 
 public function edit($id){
     $all=Project::where('status',0)->get();
@@ -88,20 +82,50 @@ public function edit($id){
 
 
 
-public function update(Request $request, $id)
+public function update(Request $request)
 {
-    $income = Income::find($id);
-    $income->project_id = $request->project_id;
-    $income->date = $request->date;
-    $income->income_amount = $request->income_amount;
-    $income->bank_account_id = $request->bank_account_id;
-    $income->note = $request->note;
+    dd($request->all());
 
-    $income->save();
+    $request->validate([
 
-    return redirect()->back()->with('success', 'Income updated successfully.');
+        'project_id' => 'required',
+        'income_amount' => 'required',
+        'date' => 'required',
+        'note' => 'required',
+        'bank_account_id' => 'required',
 
+    ]);
+
+    $oldincome = Income::where('id',$request->id)->firstOrFail();
+
+    $update=Income::where('id',$request->id)->update([
+        'project_id' => $request->project_id,
+        'income_amount' => $request->income_amount,
+        'date' => $request->date,
+        'note' => $request->note,
+        'bank_account_id' => $request->bank_account_id,
+        'editor' => Auth::user()->id,
+        'slug' => $request->project_id . rand(10000,10000000),
+
+    ]);
+
+    $data=Project::where('id',$request->project_id)->firstOrFail();
+
+    $paid_amount = (float) $request->income_amount + (float) $data->paid_amount - (float)$oldincome->income_amount;
+    $due_amount = (float) $data->project_value - (float)$paid_amount;
+
+    if( $update){
+        $update = Project::where('id',$request->project_id)->update([
+            'paid_amount' => $paid_amount,
+            'due_amount' => $due_amount,
+
+            ]);
+
+     return redirect()->back()->with('success','Data updated successfully');
+
+    }
 }
+
 
 public function destroy($id)
 {

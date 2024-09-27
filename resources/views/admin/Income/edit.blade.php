@@ -23,7 +23,7 @@
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1">Project Name</label>
-                    <select class="form-select" name="project_id" aria-label="Default select example">
+                    <select class="form-select" name="project_id"  aria-label="Default select example">
                         <option selected> Select Project Name</option>
                         @foreach ($all as $row)
                             <option value="{{ $row->id }}" {{ $row->id == $data->project_id ? 'selected' : '' }}>
