@@ -73,17 +73,11 @@ class IncomeController extends Controller
 
 public function edit($id)
 {
-    $income = Income::findOrFail($id);
-    $allProjects = Project::all();
-    return view('admin.Income.edit', compact('income', 'allProjects'));
+    $all = Income::where('status', 1)->orderBy('id', 'ASC')->get();
+    return view('admin.Income.edit', compact('all'));
 }
 
-public function destroy($id)
-{
-    $income = Income::find($id);
-    $income->delete();
-    return redirect()->back()->with('success', 'Income deleted successfully.');
-}
+
 
 public function update(Request $request, $id)
 {
@@ -98,6 +92,13 @@ public function update(Request $request, $id)
 
     return redirect()->back()->with('success', 'Income updated successfully.');
 
+}
+
+public function destroy($id)
+{
+    $income = Income::find($id);
+    $income->delete();
+    return redirect()->back()->with('success', 'Income deleted successfully.');
 }
 
 
