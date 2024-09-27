@@ -84,7 +84,7 @@ public function edit($id){
 
 public function update(Request $request)
 {
-    dd($request->all());
+    // dd($request->all());
 
     $request->validate([
 
