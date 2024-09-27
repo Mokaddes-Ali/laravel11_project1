@@ -50,6 +50,7 @@ class IncomeController extends Controller
 
         $data=Project::where('id',$request->project_id)->firstOrFail();
 
+
         $paid_amount = (float) $request->income_amount + (float) $data->paid_amount;
         $due_amount = (float) $data->project_value - (float)$paid_amount;
 
@@ -70,7 +71,6 @@ class IncomeController extends Controller
  }
 
 
- 
 public function edit($id)
 {
     $income = Income::findOrFail($id);
