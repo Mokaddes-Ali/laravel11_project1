@@ -59,9 +59,9 @@ class ClientController extends Controller
             'email' => 'required',
             'number' => 'required',
             'address' => 'required',
-            'pic' => 'required|mimes:jpeg,png,gif|required|max:2048',
+            'pic' => 'nullable|mimes:jpeg,png,gif|max:2048',
         ]);
-
+        
         $oldimg = Client::findOrFail($id);
         $deleteimg=public_path('images/'.$oldimg['pic']);
         $image_rename = '';
