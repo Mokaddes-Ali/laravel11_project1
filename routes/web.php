@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/income', [IncomeController::class, 'incomeindex'])->name('incomeindex');
     Route::post('/income/submit', [IncomeController::class, 'incomestore'])->name('incomestore');

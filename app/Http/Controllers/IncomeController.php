@@ -71,11 +71,20 @@ class IncomeController extends Controller
  }
 
 
-public function edit($id)
-{
-    $all = Income::where('status', 1)->orderBy('id', 'ASC')->get();
-    return view('admin.Income.edit', compact('all'));
-}
+// public function edit($id)
+// {
+//     $all = Project::where('status', 0)->get();
+//     $data = Income::where('id', $id)->firstOrFail();
+//     return view('admin.Income.edit', compact('data', 'all'));
+// }
+
+public function edit($id){
+    $all=Project::where('status',0)->get();
+    $data=Income::where('id',$id)->firstOrFail();
+    return view('admin.Income.edit',compact('data','all'));
+  }
+
+
 
 
 
