@@ -67,7 +67,7 @@ class IncomeController extends Controller
         }
     } catch (\Exception $e) {
     DB::rollback();
-  }
+    }
  }
 
 
@@ -84,18 +84,75 @@ public function edit($id){
 
 public function update(Request $request)
 {
-    dd($request->all());
+    // dd($request->all());
+    $request->validate([
+
+        'project_id' => 'required',
+        'income_amount' => 'required',
+        'date' => 'required',
+        'note' => 'required',
+        'bank_account' => 'required',
+
+    ]);
+
+
+    DB::beginTransaction();
+
+    try {
+        $oldincome=Income::where('id',$request->id)->firstOrFail();
+
+
+        $update=Income::where('id', $request->id)->update([
+            'project_id' => $request->project_id,
+            'income_amount' => $request->income_amount,
+            'date' => $request->date,
+            'note' => $request->note,
+            'bank_account_id' => $request->bank_account,
+            'editor' => Auth::user()->id,
+
+         ]);
+
+
+         $data=Project::where('id',$request->project_id)->firstOrFail();
+
+         $paid_amount = (float) $request->income_amount + (float) $data->paid_amount - (float)$oldincome->income_amount;
+         $due_amount = (float) $data->project_value - (float)$paid_amount;
+
+
+    if( $update){
+        $update = Project::where('id',$request->project_id)->update([
+            'paid_amount' => $paid_amount,
+            'due_amount' => $due_amount,
+
+            ]);
+
+            DB::commit();
+
+            return redirect()->back()->with('success','Data updated successfully');
+
+    }
+} catch (\Exception $e) {
+DB::rollback();
+}
 
 
 }
 
+public function incomedestroy($id){
+    $data=Income::where('id',$id)->firstOrFail();
+    $project=Project::where('id',$data->project_id)->firstOrFail();
+    $paid_amount = (float) $project->paid_amount - (float) $data->income_amount;
+    $due_amount = (float) $project->project_value - (float)$paid_amount;
 
-public function destroy($id)
-{
-    $income = Income::find($id);
-    $income->delete();
-    return redirect()->back()->with('success', 'Income deleted successfully.');
-}
+    $delete=Income::where('id',$id)->delete();
+    if($delete){
+        $update = Project::where('id',$data->project_id)->update([
+            'paid_amount' => $paid_amount,
+            'due_amount' => $due_amount,
 
+            ]);
+            return redirect()->back()->with('success','Income Deleted successfully');
+    }
+  }
 
 }
