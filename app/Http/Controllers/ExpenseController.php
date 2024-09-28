@@ -17,11 +17,9 @@ class ExpenseController extends Controller
 
 
     public function show(){
-        $all = Expense::where('status', 1)->orderBy('id', 'ASC')->get();
+         $all = Expense::where('status', 0)->orderBy('id', 'ASC')->get();
         return view('admin.expense.show', compact('all'));
       }
-
-
 
     public function store(Request $request){
         // dd($request->all());
@@ -50,18 +48,8 @@ class ExpenseController extends Controller
 
         ]);
 
-        $data=Project::where('id',$request->project_id)->firstOrFail();
-
-
-        $paid_amount = (float) $request->income_amount + (float) $data->paid_amount;
-        $due_amount = (float) $data->project_value - (float)$paid_amount;
-
         if( $insert){
-            $update = Project::where('id',$request->project_id)->update([
-                'paid_amount' => $paid_amount,
-                'due_amount' => $due_amount,
 
-                ]);
                 DB::commit();
 
          return redirect()->back()->with('success','Expense Inserted successfully');
