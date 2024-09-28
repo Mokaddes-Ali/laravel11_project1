@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Settings;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SettingsSeeder extends Seeder
 {
@@ -12,6 +13,15 @@ class SettingsSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Settings::create([
+            'company_name' => 'ALI',
+            'email' =>'abc@gmail.com',
+            'mobile' => '0123456789',
+            'address' => 'Dhaka',
+            'logo' => 'logo.png',
+            'creator' => 1,
+
+        ]);
+
     }
 }

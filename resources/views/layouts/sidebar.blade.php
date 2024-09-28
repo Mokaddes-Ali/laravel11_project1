@@ -128,9 +128,9 @@
 
 
                             <li>
-                                <a href="apps-file-manager.html">
+                                <a href="/settings">
                                     <i data-feather="file-plus"></i>
-                                    <span> File Manager </span>
+                                    <span> Settings </span>
                                 </a>
                             </li>
 

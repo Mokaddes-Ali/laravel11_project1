@@ -6,6 +6,7 @@ use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SettingsController;
 
 Route::get('/dashboard', function () {
     return view('layouts.master');
@@ -48,6 +49,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/expense/edit/{id}', [ExpenseController::class, 'edit'])->name('expenseedit');
     Route::post('/expense/update', [ExpenseController::class, 'update'])->name('expenseupdate');
     Route::get('/delete/{id}', [ExpenseController::class, 'destroy'])->name('expensedestroy');
+});
+
+
+
+Route::middleware('auth')->group(function () {
+Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
+Route::post('/settings/update', [SettingsController::class, 'update'])->name('settings.update');
 });
 
 
