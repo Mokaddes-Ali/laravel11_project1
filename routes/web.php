@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingsController;
@@ -57,6 +58,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/settings', [SettingsController::class, 'edit'])->name('settings.edit');
 Route::post('/settings/update', [SettingsController::class, 'update'])->name('settings.update');
 });
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/invoice/create/{id}', [InvoiceController::class, 'index'])->name('invoice.index');
+ });
 
 
 Route::middleware('auth')->group(function () {

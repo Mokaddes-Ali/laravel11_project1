@@ -33,6 +33,8 @@
         <td>
             <a class="btn btn-primary btn-sm," href="{{ url('/income/edit' , $row -> id) }}">edit</a>
             <a class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure Delete!')" href="{{ url('/delete', $row -> id)}}">delete</a>
+            <a class="btn btn-primary btn-sm," href="{{ url('/invoice/create' , $row -> id) }}">invoice</a>
+
         </td>
       </tr>
       @endforeach
