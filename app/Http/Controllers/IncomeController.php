@@ -128,7 +128,7 @@ public function update(Request $request)
 
             DB::commit();
 
-            return redirect()->back()->with('success','Data updated successfully');
+        return redirect()->back()->with('success','Data updated successfully');
 
     }
 } catch (\Exception $e) {
@@ -138,7 +138,7 @@ DB::rollback();
 
 }
 
-public function incomedestroy($id){
+public function destroy($id){
     $data=Income::where('id',$id)->firstOrFail();
     $project=Project::where('id',$data->project_id)->firstOrFail();
     $paid_amount = (float) $project->paid_amount - (float) $data->income_amount;

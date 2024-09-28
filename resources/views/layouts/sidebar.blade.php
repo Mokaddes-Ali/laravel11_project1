@@ -99,12 +99,12 @@
                             </li>
 
                             <li>
-                                <a href="#sidebarTasks" data-bs-toggle="collapse">
+                                <a href="#sidebarIncome" data-bs-toggle="collapse">
                                     <i data-feather="clipboard"></i>
                                     <span> Income </span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse" id="sidebarTasks">
+                                <div class="collapse" id="sidebarIncome"> <!-- Changed id here -->
                                     <ul class="nav-second-level">
                                         <li><a href="/income">Add Income</a></li>
                                         <li><a href="/show/income">List Income</a></li>
@@ -113,13 +113,28 @@
                             </li>
 
                             <li>
+                                <a href="#sidebarExpense" data-bs-toggle="collapse">
+                                    <i data-feather="clipboard"></i>
+                                    <span> Expense </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarExpense"> <!-- Changed id here -->
+                                    <ul class="nav-second-level">
+                                        <li><a href="/expense">Add expense</a></li>
+                                        <li><a href="/show/expense">List expense</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+
+                            <li>
                                 <a href="apps-file-manager.html">
                                     <i data-feather="file-plus"></i>
                                     <span> File Manager </span>
                                 </a>
                             </li>
 
-                            <li class="menu-title mt-2">Custom</li>
+                            <li class="menu-title mt-2">Expense</li>
 
                             <li>
                                 <a href="#sidebarExpages" data-bs-toggle="collapse">

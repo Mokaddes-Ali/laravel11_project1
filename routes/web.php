@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 
@@ -37,7 +38,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/show/income', [IncomeController::class, 'incomeshow'])->name('incomeshow');
     Route::get('/income/edit/{id}', [IncomeController::class, 'edit'])->name('incomeedit');
     Route::post('/income/update', [IncomeController::class, 'update'])->name('incomeupdate');
-    // Route::get('/delete/{id}', [IncomeController::class, 'incomedestroy'])->name('incomedestroy');
+    Route::get('/delete/{id}', [IncomeController::class, 'destroy'])->name('incomedestroy');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/expense', [ExpenseController::class, 'index'])->name('expenseindex');
+    // Route::post('/expense/submit', [ExpenseController::class, 'store'])->name('expensestore');
+    // Route::get('/show/expense', [ExpenseController::class, 'show'])->name('expenseshow');
+    // Route::get('/expense/edit/{id}', [ExpenseController::class, 'edit'])->name('expenseedit');
+    // Route::post('/expense/update', [ExpenseController::class, 'update'])->name('expenseupdate');
+    // Route::get('/delete/{id}', [ExpenseController::class, 'destroy'])->name('expensedestroy');
 });
 
 
