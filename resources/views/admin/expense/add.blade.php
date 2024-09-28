@@ -13,7 +13,7 @@
         <form method = "POST" action = "{{ url('/expense/submit') }}"  enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-              <label for="exampleInputEmail1">Client Name</label>
+              <label for="exampleInputEmail1">Expense Name</label>
               <select class="form-select" name="project_id" aria-label="Default select example">
                 <option selected>Select Project Name</option>
                 @foreach ($all as $row )
@@ -35,8 +35,8 @@
             </div>
 
             <div class="form-group">
-                <label for="exampleInputproject_name">Income Amount</label>
-                <input type="text"  name = "income_amount" class="form-control" id="exampleInputproject_name" aria-describedby="emailHelp" placeholder="Enter Income Amount">
+                <label for="exampleInputproject_name">Expense Amount</label>
+                <input type="text"  name = "expense_amount" class="form-control" id="exampleInputproject_name" aria-describedby="emailHelp" placeholder="Enter Income Amount">
               </div>
               <div class="form-group">
                 <label for="exampleInputAddress1">Transition Acount</label>

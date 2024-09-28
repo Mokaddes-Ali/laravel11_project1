@@ -43,8 +43,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/expense', [ExpenseController::class, 'index'])->name('expenseindex');
-    // Route::post('/expense/submit', [ExpenseController::class, 'store'])->name('expensestore');
-    // Route::get('/show/expense', [ExpenseController::class, 'show'])->name('expenseshow');
+    Route::post('/expense/submit', [ExpenseController::class, 'store'])->name('expensestore');
+    Route::get('/show/expense', [ExpenseController::class, 'show'])->name('expenseshow');
     // Route::get('/expense/edit/{id}', [ExpenseController::class, 'edit'])->name('expenseedit');
     // Route::post('/expense/update', [ExpenseController::class, 'update'])->name('expenseupdate');
     // Route::get('/delete/{id}', [ExpenseController::class, 'destroy'])->name('expensedestroy');
