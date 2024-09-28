@@ -25,7 +25,13 @@
             <div class="form-group">
                 <label for="exampleInputAddress1">Date</label>
                 <input type="date"  name = "date"  class="form-control" id="exampleInputAddress1" placeholder="Choose Date">
-              </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                   const today = new Date().toISOString().split('T')[0];
+                   document.querySelector('input[name="date"]').value = today;
+                   });
+                </script>
+            </div>
 
             <div class="form-group">
                 <label for="exampleInputproject_name">Income Amount</label>
