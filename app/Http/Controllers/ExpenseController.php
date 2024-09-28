@@ -71,12 +71,41 @@ class ExpenseController extends Controller
 
 
     public function update(Request $request){
-        dd($request->all());
+        // dd($request->all());
+        $request->validate([
+
+            'project_id' => 'required',
+            'expense_amount' => 'required',
+            'date' => 'required',
+            'note' => 'required',
+            'bank_account' => 'required',
+
+        ]);
+
+        $update=Expense::where('id', $request->id)->update([
+            'project_id' => $request->project_id,
+            'expense_amount' => $request->expense_amount,
+            'date' => $request->date,
+            'note' => $request->note,
+            'bank_account_id' => $request->bank_account,
+            'editor' => Auth::user()->id,
+
+         ]);
+
+         if( $update){
+
+            return redirect()->back()->with('success','Data updated successfully');
+
     }
+ }
 
 
 
-    public function destroy(){
-        return view('admin.Expense.destroy');
+   public function destroy($id){
+    $delete = Expense::where('id', $id)->delete();
+    if($delete){
+        return redirect()->back()->with('success','Data deleted successfully');
     }
+}
+
 }
