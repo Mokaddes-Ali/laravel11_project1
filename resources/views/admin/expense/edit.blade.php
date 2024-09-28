@@ -19,7 +19,7 @@
                     {{ session()->get('error') }}
                 </div>
             @endif
-            <form action="{{ url('/income/update') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('/expense/update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputEmail1">Project Name</label>
@@ -42,9 +42,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Income Amount</label>
-                    <input type="text" name="income_amount" class="form-control" id="exampleInputEmail1"
-                        aria-describedby="emailHelp" value="{{ $data['income_amount'] }}">
+                    <label for="exampleInputEmail1">Expense Amount</label>
+                    <input type="text" name="expense_amount" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" value="{{ $data['expense_amount'] }}">
 
                 </div>
 

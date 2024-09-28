@@ -62,9 +62,11 @@ class ExpenseController extends Controller
 
 
 
-    public function edit(){
-        return view('admin.Expense.edit');
-    }
+ public function edit($id){
+    $all=Project::where('status',0)->get();
+    $data=Expense::where('id',$id)->firstOrFail();
+    return view('admin.expense.edit',compact('data','all'));
+  }
 
 
 
