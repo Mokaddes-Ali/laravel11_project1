@@ -100,7 +100,6 @@ class ExpenseController extends Controller
  }
 
 
-
    public function destroy($id){
     $delete = Expense::where('id', $id)->delete();
     if($delete){
