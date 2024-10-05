@@ -6,7 +6,7 @@
         Show All Project List
 </div>
 
-<form method="GET" action="/income/filter">
+<form method="GET" action="/invoice/filter">
 
 
 
@@ -40,7 +40,7 @@
                 	<div class="form-group pt-2">
 
 
-                    <a href="{{url('/income/show')}}" type="submit" class="btn btn-outline-primary ">Reset</a>
+                    <a href="{{url('/show/income')}}" type="submit" class="btn btn-outline-primary ">Reset</a>
                 </div>
                 </div>
            				</div>

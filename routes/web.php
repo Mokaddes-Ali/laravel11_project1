@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/income/edit/{id}', [IncomeController::class, 'edit'])->name('incomeedit');
     Route::post('/income/update', [IncomeController::class, 'update'])->name('incomeupdate');
     Route::get('/delete/{id}', [IncomeController::class, 'destroy'])->name('incomedestroy');
+    Route::get('/invoice/filter', [IncomeController::class, 'filter'])->name('invoice.filter');
 });
 
 Route::middleware('auth')->group(function () {
@@ -62,7 +63,8 @@ Route::post('/settings/update', [SettingsController::class, 'update'])->name('se
 
 Route::middleware('auth')->group(function () {
     Route::get('/invoice/create/{id}', [InvoiceController::class, 'index'])->name('invoice.index');
-    Route::get('/invoice/pdf/{id}', [InvoiceController::class, 'pdf'])->name('invoice.invoicepdf');
+    Route::get('/invoice/pdf/{id}', [InvoiceController::class, 'pdf'])->name('invoice.pdf');
+
  });
 
 

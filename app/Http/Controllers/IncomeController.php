@@ -20,11 +20,11 @@ class IncomeController extends Controller
         return view('admin.Income.show', compact('all'));
       }
 
-      public function filter(){
-        
+      public function filter(Request $request){
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
 
-
-        $all = Income::whereDate()->orderBy('id', 'ASC')->get();
+        $all = Income::whereDate('date','>=',$start_date)->where('date','<=', $end_date)->get();
         return view('admin.Income.show', compact('all'));
       }
 
