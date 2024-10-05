@@ -5,10 +5,60 @@
     <div class="card-header w-36 h-11">
         Show All Project List
 </div>
+
+<form method="GET" action="/income/filter">
+
+
+
+	<div class="row mb-3">
+           	<div class="col-md-4">
+           		<div class="form-group">
+                    <label> Start Date</label>
+                    <input type="date" class="form-control " data-date-today-highlight="true" data-date-format="yyyy-mm-dd" name="start_date" required autocomplete="off">
+
+                </div>
+           	</div>
+           	<div class="col-md-8">
+
+           		<div class="row">
+           			<div class="col-md-6">
+           				<div class="form-group">
+                    <label> End Date</label>
+                    <input type="date" class="form-control " data-date-today-highlight="true" data-date-format="yyyy-mm-dd" name="end_date" required autocomplete="off">
+
+                </div>
+           			</div>
+           			<div class="col-md-6  mt-1">
+           				<div class="row">
+           					<div class="col-md-2">
+           						<div class="form-group pt-2">
+
+                    <button type="submit" class="btn btn-outline-primary ">Filter</button>
+                </div>
+           					</div>
+                <div class="col-md-2">
+                	<div class="form-group pt-2">
+
+
+                    <a href="{{url('/income/show')}}" type="submit" class="btn btn-outline-primary ">Reset</a>
+                </div>
+                </div>
+           				</div>
+           			</div>
+           		</div>
+           	</div>
+
+
+
+           </div>
+</form>
+
+
 @if(session()->has('success'))
 <div class="alert alert-success">
     {{ session()->get('success') }}
 </div>
+
 @endif
 <table class="table table-striped table-responsive table-dark">
     <thead>
@@ -34,7 +84,7 @@
             <a class="btn btn-primary btn-sm," href="{{ url('/income/edit' , $row -> id) }}">edit</a>
             <a class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure Delete!')" href="{{ url('/delete', $row -> id)}}">delete</a>
             <a class="btn btn-primary btn-sm," href="{{ url('/invoice/create' , $row -> id) }}">invoice</a>
-            <a class="btn btn-secondary btn-sm," href="{{ url(' /invoice/pdf' , $row -> id) }}">invoice</a>
+            <a class="btn btn-secondary btn-sm," href="{{ url('/invoice/pdf' , $row -> id) }}">pdf</a>
 
         </td>
       </tr>

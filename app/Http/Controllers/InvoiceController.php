@@ -19,14 +19,14 @@ class InvoiceController extends Controller
         $setting = Settings::where('status', 0)->firstOrFail();
         return view('admin.invoice.index', compact('invoices', 'data', 'setting'));
     }
-    public function invoicepdf($pid)
+
+    public function pdf($pid)
     {
 
         $invoices = Income::where('project_id', $pid)->get();
         $data = Project::where('id', $pid)->first();
         $setting = Settings::where('status', 0)->firstOrFail();
-        $pdf = Pdf::loadView('pdf.invoice', $data);
-
+        $pdf = Pdf::loadView('admin.invoice.pdf', compact('invoices', 'data', 'setting'));
         return $pdf->download('invoice.pdf');
     }
 }
