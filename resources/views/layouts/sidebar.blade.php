@@ -132,6 +132,11 @@
                                     <i data-feather="file-plus"></i>
                                     <span> Settings </span>
                                 </a>
+
+                                <a href="/backup">
+                                    <i data-feather="file-plus"></i>
+                                    <span>Data Backup</span>
+                                </a>
                             </li>
 
                             <li class="menu-title mt-2">Expense</li>

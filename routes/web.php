@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ExpenseController;
@@ -66,6 +67,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice/pdf/{id}', [InvoiceController::class, 'pdf'])->name('invoice.pdf');
 
  });
+
+
+Route::middleware('auth')->group(function () {
+Route::get('/backup', [BackupController::class, 'createBackup'])->name('backup.create');
+
+});
+
+
 
 
 
