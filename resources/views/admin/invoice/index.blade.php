@@ -166,6 +166,7 @@
                 <td></td>
                 <td>Total Paid Amount <span style="color: rgb(12, 12, 14);">:</span> {{ $data->paid_amount }}</td>
             </tr>
+
             <tr class="item last" style="color: black; font-weight: bold;">
                 <td></td>
                 <td>Due Amount <span style="color: rgb(12, 12, 14);">:</span> {{ $data->due_amount }}</td>
