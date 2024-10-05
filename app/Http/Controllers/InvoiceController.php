@@ -6,21 +6,27 @@ use App\Models\Income;
 use App\Models\Project;
 use App\Models\Settings;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class InvoiceController extends Controller
 {
     public function index($pid)
     {
-        // Fetch invoices related to project ID 1
+
         $invoices = Income::where('project_id', $pid)->get();
-
-        // Fetch the first project with ID 1
-        $data = Project::where('id', $pid)->first();  // Use `first()` to get a single project object instead of a collection.
-
-        // Fetch the first setting with status 0
+        $data = Project::where('id', $pid)->first();
         $setting = Settings::where('status', 0)->firstOrFail();
-
-        // Return the view with the data compacted into variables
         return view('admin.invoice.index', compact('invoices', 'data', 'setting'));
+    }
+    public function invoicepdf($pid)
+    {
+
+        $invoices = Income::where('project_id', $pid)->get();
+        $data = Project::where('id', $pid)->first();
+        $setting = Settings::where('status', 0)->firstOrFail();
+        $pdf = Pdf::loadView('pdf.invoice', $data);
+
+        return $pdf->download('invoice.pdf');
     }
 }
