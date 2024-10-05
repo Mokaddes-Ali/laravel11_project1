@@ -14,8 +14,8 @@
            	<div class="col-md-4">
            		<div class="form-group">
                     <label> Start Date</label>
-                    <input type="date" class="form-control " data-date-today-highlight="true" data-date-format="yyyy-mm-dd" name="start_date" required autocomplete="off">
-
+                    <input type="date" name="start_date" class="form-control" required autocomplete="off"
+                    value="{{ old('start_date', request('start_date')) }}">
                 </div>
            	</div>
            	<div class="col-md-8">
@@ -24,8 +24,8 @@
            			<div class="col-md-6">
            				<div class="form-group">
                     <label> End Date</label>
-                    <input type="date" class="form-control " data-date-today-highlight="true" data-date-format="yyyy-mm-dd" name="end_date" required autocomplete="off">
-
+                    <input type="date" name="end_date" class="form-control" required autocomplete="off"
+                     value="{{ old('end_date', request('end_date')) }}">
                 </div>
            			</div>
            			<div class="col-md-6  mt-1">
