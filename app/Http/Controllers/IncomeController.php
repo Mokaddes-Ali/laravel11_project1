@@ -20,6 +20,13 @@ class IncomeController extends Controller
         return view('admin.Income.show', compact('all'));
       }
 
+      public function filter(){
+        
+
+
+        $all = Income::whereDate()->orderBy('id', 'ASC')->get();
+        return view('admin.Income.show', compact('all'));
+      }
 
     public function incomestore(Request $request){
         // dd($request->all());
