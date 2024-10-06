@@ -13,7 +13,6 @@ class InvoiceController extends Controller
 {
     public function index($pid)
     {
-
         $invoices = Income::where('project_id', $pid)->get();
         $data = Project::where('id', $pid)->first();
         $setting = Settings::where('status', 0)->firstOrFail();
