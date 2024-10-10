@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/show/project', [ProjectController::class, 'projectshow'])->name('projectshow');
     Route::get('/edit/project/{id}', [ProjectController::class, 'projectedit'])->name('projectedit');
     Route::post('/project/update', [ProjectController::class, 'projectupdate'])->name('projectupdate');
-    Route::get('/delete/{id}', [ProjectController::class, 'projectdestroy'])->name('projectdestroy');
+    Route::post('/delete/{id}', [ProjectController::class, 'projectdestroy'])->name('projectdestroy');
 });
 
 
@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/show/income', [IncomeController::class, 'incomeshow'])->name('incomeshow');
     Route::get('/income/edit/{id}', [IncomeController::class, 'edit'])->name('incomeedit');
     Route::post('/income/update', [IncomeController::class, 'update'])->name('incomeupdate');
-    Route::get('/delete/{id}', [IncomeController::class, 'destroy'])->name('incomedestroy');
+    Route::delete('/income/delete/{id}', [IncomeController::class, 'delete'])->name('income.delete');
     Route::get('/invoice/filter', [IncomeController::class, 'filter'])->name('invoice.filter');
 });
 

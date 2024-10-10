@@ -145,21 +145,42 @@ DB::rollback();
 
 }
 
-public function destroy($id){
-    $data=Income::where('id',$id)->firstOrFail();
-    $project=Project::where('id',$data->project_id)->firstOrFail();
-    $paid_amount = (float) $project->paid_amount - (float) $data->income_amount;
-    $due_amount = (float) $project->project_value - (float)$paid_amount;
 
-    $delete=Income::where('id',$id)->delete();
-    if($delete){
-        $update = Project::where('id',$data->project_id)->update([
+
+public function delete($id)
+{
+    DB::beginTransaction();
+
+    try {
+        // Step 1: Retrieve the income record
+        $income = Income::findOrFail($id);
+
+        // Step 2: Retrieve the associated Project
+        $project = Project::findOrFail($income->project_id);
+
+        // Step 3: Adjust the project's paid and due amounts
+        $paid_amount = $project->paid_amount - $income->income_amount;
+        $due_amount = $project->project_value - $paid_amount;
+
+        // Step 4: Delete the income record
+        $income->delete();
+
+        // Step 5: Update the project with new paid and due amounts
+        $project->update([
             'paid_amount' => $paid_amount,
             'due_amount' => $due_amount,
+        ]);
 
-            ]);
-            return redirect()->back()->with('success','Income Deleted successfully');
+        DB::commit();
+
+        return redirect()->back()->with('success', 'Income deleted successfully');
+    } catch (\Exception $e) {
+        DB::rollback();
+        \Log::error('Delete Error: ' . $e->getMessage());
+
+        return redirect()->back()->with('error', 'Failed to delete income');
     }
-  }
+}
+
 
 }
