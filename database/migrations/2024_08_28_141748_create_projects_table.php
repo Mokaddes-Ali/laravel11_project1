@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('projects', function (Blueprint $table) {
 
             $table->id();
-            $table->string('project_name')->unique();
+            $table->string('project_name')-> unique(); //its sensitive for add project
             $table->unsignedBigInteger('client_id');
             $table->text('description')->nullable();
             $table->decimal('project_value', 20, 2);

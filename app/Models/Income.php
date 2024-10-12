@@ -17,10 +17,7 @@ class Income extends Model
     {
         return $this->belongsTo(Project::class , 'project_id');
     }
-    
-    public function project() {
-        return $this->belongsTo(Project::class, 'project_id');
-    }
+
 
     public function client() {
         return $this->belongsTo(Client::class, 'client_id');
