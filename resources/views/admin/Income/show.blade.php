@@ -59,44 +59,6 @@
 
 @endif
 
-{{-- <table class="table table-striped table-responsive table-dark">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Project Name</th>
-        <th scope="col">Date</th>
-        <th scope="col">Income/PaidAmount</th>
-        <th scope="col">Note</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-        @foreach ($all as $row)
-      <tr>
-        <th scope="row">{{ $row['id'] }}</th>
-        <td>{{$row['income']['project_name']}}</td>
-        <td>{{$row['date']}}</td>
-        <td>{{$row['income_amount']}}</td>
-        <td>{{$row['note']}}</td>
-
-        <td>
-            <a class="btn btn-primary btn-sm," href="{{ url('/income/edit' , $row -> id) }}">edit</a>
-            <form action="{{ route('income.delete', $row->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" onclick="return confirm('Are you sure you want to delete this?')">Delete</button>
-            </form>
-            <a class="btn btn-primary btn-sm," href="{{ url('/invoice/create' , $row ->project_id) }}">invoice</a>
-            <a class="btn btn-secondary btn-sm," href="{{ url('/invoice/pdf' , $row ->project_id) }}">pdf</a>
-
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
-  </table>
-
-@endsection --}}
-
 <table class="table table-striped table-responsive table-dark">
     <thead>
         <tr>
@@ -115,16 +77,17 @@
             <td>{{ $row->income_amount }}</td>
             <td>{{ $row->note }}</td>
             <td>
-                <a class="btn btn-primary btn-sm" href="{{ url('/income/edit', $row->id) }}">Edit</a>
-                <a class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure Delete!')" href="{{ url('/income/delete/', $row -> id)}}">delete</a>
-                <a class="btn btn-primary btn-sm" href="{{ url('/invoice/create', $row->project_id) }}">Invoice</a>
-                <form action="{{ route('income.delete',  $row->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                <a class="btn btn-primary btn-sm me-2 d-inline-block" href="{{ url('/income/edit', $row->id) }}">Edit</a>
+                <a class="btn btn-primary btn-sm me-2 d-inline-block" href="{{ url('/invoice/create', $row->project_id) }}">Invoice</a>
+                <form action="{{ route('income.delete', $row->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');" class="d-inline-block me-2">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form>
-                <a class="btn btn-secondary btn-sm" href="{{ url('/invoice/pdf', $row->project_id) }}">PDF</a>
+                <a class="btn btn-secondary btn-sm d-inline-block" href="{{ url('/invoice/pdf', $row->project_id) }}">PDF</a>
             </td>
+
+
         </tr>
         @endforeach
     </tbody>

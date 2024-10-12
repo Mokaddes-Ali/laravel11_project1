@@ -118,7 +118,7 @@ class IncomeController extends Controller
     }
 
     // Delete functionality
-    public function delete($id){
+    public function destroy($id){
         DB::beginTransaction();
 
         try {
