@@ -51,6 +51,26 @@
            </div>
 </form>
 
+<!-- Search Form -->
+<form method="GET" action="/invoice/search" class="mb-3">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label> Search</label>
+                <input type="text" name="search" class="form-control" placeholder="Enter project name or note"
+                value="{{ request('search') }}">
+            </div>
+        </div>
+        <div class="col-md-4 mt-1">
+            <div class="form-group">
+                <label> </label>
+                <button type="submit" class="btn btn-outline-primary">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
 
 @if(session()->has('success'))
 <div class="alert alert-success">
@@ -65,7 +85,6 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Project Name</th>
-            <th scope="col">Client Name</th>
             <th scope="col">Date</th>
             <th scope="col">Income/Paid Amount</th>
             <th scope="col">Note</th>
@@ -77,7 +96,6 @@
         <tr>
             <th scope="row">{{ $row->id }}</th>
             <td>{{$row['income']['project_name']}}</td>
-            <td>{{$row['client']['client_name']}}</td>
             <td>{{ $row->date }}</td>
             <td>{{ $row->income_amount }}</td>
             <td>{{ $row->note }}</td>

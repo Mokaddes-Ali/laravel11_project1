@@ -20,15 +20,6 @@ class IncomeController extends Controller
         return view('admin.Income.show', compact('all'));
     }
 
-    // public function incomeshow() {
-    //     $all = Income::where('status', 1)
-    //                  ->with(['project', 'client']) // Eager load related data
-    //                  ->orderBy('id', 'ASC')
-    //                  ->get();
-
-    //     return view('admin.Income.show', compact('all'));
-    // }
-
 
     public function filter(Request $request){
         $start_date = $request->start_date;
@@ -37,6 +28,19 @@ class IncomeController extends Controller
         $all = Income::whereDate('date', '>=', $start_date)->whereDate('date', '<=', $end_date)->get();
         return view('admin.Income.show', compact('all'));
     }
+
+    public function search(Request $request)
+{
+    $searchTerm = $request->input('search');
+
+    $all = Income::where(function($query) use ($searchTerm) {
+        $query->whereRaw('LOWER(income.project_name) LIKE ?', ['%' . strtolower($searchTerm) . '%'])
+              ->orWhereRaw('LOWER(note) LIKE ?', ['%' . strtolower($searchTerm) . '%']);
+    })->get();
+
+    return view('your.view.name', compact('all'));
+}
+
 
     public function incomestore(Request $request){
         $request->validate([
