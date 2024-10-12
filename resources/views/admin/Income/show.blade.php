@@ -52,7 +52,7 @@
 </form>
 
 <!-- Search Form -->
-<form method="GET" action="/invoice/search" class="mb-3">
+{{-- <form method="GET" action="/invoice/search" class="mb-3">
     <div class="row">
         <div class="col-md-8">
             <div class="form-group">
@@ -68,7 +68,7 @@
             </div>
         </div>
     </div>
-</form>
+</form> --}}
 
 
 

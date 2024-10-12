@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Flasher\Prime\FlasherInterface;
 
 class ClientController extends Controller
 {
@@ -14,7 +15,7 @@ class ClientController extends Controller
         $all = Client::all();
         return view('admin.client.show', compact('all'));
     }
-    public function create(Request $request){
+    public function create(Request $request, FlasherInterface $flasher){
             $request->validate([
             'name' => 'required|max:40',
             'email' => 'required',
@@ -40,7 +41,9 @@ class ClientController extends Controller
         ]);
 
         if ($insert) {
-            return redirect()-> route('show') -> with('success', 'Data inserted successfully');
+            $flasher->addSuccess('Student added successfully!');
+            return redirect()-> route('show');
+
         } else {
             return back()->with('fail', 'Data insertion failed');
         }
@@ -61,7 +64,7 @@ class ClientController extends Controller
             'address' => 'required',
             'pic' => 'nullable|mimes:jpeg,png,gif|max:2048',
         ]);
-        
+
         $oldimg = Client::findOrFail($id);
         $deleteimg=public_path('images/'.$oldimg['pic']);
         $image_rename = '';
