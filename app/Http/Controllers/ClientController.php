@@ -15,7 +15,7 @@ class ClientController extends Controller
         $all = Client::all();
         return view('admin.client.show', compact('all'));
     }
-    public function create(Request $request, FlasherInterface $flasher){
+    public function create(Request $request){
             $request->validate([
             'name' => 'required|max:40',
             'email' => 'required',
@@ -41,8 +41,7 @@ class ClientController extends Controller
         ]);
 
         if ($insert) {
-            $flasher->addSuccess('Student added successfully!');
-            return redirect()-> route('show');
+            return redirect()-> route('show')->with('success', 'Data inserted successfully');
 
         } else {
             return back()->with('fail', 'Data insertion failed');
