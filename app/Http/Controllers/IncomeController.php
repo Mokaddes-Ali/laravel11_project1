@@ -20,6 +20,16 @@ class IncomeController extends Controller
         return view('admin.Income.show', compact('all'));
     }
 
+    // public function incomeshow() {
+    //     $all = Income::where('status', 1)
+    //                  ->with(['project', 'client']) // Eager load related data
+    //                  ->orderBy('id', 'ASC')
+    //                  ->get();
+
+    //     return view('admin.Income.show', compact('all'));
+    // }
+
+
     public function filter(Request $request){
         $start_date = $request->start_date;
         $end_date = $request->end_date;
