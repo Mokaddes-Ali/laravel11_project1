@@ -116,8 +116,13 @@
             <td>{{ $row->note }}</td>
             <td>
                 <a class="btn btn-primary btn-sm" href="{{ url('/income/edit', $row->id) }}">Edit</a>
-                <a class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure Delete!')" href="{{ url('/delete', $row -> id)}}">delete</a>
+                <a class="btn btn-danger btn-sm" onclick="return confirm('Are You Sure Delete!')" href="{{ url('/income/delete/', $row -> id)}}">delete</a>
                 <a class="btn btn-primary btn-sm" href="{{ url('/invoice/create', $row->project_id) }}">Invoice</a>
+                <form action="{{ route('income.delete',  $row->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
                 <a class="btn btn-secondary btn-sm" href="{{ url('/invoice/pdf', $row->project_id) }}">PDF</a>
             </td>
         </tr>

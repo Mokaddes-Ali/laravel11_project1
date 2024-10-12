@@ -41,8 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/show/income', [IncomeController::class, 'incomeshow'])->name('incomeshow');
     Route::get('/income/edit/{id}', [IncomeController::class, 'edit'])->name('incomeedit');
     Route::post('/income/update', [IncomeController::class, 'update'])->name('incomeupdate');
-    Route::get('/delete/{id}', [IncomeController::class, 'destroy']);
+    Route::get('/income/delete/{id}', [IncomeController::class, 'delete']);
     Route::get('/invoice/filter', [IncomeController::class, 'filter'])->name('invoice.filter');
+    Route::delete('/income/delete/{id}', [IncomeController::class, 'delete'])->name('income.delete');
+
 });
 
 Route::middleware('auth')->group(function () {
