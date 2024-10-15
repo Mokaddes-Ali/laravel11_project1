@@ -42,7 +42,6 @@ class ProjectController extends Controller
             'creator' => Auth::user()->id,
             'slug' => uniqid().rand(10000, 10000000),
         ]);
-
         if ($insert) {
             return back()->with('success', 'Data inserted successfully');
         } else {
@@ -50,7 +49,6 @@ class ProjectController extends Controller
         }
 
       }
-
       public function projectedit ($id){
         $all=Client::all();
         $data=Project::where('id',$id)->firstOrFail();
