@@ -70,7 +70,6 @@ Route::middleware('auth')->group(function () {
 
  });
 
-
 Route::middleware('auth')->group(function () {
 Route::get('/backup', [BackupController::class, 'createBackup'])->name('backup.create');
 
