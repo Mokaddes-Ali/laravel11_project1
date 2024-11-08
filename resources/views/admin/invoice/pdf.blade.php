@@ -154,6 +154,7 @@
                 <td>Paid Amount</td>
             </tr>
 
+            
             <!-- Loop through the invoices -->
             @foreach ($invoices as $key => $row)
             <tr class="item">
