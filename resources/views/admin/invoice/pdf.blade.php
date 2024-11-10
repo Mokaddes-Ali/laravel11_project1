@@ -154,7 +154,7 @@
                 <td>Paid Amount</td>
             </tr>
 
-            
+
             <!-- Loop through the invoices -->
             @foreach ($invoices as $key => $row)
             <tr class="item">
@@ -163,6 +163,7 @@
             </tr>
             @endforeach
 
+            
             <tr class="item last" style="color: rgb(12, 12, 14); font-weight: bold;">
                 <td></td>
                 <td>Total Paid Amount <span style="color: rgb(12, 12, 14);">:</span> {{ $data->paid_amount }}</td>
