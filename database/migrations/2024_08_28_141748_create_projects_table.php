@@ -44,6 +44,7 @@ return new class extends Migration
             $table->foreign('editor')
                   ->references('id')
                   ->on('users')
+                  ->on('users')
                   ->cascadeOnUpdate()
                   ->restrictOnDelete();
         });
