@@ -41,7 +41,6 @@
             <input type="text" name="address" class="form-control" id="address" value="{{ $data->address }}" placeholder="Enter Address">
         </div>
 
-        {{-- Logo field --}}
         <div class="form-group">
             <label for="logo">Logo</label>
             <input type="file" name="logo" class="form-control" id="logo" placeholder="Upload Logo">
