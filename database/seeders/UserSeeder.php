@@ -8,13 +8,37 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 
+
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
+        // Create Permissions
+        Permission::firstOrCreate(['name' => 'user-list', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'user-create', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'user-edit', 'guard_name' => 'web']);
+
+        Permission::firstOrCreate(['name' => 'customer-list', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'customer-create', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'customer-edit', 'guard_name' => 'web']);
+
+        Permission::firstOrCreate(['name' => 'category-list', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'category-create', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'category-edit', 'guard_name' => 'web']);
+
+        Permission::firstOrCreate(['name' => 'brand-list', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'brand-create', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'brand-edit', 'guard_name' => 'web']);
+
+        Permission::firstOrCreate(['name' => 'product-list', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'product-create', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'product-edit', 'guard_name' => 'web']);
+
+        Permission::firstOrCreate(['name' => 'sale-list', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'sale-create', 'guard_name' => 'web']);
+        Permission::firstOrCreate(['name' => 'sale-edit', 'guard_name' => 'web']);
+
+        // Create Roles and Assign Permissions
         $superAdminRole = Role::create(['name' => 'super-admin']);
         $superAdminRole->givePermissionTo(Permission::all());
 
@@ -23,33 +47,24 @@ class UserSeeder extends Seeder
             'user-list',
             'user-create',
             'user-edit',
-
             'customer-list',
             'customer-create',
             'customer-edit',
-
-
             'category-list',
             'category-create',
             'category-edit',
-
-
             'brand-list',
             'brand-create',
             'brand-edit',
-
-
             'product-list',
             'product-create',
             'product-edit',
-
             'sale-list',
             'sale-create',
             'sale-edit',
-
         ]);
-        $staffRole = Role::create(['name' => 'staff']);
 
+        $staffRole = Role::create(['name' => 'staff']);
         $staffRole->givePermissionTo([
             'user-list',
             'customer-list',
@@ -57,11 +72,9 @@ class UserSeeder extends Seeder
             'brand-list',
             'product-list',
             'sale-list',
-
-
         ]);
-        $userRole = Role::create(['name' => 'user']);
 
+        $userRole = Role::create(['name' => 'user']);
         $userRole->givePermissionTo([
             'user-list',
             'customer-list',
@@ -71,7 +84,7 @@ class UserSeeder extends Seeder
             'sale-list',
         ]);
 
-        // Create and assign role to Super Admin user
+        // Create and assign roles to users
         $superAdminUser = User::firstOrCreate(
             ['email' => 'superadmin@gmail.com'],
             [
@@ -81,7 +94,6 @@ class UserSeeder extends Seeder
         );
         $superAdminUser->assignRole($superAdminRole);
 
-        // Create and assign role to Admin user
         $adminUser = User::firstOrCreate(
             ['email' => 'admin@gmail.com'],
             [
@@ -91,7 +103,6 @@ class UserSeeder extends Seeder
         );
         $adminUser->assignRole($adminRole);
 
-        // Create and assign role to Staff user
         $staffUser = User::firstOrCreate(
             ['email' => 'staff@gmail.com'],
             [
@@ -102,4 +113,3 @@ class UserSeeder extends Seeder
         $staffUser->assignRole($staffRole);
     }
 }
-
