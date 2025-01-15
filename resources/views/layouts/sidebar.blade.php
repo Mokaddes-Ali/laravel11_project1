@@ -71,6 +71,24 @@
                             </li>
 
                             <li>
+                                <a href="#sidebarUsers" data-bs-toggle="collapse">
+                                    <i data-feather="user"></i>
+                                    <span> Users </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarUsers">
+                                    <ul class="nav-second-level">
+                                        <li><a href="{{ url('/show') }}">All Users</a></li>
+
+                                        <li><a href="{{ url('/user') }}">Add New User</a></li>
+
+                                        <li><a href="{{ url('/role') }}">Add New Roles</a></li>
+                                        <li><a href={{ route('roles.index') }}>Roles List</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
                                 <a href="#sidebarEmail" data-bs-toggle="collapse">
                                     <i data-feather="mail"></i>
                                     <span> Client </span>

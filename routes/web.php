@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\IncomeController;
@@ -74,6 +76,23 @@ Route::middleware('auth')->group(function () {
 Route::get('/backup', [BackupController::class, 'createBackup'])->name('backup.create');
 
 });
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/user', [UserController::class, 'create']);
+    Route::get('/show', [UserController::class, 'index']);
+    Route::resource('users', UserController::class);
+    Route::get('users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+      });
+
+Route::middleware('auth')->group(function () {
+    Route::resource('roles', RoleController::class);
+    Route::get('/role', [RoleController::class, 'create']);
+
+
+    });
 
 
 
