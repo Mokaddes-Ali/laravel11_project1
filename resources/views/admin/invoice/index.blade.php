@@ -172,8 +172,6 @@
             <tr class="item last" style="color: black; font-weight: bold;">
                 <td></td>
                 <td>Due Amount <span style="color: rgb(12, 12, 14);">:</span> {{ $data->due_amount }}</td>
-                <td>Project Name: {{ $data->project_name }}</td>
-                <td> Client name:{{ $client->name }}</td>
             </tr>
         </table>
     </div>
