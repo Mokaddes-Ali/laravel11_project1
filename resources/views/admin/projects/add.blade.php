@@ -20,6 +20,7 @@
                 <option value="{{ $row->id }}">{{ $row['name'] }}</option>
                 @endforeach
               </select>
+              
             </div>
             <div class="form-group">
                 <label for="exampleInputproject_name">Project Name</label>
