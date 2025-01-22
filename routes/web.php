@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/invoice/filter', [IncomeController::class, 'filter'])->name('invoice.filter');
     Route::delete('/income/delete/{id}', [IncomeController::class, 'destroy'])->name('income.delete');
     Route::get('/invoice/search', [IncomeController::class, 'search'])->name('invoice.search');
+    Route::get('/project/details/{id}', [IncomeController::class, 'fetchProjectDetails']);
 
 });
 
