@@ -506,7 +506,6 @@
                             <a class="btn btn-primary btn-sm me-2 d-inline-block" href="{{ url('/invoice/create', $row->project_id) }}">Invoice</a>
                             <a class="btn btn-secondary btn-sm d-inline-block" href="{{ url('/invoice/pdf', $row->project_id) }}">PDF</a>
                         </td>
-
                     </tr>
                     @endforeach
                     <tr class="table-warning">
