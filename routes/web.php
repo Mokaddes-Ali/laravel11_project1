@@ -12,6 +12,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingsController;
 
+Route::get('/', function () {
+    return view('auth.login');
+});
+
 Route::get('/dashboard', function () {
     return view('layouts.master');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -90,7 +94,6 @@ Route::group(['middleware' => ['auth']], function() {
 Route::middleware('auth')->group(function () {
     Route::resource('roles', RoleController::class);
     Route::get('/role', [RoleController::class, 'create']);
-
 
     });
 
