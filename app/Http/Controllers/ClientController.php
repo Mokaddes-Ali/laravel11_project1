@@ -38,6 +38,8 @@ class ClientController extends Controller
             'number' => $request['number'],
             'address' => $request['address'],
             'pic' => $image_rename ,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         if ($insert) {
@@ -89,6 +91,8 @@ class ClientController extends Controller
             'number' => $request->number,
             'address' => $request->address,
             'pic' => $image_rename,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         if ($update) {

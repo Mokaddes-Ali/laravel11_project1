@@ -41,6 +41,8 @@ class ProjectController extends Controller
             'description' => $request['description'],
             'creator' => Auth::user()->id,
             'slug' => uniqid().rand(10000, 10000000),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         if ($insert) {
             return back()->with('success', 'Data inserted successfully');
@@ -76,6 +78,8 @@ class ProjectController extends Controller
           'description' =>$request->description,
           'date' =>$request->date,
           'editor'=> Auth::user()->id,
+          'created_at' => now(),
+          'updated_at' => now(),
 
           ]);
 

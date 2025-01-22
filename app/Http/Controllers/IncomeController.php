@@ -97,7 +97,7 @@ public function incomeshow(Request $request)
             'incomes.created_at'
         )
         ->groupBy('projects.id', 'projects.project_name', 'clients.name', 'incomes.created_at')
-        ->orderBy('incomes.created_at', 'asc');
+        ->orderBy('incomes.created_at', 'desc');
 
     // Apply date filters if they exist
     if ($startDate && $endDate) {
@@ -272,6 +272,10 @@ public function incomeshow(Request $request)
                 'bank_account_id' => $request->bank_account_id,
                 'creator' => Auth::user()->id,
                 'slug' => $request->project_id . rand(10000, 10000000),
+                'created_at' => now(),
+                'updated_at' => now(),
+
+
             ]);
 
             $paid_amount = (float) $request->income_amount + (float) $project->paid_amount;
@@ -353,6 +357,8 @@ public function incomeshow(Request $request)
                 'note' => $request->note,
                 'bank_account_id' => $request->bank_account,
                 'editor' => Auth::user()->id,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
 
             $data = Project::where('id', $request->project_id)->firstOrFail();

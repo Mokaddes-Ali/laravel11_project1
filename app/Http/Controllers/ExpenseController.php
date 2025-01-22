@@ -45,6 +45,8 @@ class ExpenseController extends Controller
            'bank_account_id' => $request->bank_account_id,
            'creator' => Auth::user()->id,
            'slug' => $request->project_id . rand(10000,10000000),
+           'created_at' => now(),
+            'updated_at' => now(),
 
         ]);
 
@@ -89,6 +91,8 @@ class ExpenseController extends Controller
             'note' => $request->note,
             'bank_account_id' => $request->bank_account,
             'editor' => Auth::user()->id,
+            'created_at' => now(),
+             'updated_at' => now(),
 
          ]);
 

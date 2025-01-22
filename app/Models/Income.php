@@ -9,6 +9,8 @@ class Income extends Model
 {
     use HasFactory;
 
+    public $timestamps = true;
+
    protected $table = 'incomes';
 
    protected $primaryKey = 'id';
