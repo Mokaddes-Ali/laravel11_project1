@@ -455,6 +455,7 @@
                         <th class="text-center align-middle">Project Name</th>
                         <th class="text-center align-middle">Client Name</th>
                         <th class="text-center align-middle">Income/Paid Amount</th>
+                        <th class="text-center align-middle">Invoice</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -465,7 +466,8 @@
                         <td class="text-center align-middle">{{ $row->client_name }}</td>
                         <td>
                             @php
-                                $incomeAmounts = explode(',', $row->income_amounts);
+                                $incomeAmounts = explode(',', $row->income_amounts); // Income amounts
+                                $incomeIds = explode(',', $row->income_ids); // Income IDs
                                 $incomeDate = \Carbon\Carbon::parse($row->created_at)->format('Y-m-d');
                             @endphp
                             <table class="table table-sm mb-0">
@@ -479,29 +481,32 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($incomeAmounts as $index => $amount)
-                                    <tr>
-                                        <td class="text-center">{{  }}</td>
-                                        <td class="text-center">{{ $amount }}</td>
-                                        <td class="text-center">{{ $incomeDate }}</td>
-                                        <td class="text-center align-middle">
-                                            @if (isset($row->project_id)) <!-- Check if project_id exists -->
-                                                {{-- <a href="/income/edit/{{ $row->project_id }}/{{ $index }}" class="btn btn-sm btn-primary">Edit</a> --}}
-                                                <a class="btn btn-primary btn-sm me-2 d-inline-block" href="{{ url('/income/edit', $row->project_id) }}">Edit</a>
-                                                <form action="{{ route('income.delete', $row->project_id)}} " method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');" class="d-inline-block me-2">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                                </form>
-                                            @else
-                                                No ID Available
-                                            @endif
-                                        </td>
-
-                                    </tr>
+                                        <tr>
+                                            <td class="text-center">{{ $incomeIds[$index] ?? 'N/A' }}</td>
+                                            <td class="text-center">{{ $amount }}</td>
+                                            <td class="text-center">{{ $incomeDate }}</td>
+                                            <td class="text-center align-middle">
+                                                @if (isset($incomeIds[$index]))
+                                                    <a href="{{ url('/income/edit', $incomeIds[$index]) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                    <form action="{{ route('income.delete', $incomeIds[$index]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?');" class="d-inline-block">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                    </form>
+                                                @else
+                                                    No ID Available
+                                                @endif
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </td>
+                        <td class="text-center align-middle">
+                            <a class="btn btn-primary btn-sm me-2 d-inline-block" href="{{ url('/invoice/create', $row->project_id) }}">Invoice</a>
+                            <a class="btn btn-secondary btn-sm d-inline-block" href="{{ url('/invoice/pdf', $row->project_id) }}">PDF</a>
+                        </td>
+
                     </tr>
                     @endforeach
                     <tr class="table-warning">
