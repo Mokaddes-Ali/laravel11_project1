@@ -9,18 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendWelcomeMail extends Mailable
+class OtpMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $welcomeMessage;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($welcomeMessage)
+    public function __construct()
     {
-        $this->$welcomeMessage = $welcomeMessage;
+        //
     }
 
     /**
@@ -29,7 +27,7 @@ class SendWelcomeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Welcome Mail in laravel11',
+            subject: 'Otp Mail',
         );
     }
 
@@ -39,7 +37,7 @@ class SendWelcomeMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email.welcome',
+            view: 'view.name',
         );
     }
 
@@ -53,5 +51,3 @@ class SendWelcomeMail extends Mailable
         return [];
     }
 }
-
-

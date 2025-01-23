@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingsController;
 
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -84,6 +85,8 @@ Route::get('/backup', [BackupController::class, 'createBackup'])->name('backup.c
 });
 
 Route::get('/send-mail', [MailController::class, 'sendMail']);
+
+
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/user', [UserController::class, 'create']);
