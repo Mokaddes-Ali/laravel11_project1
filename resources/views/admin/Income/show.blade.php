@@ -1,4 +1,4 @@
-{{-- @extends('layouts.master')
+@extends('layouts.master')
 
 @section('content')
 <div class="card ">
@@ -412,7 +412,7 @@
 </div>
 @endsection --}}
 
-
+{{--
 @extends('layouts.master')
 
 @section('content')
@@ -518,3 +518,4 @@
     </div>
 </div>
 @endsection
+

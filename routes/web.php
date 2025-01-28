@@ -13,10 +13,25 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingsController;
 
+use App\Http\Controllers\OtpController;
+
+Route::get('otp-request', function () {
+    return view('otp.request');
+});
+
+Route::get('otp-verify', function () {
+    return view('otp.verify');
+});
+
+Route::post('otp-request', [OtpController::class, 'requestOtp'])->name('otp.request');
+Route::post('otp-verify', [OtpController::class, 'verifyOtp'])->name('otp.verify');
+
+
 
 Route::get('/', function () {
     return view('auth.login');
 });
+
 
 Route::get('/dashboard', function () {
     return view('layouts.master');
@@ -53,8 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/income/delete/{id}', [IncomeController::class, 'destroy'])->name('income.delete');
     Route::get('/invoice/search', [IncomeController::class, 'search'])->name('invoice.search');
     Route::get('/project/details/{id}', [IncomeController::class, 'fetchProjectDetails']);
-
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/expense', [ExpenseController::class, 'index'])->name('expenseindex');

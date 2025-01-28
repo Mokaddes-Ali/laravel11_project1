@@ -24,6 +24,17 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'otp_created_at' => 'datetime',  // Cast otp_created_at to a Carbon instance
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
@@ -32,17 +43,4 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
 }
