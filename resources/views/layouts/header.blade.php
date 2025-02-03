@@ -13,6 +13,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('admin')}}/assets/images/favicon.ico">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
         <!-- plugins -->
         <link href="{{asset('admin')}}/assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />

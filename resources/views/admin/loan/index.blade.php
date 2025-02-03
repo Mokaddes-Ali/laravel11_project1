@@ -1,59 +1,74 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-4">Loans List</h2>
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="mb-0">Loans List</h2>
+            <a href="{{ route('loans.create') }}" class="btn btn-primary btn-md">
+                <i class="fas fa-plus"></i> Create Loan
+            </a>
+        </div>
 
         <!-- Success/Error Message -->
         @if(session('success'))
-            <script>
-                Toastify({
-                    text: "{{ session('success') }}",
-                    backgroundColor: "green",
-                    duration: 3000
-                }).showToast();
-            </script>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endif
 
         @if(session('error'))
-            <script>
-                Toastify({
-                    text: "{{ session('error') }}",
-                    backgroundColor: "red",
-                    duration: 3000
-                }).showToast();
-            </script>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         @endif
 
-        <table class="min-w-full table-auto">
-            <thead>
-                <tr>
-                    <th class="px-4 py-2 border">Loan ID</th>
-                    <th class="px-4 py-2 border">Amount</th>
-                    <th class="px-4 py-2 border">Duration</th>
-                    <th class="px-4 py-2 border">Interest Rate</th>
-                    <th class="px-4 py-2 border">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($loans as $loan)
-                    <tr>
-                        <td class="px-4 py-2 border">{{ $loan->loan_id }}</td>
-                        <td class="px-4 py-2 border">{{ $loan->amount }}</td>
-                        <td class="px-4 py-2 border">{{ $loan->duration }}</td>
-                        <td class="px-4 py-2 border">{{ $loan->interest_rate }}%</td>
-                        <td class="px-4 py-2 border">
-                            <a href="{{ route('loans.edit', $loan->id) }}" class="text-blue-500">Edit</a> |
-                            <form action="{{ route('loans.destroy', $loan->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-500">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <!-- Loans Table -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <table class="table table-hover table-striped text-center table-border">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Loan ID</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Duration (Months)</th>
+                            <th scope="col">Interest Rate (%)</th>
+                            <th scope="col">Total Amount</th>
+                            <th scope="col">Monthly Pay Amount</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($loans as $loan)
+                            <tr>
+                                <td>{{ $loan->id }}</td>
+                                <td>{{ $loan->loan_id }}</td>
+                                <td>{{ $loan->amount }}</td>
+                                <td>{{ $loan->duration }}</td>
+                                <td>{{ $loan->interest_rate }}</td>
+                                <td>{{ $loan->total_pay_amount}}</td>
+                                <td>{{ $loan->monthly_pay_amount }}</td>
+                                <td>
+                                    <div class="d-flex gap-1">
+                                    <a href="{{ route('loans.edit', $loan->id) }}" class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form action="{{ route('loans.destroy', $loan->id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this loan?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 @endsection
-
