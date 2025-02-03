@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OtpController;
+use App\Http\Controllers\LoanController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -10,10 +12,9 @@ use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingsController;
-
-use App\Http\Controllers\OtpController;
 
 Route::get('otp-request', function () {
     return view('otp.request');
@@ -112,6 +113,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
       });
+
+Route::middleware('auth')->group(function () {
+    Route::resource('loans', LoanController::class);
+
+    });
 
 Route::middleware('auth')->group(function () {
     Route::resource('roles', RoleController::class);

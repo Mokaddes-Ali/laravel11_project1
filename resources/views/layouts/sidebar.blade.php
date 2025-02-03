@@ -88,15 +88,38 @@
                                 </div>
                             </li>
 
+
                             <li>
-                                <a href="#sidebarEmail" data-bs-toggle="collapse">
+                                <a href="#sidebarLoan" data-bs-toggle="collapse">
                                     <i data-feather="mail"></i>
-                                    <span> Client </span>
+                                    <span>Loan</span>
                                     <span class="menu-arrow"></span>
                                 </a>
-                                <div class="collapse" id="sidebarEmail">
+                                <div class="collapse" id="sidebarLoan">
                                     <ul class="nav-second-level">
+                                        <!-- Link for Create Loan -->
+                                        <li><a href="{{ route('loans.create') }}" class="flex items-center space-x-2 hover:text-blue-400">
+                                            <span>Create Loan</span>
+                                        </a></li>
+                                        <!-- Link for Loans List -->
+                                        <li><a href="{{ route('loans.index') }}" class="flex items-center space-x-2 hover:text-blue-400">
+                                            <span>Loans List</span>
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li>
+                                <a href="#sidebarClient" data-bs-toggle="collapse">
+                                    <i data-feather="mail"></i>
+                                    <span>Client</span>
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <div class="collapse" id="sidebarClient">
+                                    <ul class="nav-second-level">
+                                        <!-- Link for Add Client -->
                                         <li><a href="/client">Add Client</a></li>
+                                        <!-- Link for Manage Client -->
                                         <li><a href="/show/client">Manage Client</a></li>
                                     </ul>
                                 </div>
