@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Loan;
+use Barryvdh\DomPDF\PDF;
+use App\Exports\LoansExport;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\LoansExport;
-use PDF;
+use Illuminate\Support\Facades\Validator;
 
 class LoanController extends Controller
 {
@@ -25,16 +25,10 @@ class LoanController extends Controller
 
     public function index(Request $request)
     {
-        // Search
         $search = $request->query('search');
-
-        // Sorting
         $sort = $request->query('sort', 'id');
         $direction = $request->query('direction', 'asc');
-
-        // Pagination
         $perPage = $request->query('per_page', 10);
-
         $loans = Loan::query()
             ->when($search, function ($query, $search) {
                 return $query->where('loan_id', 'like', '%' . $search . '%');
@@ -44,6 +38,7 @@ class LoanController extends Controller
 
         return view('admin.loan.index', compact('loans'));
     }
+
 
     public function export($type)
     {

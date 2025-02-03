@@ -119,6 +119,10 @@ Route::middleware('auth')->group(function () {
 
     });
 
+Route::get('/loans/search', [LoanController::class, 'search'])->name('loans.search');
+Route::get('/loans', [LoanController::class, 'index'])->name('loans.index');
+Route::get('/loans/export/{type}', [LoanController::class, 'export'])->name('loans.export');
+
 Route::middleware('auth')->group(function () {
     Route::resource('roles', RoleController::class);
     Route::get('/role', [RoleController::class, 'create']);
