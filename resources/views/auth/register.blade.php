@@ -5,7 +5,7 @@
             <span class="text-center text-3xl font-black animate-pulse text-fuchsia-400 dark:text-white">Welcome to {{ $setting->company_name}}</span>
         </a>
     </div>
-    <div class="border-4 rounded-md border-gradient-to-tl from-indigo-600 to-pink-600 p-4 border-indigo-200 border-x-indigo-500">
+    <div class="border-4 p-4 rounded-md border-gradient-to-tl from-indigo-600 to-pink-600 p-4 border-indigo-200 border-x-indigo-500">
     <form method="POST" action="{{ route('register') }}" class="">
         @csrf
 

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Flasher\Laravel\Facade\Flasher;
 
 class ProfileController extends Controller
 {
@@ -34,7 +35,10 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // Success Toast Message
+        Flasher::addSuccess('Your profile has been successfully updated.');
+
+        return Redirect::route('profile.edit');
     }
 
     /**
@@ -48,13 +52,23 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        Auth::logout();
+        try {
+            Auth::logout();
 
-        $user->delete();
+            $user->delete();
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+            // Success Message
+            Flasher::addSuccess('Your account has been successfully deleted.');
+
+            return Redirect::route('login');
+        } catch (\Exception $e) {
+            // Error Message with Details
+            Flasher::addError('Account deletion failed: ' . $e->getMessage());
+
+            return Redirect::route('login');
+        }
     }
 }
