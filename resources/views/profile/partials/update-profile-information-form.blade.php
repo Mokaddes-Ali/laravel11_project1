@@ -1,4 +1,4 @@
-<section>
+{{-- <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
             {{ __('Profile Information') }}
@@ -58,6 +58,52 @@
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
                 >{{ __('Saved.') }}</p>
+            @endif
+        </div>
+    </form>
+</section> --}}
+
+
+<section class="mt-2">
+    <header>
+        <h2 class="h4 text-dark fw-bold">Profile Information</h2>
+        <p class="text-muted">Update your account's profile information and email address.</p>
+    </header>
+
+    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+        @csrf
+    </form>
+
+    <form method="post" action="{{ route('profile.update') }}" class="mt-4">
+        @csrf
+        @method('patch')
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name">
+            <div class="text-danger">{{ $errors->first('name') }}</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" name="email" class="form-control" value="{{ old('email', $user->email) }}" required autocomplete="username">
+            <div class="text-danger">{{ $errors->first('email') }}</div>
+
+            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
+                <div class="mt-2">
+                    <p class="text-muted">Your email address is unverified.</p>
+                    <button form="send-verification" class="btn btn-link p-0">Click here to re-send the verification email.</button>
+                    @if (session('status') === 'verification-link-sent')
+                        <p class="text-success fw-bold mt-2">A new verification link has been sent to your email address.</p>
+                    @endif
+                </div>
+            @endif
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+            <button type="submit" class="btn btn-primary ms-5 my-2 text-center">Save</button>
+            @if (session('status') === 'profile-updated')
+                <p class="text-success m-0">Saved...</p>
             @endif
         </div>
     </form>

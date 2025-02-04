@@ -227,24 +227,23 @@
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
-                    @include('layouts.navigation')
+
                     <!-- item-->
-                    {{-- <div class="dropdown-header noti-title">
+                    <div class="dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Welcome !</h6>
                     </div>
-                    @include('layouts.navigation') --}}
 
-                    {{-- <a href="pages-profile.html" class="dropdown-item notify-item">
+                    <a href="{{ route('profile.edit') }}" class="dropdown-item notify-item">
                         <i data-feather="user" class="icon-dual icon-xs me-1"></i><span>My Account</span>
                     </a>
-                    <div class="dropdown-divider"></div> --}}
+                    <div class="dropdown-divider"></div>
 
-                    {{-- <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                     <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                         <i data-feather="log-out" class="icon-dual icon-xs me-1"></i><span>Logout</span>
                     </a>
                     <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
-                    </form> --}}
+                    </form>
 
                 </div>
             </li>
