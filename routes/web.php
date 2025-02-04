@@ -29,9 +29,8 @@ Route::post('otp-verify', [OtpController::class, 'verifyOtp'])->name('otp.verify
 
 
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [InvoiceController::class, 'indexlogo']);
+
 
 
 Route::get('/dashboard', function () {

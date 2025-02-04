@@ -12,14 +12,6 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class InvoiceController extends Controller
 {
-    // public function index($pid)
-    // {
-    //     $invoices = Income::where('project_id', $pid)->get();
-    //     $data = Project::where('id', $pid)->first();
-    //     $client = Client::where('id', $data->client_id)->first();
-    //     $setting = Settings::where('status', 0)->firstOrFail();
-    //     return view('admin.invoice.index', compact('invoices', 'data', 'setting'));
-    // }
 
     public function index($pid)
 {
@@ -29,6 +21,14 @@ class InvoiceController extends Controller
     $setting = Settings::where('status', 0)->firstOrFail();
     return view('admin.invoice.index', compact('invoices', 'data', 'setting', 'client'));
 }
+
+
+public function indexlogo()
+{
+    $setting = Settings::where('status', 0)->firstOrFail();
+    return view('auth.login', compact('setting'));
+}
+
 
 
     public function pdf($pid)

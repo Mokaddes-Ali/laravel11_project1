@@ -17,10 +17,10 @@ class IncomeController extends Controller
         return view('admin.Income.add', compact('all'));
     }
 
-    // public function incomeshow(){
-    //     $all = Income::where('status', 1)->orderBy('id', 'ASC')->get();
-    //     return view('admin.Income.show', compact('all'));
-    // }
+    public function incomeshow(){
+        $all = Income::where('status', 1)->orderBy('id', 'ASC')->get();
+        return view('admin.Income.show', compact('all'));
+    }
 
 //     public function incomeshow(){
 //       // Controller code
@@ -78,44 +78,44 @@ class IncomeController extends Controller
 // }
 
 
-public function incomeshow(Request $request)
-{
-    // Retrieve start and end date filters from request
-    $startDate = $request->input('start_date');
-    $endDate = $request->input('end_date');
+// public function incomeshow(Request $request)
+// {
+//     // Retrieve start and end date filters from request
+//     $startDate = $request->input('start_date');
+//     $endDate = $request->input('end_date');
 
-    // Build the query to get the incomes with date filtering
-    $query = DB::table('incomes')
-        ->join('projects', 'incomes.project_id', '=', 'projects.id')
-        ->join('clients', 'projects.client_id', '=', 'clients.id')
-        ->select(
-            'projects.id as project_id',   // Ensure project ID is selected
-            'projects.project_name',
-            'clients.name as client_name',
-            DB::raw('GROUP_CONCAT(incomes.income_amount) as income_amounts'),
-            DB::raw('GROUP_CONCAT(incomes.id) as income_ids'), // Add income IDs
-            'incomes.created_at'
-        )
-        ->groupBy('projects.id', 'projects.project_name', 'clients.name', 'incomes.created_at')
-        ->orderBy('incomes.created_at', 'desc');
+//     // Build the query to get the incomes with date filtering
+//     $query = DB::table('incomes')
+//         ->join('projects', 'incomes.project_id', '=', 'projects.id')
+//         ->join('clients', 'projects.client_id', '=', 'clients.id')
+//         ->select(
+//             'projects.id as project_id',   // Ensure project ID is selected
+//             'projects.project_name',
+//             'clients.name as client_name',
+//             DB::raw('GROUP_CONCAT(incomes.income_amount) as income_amounts'),
+//             DB::raw('GROUP_CONCAT(incomes.id) as income_ids'), // Add income IDs
+//             'incomes.created_at'
+//         )
+//         ->groupBy('projects.id', 'projects.project_name', 'clients.name', 'incomes.created_at')
+//         ->orderBy('incomes.created_at', 'desc');
 
-    // Apply date filters if they exist
-    if ($startDate && $endDate) {
-        $query->whereBetween('incomes.created_at', [$startDate, $endDate]);
-    }
+//     // Apply date filters if they exist
+//     if ($startDate && $endDate) {
+//         $query->whereBetween('incomes.created_at', [$startDate, $endDate]);
+//     }
 
-    // Get the data
-    $all = $query->get();
+//     // Get the data
+//     $all = $query->get();
 
-    // Calculate total income with date filtering
-    $totalAmountQuery = DB::table('incomes');
-    if ($startDate && $endDate) {
-        $totalAmountQuery->whereBetween('created_at', [$startDate, $endDate]);
-    }
-    $totalAmount = $totalAmountQuery->sum('income_amount');
+//     // Calculate total income with date filtering
+//     $totalAmountQuery = DB::table('incomes');
+//     if ($startDate && $endDate) {
+//         $totalAmountQuery->whereBetween('created_at', [$startDate, $endDate]);
+//     }
+//     $totalAmount = $totalAmountQuery->sum('income_amount');
 
-    return view('admin.Income.show', compact('all', 'totalAmount'));
-}
+//     return view('admin.Income.show', compact('all', 'totalAmount'));
+// }
 
 
 
