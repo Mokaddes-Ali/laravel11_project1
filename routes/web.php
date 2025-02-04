@@ -28,11 +28,6 @@ Route::post('otp-request', [OtpController::class, 'requestOtp'])->name('otp.requ
 Route::post('otp-verify', [OtpController::class, 'verifyOtp'])->name('otp.verify');
 
 
-
-Route::get('/', [InvoiceController::class, 'indexlogo']);
-
-
-
 Route::get('/dashboard', function () {
     return view('layouts.master');
 })->middleware(['auth', 'verified'])->name('dashboard');

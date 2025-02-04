@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
+use App\Models\Settings;
 
 class PasswordResetLinkController extends Controller
 {
@@ -15,7 +16,8 @@ class PasswordResetLinkController extends Controller
      */
     public function create(): View
     {
-        return view('auth.forgot-password');
+        $setting = Settings::where('status', 0)->firstOrFail();
+        return view('auth.forgot-password',compact('setting'));
     }
 
     /**

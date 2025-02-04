@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  @keyframes borderGlow {
+    0% { border-color: #ff5f6d; }
+    25% { border-color: #ff9966; }
+    50% { border-color: #ffcc33; }
+    75% { border-color: #66ff66; }
+    100% { border-color: #ff5f6d; }
+  }
+
+  .animate-border-glow {
+    animation: borderGlow 3s infinite linear;
+  }
+}
+
