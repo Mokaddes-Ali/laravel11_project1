@@ -169,8 +169,6 @@ class ClientController extends Controller
             'loan_amount' => 'required|numeric',
             'loan_type' => 'required|in:personal,business,home,education,other',
             'purpose' => 'nullable|max:255',
-            'loan_start_date' => 'required|date',
-            'loan_status' => 'nullable|in:pending,approved,rejected,ongoing,completed',
             'guarantor_name' => 'required|max:40',
             'guarantor_nid' => 'required|max:20',
             'guarantor_nid_pic_font' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
@@ -183,13 +181,9 @@ class ClientController extends Controller
             'guarantor_pic' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
             'guarantor_relation' => 'required|max:40',
             'has_previous_loan' => 'nullable|boolean',
-            'insurance_taken' => 'nullable|boolean',
             'creator' => 'nullable|exists:users,id',
             'editor' => 'nullable|exists:users,id',
-            'loan_applied_date' => 'required|date',
-            'loan_approved_date' => 'nullable|date',
             'slug' => 'nullable|max:50',
-            'status' => 'nullable|integer',
         ]);
 
         $data = $request->except(['_token', 'pic', 'nid_pic_font', 'nid_pic_back', 'guarantor_nid_pic_font', 'guarantor_nid_pic_back', 'guarantor_pic']);

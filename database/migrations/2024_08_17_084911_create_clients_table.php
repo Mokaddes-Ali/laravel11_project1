@@ -35,11 +35,9 @@ return new class extends Migration
             $table->string('number')->unique();
             $table->string('emergency_contact_name');
             $table->string('pic')->nullable();
-            $table->unsignedBigInteger('loan_amount');
+            $table->string('loan_amount');
             $table->enum('loan_type', ['personal', 'business', 'home', 'education', 'other']);
             $table->text('purpose')->nullable();
-            $table->date('loan_start_date');
-            $table->enum('loan_status', ['pending', 'approved', 'rejected', 'ongoing', 'completed'])->default('pending'); // লোনের স্ট্যাটাস
             $table->string('guarantor_name');
             $table->string('guarantor_nid');
             $table->string('guarantor_nid_pic_font')->nullable();
@@ -52,21 +50,14 @@ return new class extends Migration
             $table->string('guarantor_pic')->nullable();
             $table->string('guarantor_relation');
             $table->boolean('has_previous_loan')->default(false);
-            $table->boolean('insurance_taken')->default(false);
+            $table->string('slug', 50)->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->unsignedBigInteger('creator')->nullable();
             $table->unsignedBigInteger('editor')->nullable();
-            $table->date('loan_applied_date');
-            $table->date('loan_approved_date')->nullable();
-            $table->string('slug', 50)->nullable();
-            $table->integer('status')->default(0);
             $table->timestamps();
 
                 // Foreign key constraints with cascadeOnUpdate and restrictOnDelete
-                $table->forein('loan_amount')
-                      ->references('id')
-                      ->on('loans')
-                      ->cascadeOnUpdate()
-                      ->restrictOnDelete();
+               
              $table->foreign('creator')
                       ->references('id')
                       ->on('users')

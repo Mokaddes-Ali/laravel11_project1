@@ -107,7 +107,7 @@
 </div> --}}
 
 
-
+{{--
 
 @section('content')
 <div class="container" style="margin-top: 5px; height: 5000px;">
@@ -335,4 +335,205 @@
         </div>
     </form>
 </div>
+@endsection --}}
+
+@section('content')
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Client</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Create New Client</h2>
+        <form action="{{ route('create') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <!-- Personal Information -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="father_name">Father's Name</label>
+                <input type="text" class="form-control" id="father_name" name="father_name" required>
+            </div>
+            <div class="form-group">
+                <label for="mother_name">Mother's Name</label>
+                <input type="text" class="form-control" id="mother_name" name="mother_name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+            </div>
+            <div class="form-group">
+                <label for="date_of_birth">Date of Birth</label>
+                <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
+            </div>
+            <div class="form-group">
+                <label for="nid_number">NID Number</label>
+                <input type="text" class="form-control" id="nid_number" name="nid_number" required>
+            </div>
+            <div class="form-group">
+                <label for="nid_pic_font">NID Front Picture</label>
+                <input type="file" class="form-control-file" id="nid_pic_font" name="nid_pic_font">
+            </div>
+            <div class="form-group">
+                <label for="nid_pic_back">NID Back Picture</label>
+                <input type="file" class="form-control-file" id="nid_pic_back" name="nid_pic_back">
+            </div>
+            <div class="form-group">
+                <label for="occupation">Occupation</label>
+                <input type="text" class="form-control" id="occupation" name="occupation" required>
+            </div>
+            <div class="form-group">
+                <label for="monthly_income">Monthly Income</label>
+                <input type="number" class="form-control" id="monthly_income" name="monthly_income" required>
+            </div>
+
+            <!-- Present Address -->
+            <div class="form-group">
+                <label for="present_district">Present District</label>
+                <input type="text" class="form-control" id="present_district" name="present_district" required>
+            </div>
+            <div class="form-group">
+                <label for="present_upazila">Present Upazila</label>
+                <input type="text" class="form-control" id="present_upazila" name="present_upazila" required>
+            </div>
+            <div class="form-group">
+                <label for="present_village">Present Village</label>
+                <input type="text" class="form-control" id="present_village" name="present_village">
+            </div>
+            <div class="form-group">
+                <label for="present_postcode">Present Postcode</label>
+                <input type="text" class="form-control" id="present_postcode" name="present_postcode">
+            </div>
+
+            <!-- Permanent Address -->
+            <div class="form-group">
+                <label for="permanent_district">Permanent District</label>
+                <input type="text" class="form-control" id="permanent_district" name="permanent_district" required>
+            </div>
+            <div class="form-group">
+                <label for="permanent_upazila">Permanent Upazila</label>
+                <input type="text" class="form-control" id="permanent_upazila" name="permanent_upazila" required>
+            </div>
+            <div class="form-group">
+                <label for="permanent_village">Permanent Village</label>
+                <input type="text" class="form-control" id="permanent_village" name="permanent_village">
+            </div>
+            <div class="form-group">
+                <label for="permanent_postcode">Permanent Postcode</label>
+                <input type="text" class="form-control" id="permanent_postcode" name="permanent_postcode">
+            </div>
+
+            <!-- Contact Information -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="number">Number</label>
+                <input type="text" class="form-control" id="number" name="number" required>
+            </div>
+            <div class="form-group">
+                <label for="emergency_contact_name">Emergency Contact Name</label>
+                <input type="text" class="form-control" id="emergency_contact_name" name="emergency_contact_name" required>
+            </div>
+            <div class="form-group">
+                <label for="pic">Client Picture</label>
+                <input type="file" class="form-control-file" id="pic" name="pic">
+            </div>
+
+            <!-- Loan Information -->
+            <div class="form-group">
+                <label for="loan_amount">Loan Amount</label>
+                <input type="number" class="form-control" id="loan_amount" name="loan_amount" required>
+            </div>
+            <div class="form-group">
+                <label for="loan_type">Loan Type</label>
+                <select class="form-control" id="loan_type" name="loan_type" required>
+                    <option value="personal">Personal</option>
+                    <option value="business">Business</option>
+                    <option value="home">Home</option>
+                    <option value="education">Education</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="purpose">Purpose</label>
+                <textarea class="form-control" id="purpose" name="purpose"></textarea>
+            </div>
+
+            <!-- Guarantor Information -->
+            <div class="form-group">
+                <label for="guarantor_name">Guarantor Name</label>
+                <input type="text" class="form-control" id="guarantor_name" name="guarantor_name" required>
+            </div>
+            <div class="form-group">
+                <label for="guarantor_nid">Guarantor NID</label>
+                <input type="text" class="form-control" id="guarantor_nid" name="guarantor_nid" required>
+            </div>
+            <div class="form-group">
+                <label for="guarantor_nid_pic_font">Guarantor NID Front Picture</label>
+                <input type="file" class="form-control-file" id="guarantor_nid_pic_font" name="guarantor_nid_pic_font">
+            </div>
+            <div class="form-group">
+                <label for="guarantor_nid_pic_back">Guarantor NID Back Picture</label>
+                <input type="file" class="form-control-file" id="guarantor_nid_pic_back" name="guarantor_nid_pic_back">
+            </div>
+            <div class="form-group">
+                <label for="guarantor_address">Guarantor Address</label>
+                <input type="text" class="form-control" id="guarantor_address" name="guarantor_address" required>
+            </div>
+            <div class="form-group">
+                <label for="guarantor_occupation">Guarantor Occupation</label>
+                <input type="text" class="form-control" id="guarantor_occupation" name="guarantor_occupation" required>
+            </div>
+            <div class="form-group">
+                <label for="guarantor_monthly_income">Guarantor Monthly Income</label>
+                <input type="number" class="form-control" id="guarantor_monthly_income" name="guarantor_monthly_income">
+            </div>
+            <div class="form-group">
+                <label for="guarantor_phone_number">Guarantor Phone Number</label>
+                <input type="text" class="form-control" id="guarantor_phone_number" name="guarantor_phone_number" required>
+            </div>
+            <div class="form-group">
+                <label for="guarantor_email">Guarantor Email</label>
+                <input type="email" class="form-control" id="guarantor_email" name="guarantor_email">
+            </div>
+            <div class="form-group">
+                <label for="guarantor_pic">Guarantor Picture</label>
+                <input type="file" class="form-control-file" id="guarantor_pic" name="guarantor_pic">
+            </div>
+            <div class="form-group">
+                <label for="guarantor_relation">Guarantor Relation</label>
+                <input type="text" class="form-control" id="guarantor_relation" name="guarantor_relation" required>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="form-group">
+                <label for="has_previous_loan">Has Previous Loan?</label>
+                <select class="form-control" id="has_previous_loan" name="has_previous_loan">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
 @endsection

@@ -16,6 +16,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SettingsController;
 
+use App\Http\Controllers\ApplicationController;
+
 Route::get('otp-request', function () {
     return view('otp.request');
 });
@@ -130,6 +132,20 @@ Route::middleware('auth')->group(function () {
 
 
 
+
+
+// User routes
+Route::middleware('auth')->group(function () {
+    Route::get('/application', [ApplicationController::class, 'create'])->name('application.create');
+    Route::post('/application', [ApplicationController::class, 'store'])->name('application.store');
+    Route::get('/application/{application}', [ApplicationController::class, 'show'])->name('application.show');
+});
+
+// Admin routes
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/applications', [ApplicationController::class, 'index'])->name('admin.applications.index');
+    Route::post('/admin/applications/{application}/approve', [ApplicationController::class, 'approve'])->name('admin.applications.approve');
+});
 
 
 Route::middleware('auth')->group(function () {
