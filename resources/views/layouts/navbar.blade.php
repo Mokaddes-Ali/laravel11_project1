@@ -96,32 +96,6 @@
                 <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i data-feather="grid"></i>
                 </a>
-                <div class="dropdown-menu dropdown-lg dropdown-menu-end p-0">
-
-                    <div class="p-1">
-                        <div class="row g-0">
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="assets/images/brands/slack.png" alt="slack">
-                                    <span>Slack</span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="assets/images/brands/github.png" alt="Github">
-                                    <span>GitHub</span>
-                                </a>
-                            </div>
-                            <div class="col">
-                                <a class="dropdown-icon-item" href="#">
-                                    <img src="assets/images/brands/dribbble.png" alt="dribbble">
-                                    <span>Dribbble</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
             </li>
 
             <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
@@ -253,27 +227,24 @@
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
+                    @include('layouts.navigation')
                     <!-- item-->
-                    <div class="dropdown-header noti-title">
+                    {{-- <div class="dropdown-header noti-title">
                         <h6 class="text-overflow m-0">Welcome !</h6>
                     </div>
+                    @include('layouts.navigation') --}}
 
-                    <a href="pages-profile.html" class="dropdown-item notify-item">
+                    {{-- <a href="pages-profile.html" class="dropdown-item notify-item">
                         <i data-feather="user" class="icon-dual icon-xs me-1"></i><span>My Account</span>
                     </a>
+                    <div class="dropdown-divider"></div> --}}
 
-                    <a href="pages-lock-screen.html" class="dropdown-item notify-item">
-                        <i data-feather="lock" class="icon-dual icon-xs me-1"></i><span>Lock Screen</span>
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                    {{-- <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
                         <i data-feather="log-out" class="icon-dual icon-xs me-1"></i><span>Logout</span>
                     </a>
                     <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
-                    </form>
+                    </form> --}}
 
                 </div>
             </li>
@@ -326,42 +297,6 @@
                     </div>
                 </a>
                 <!-- End mobile menu toggle-->
-            </li>
-
-            <li class="dropdown d-none d-xl-block">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    Create New
-                    <i class="uil uil-angle-down"></i>
-                </a>
-                <div class="dropdown-menu">
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <i class="uil uil-bag me-1"></i><span>New Projects</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <i class="uil uil-user-plus me-1"></i><span>Create Users</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <i class="uil uil-chart-pie me-1"></i><span>Revenue Report</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <i class="uil uil-cog me-1"></i><span>Settings</span>
-                    </a>
-
-                    <div class="dropdown-divider"></div>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <i class="uil uil-question-circle me-1"></i><span>Help & Support</span>
-                    </a>
-
-                </div>
             </li>
 
         </ul>

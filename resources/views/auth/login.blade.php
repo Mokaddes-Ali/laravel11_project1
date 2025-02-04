@@ -8,7 +8,7 @@
     </div>
 
     <!-- Login Form Container -->
-    <div class="shadow-md p-4 border-4 border-dotted border-red-500 rounded-xl">
+    <div class="shadow-md p-4 border-4 border-dotted border-green-300 rounded-xl">
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -63,7 +63,7 @@
         </form>
 
         <!-- Register Section -->
-        <div class="mt-6 text-center">
+        <div class="mt-3 text-center">
             <p class="text-md pt-2 pb-2 text-red-600 dark:text-gray-400">{{ __('Don’t have an account?') }}</p>
             <a href="{{ route('register') }}" class="animate-bounce inline-flex items-center mt-2 px-6 py-2 bg-green-600 hover:bg-green-500 text-white font-semibold rounded-md transition duration-200">
                 {{ __('Create an account') }}

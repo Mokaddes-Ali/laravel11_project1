@@ -1,4 +1,4 @@
-       
+
 </div> <!-- container -->
 
 </div> <!-- content -->
@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                <script>document.write(new Date().getFullYear())</script> &copy; Shreyu theme by <a href="#">Coderthemes</a> 
+                <script>document.write(new Date().getFullYear())</script> &copy; Shreyu theme by <a href="#">Coderthemes</a>
             </div>
             <div class="col-md-6">
                 <div class="text-md-end footer-links d-none d-sm-block">
@@ -135,10 +135,6 @@
 
 
     <button class="btn btn-primary w-100 mt-4" id="resetBtn">Reset to Default</button>
-
-    <a href="https://1.envato.market/shreyu_admin" class="btn btn-danger d-block mt-3" target="_blank">
-        <i class="mdi mdi-basket me-1"></i> Purchase Now
-    </a>
 
 </div>
 
