@@ -193,7 +193,6 @@ class ClientController extends Controller
         ]);
 
 
-
         // Handle file uploads
         $data = $request->except(['_token', 'pic', 'nid_pic_font', 'nid_pic_back', 'guarantor_nid_pic_font', 'guarantor_nid_pic_back', 'guarantor_pic']);
 
@@ -230,6 +229,11 @@ class ClientController extends Controller
     }
 
 
+    public function showClientInfo($user_id)
+    {
+        $client = Client::where('user_id', $user_id)->firstOrFail();
+        return view('admin.client.user', compact('client'));
+    }
 
 
     public function edit($id)

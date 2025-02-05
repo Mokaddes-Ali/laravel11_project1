@@ -530,37 +530,6 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-
-            <!-- Loan Information -->
-            <h4 class="mt-4">Loan Information</h4>
-            <div class="form-group">
-                <label for="loan_amount">Loan Amount</label>
-                <input type="number" class="form-control" id="loan_amount" name="loan_amount" value="{{ old('loan_amount') }}" required>
-                @error('loan_amount')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="loan_type">Loan Type</label>
-                <select class="form-control" id="loan_type" name="loan_type" required>
-                    <option value="personal" {{ old('loan_type') == 'personal' ? 'selected' : '' }}>Personal</option>
-                    <option value="business" {{ old('loan_type') == 'business' ? 'selected' : '' }}>Business</option>
-                    <option value="home" {{ old('loan_type') == 'home' ? 'selected' : '' }}>Home</option>
-                    <option value="education" {{ old('loan_type') == 'education' ? 'selected' : '' }}>Education</option>
-                    <option value="other" {{ old('loan_type') == 'other' ? 'selected' : '' }}>Other</option>
-                </select>
-                @error('loan_type')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label for="purpose">Purpose</label>
-                <textarea class="form-control" id="purpose" name="purpose">{{ old('purpose') }}</textarea>
-                @error('purpose')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
             <!-- Guarantor Information -->
             <h4 class="mt-4">Guarantor Information</h4>
             <div class="form-group">
@@ -640,20 +609,6 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
-
-            <!-- Additional Information -->
-            <h4 class="mt-4">Additional Information</h4>
-            <div class="form-group">
-                <label for="has_previous_loan">Has Previous Loan?</label>
-                <select class="form-control" id="has_previous_loan" name="has_previous_loan">
-                    <option value="0" {{ old('has_previous_loan') == '0' ? 'selected' : '' }}>No</option>
-                    <option value="1" {{ old('has_previous_loan') == '1' ? 'selected' : '' }}>Yes</option>
-                </select>
-                @error('has_previous_loan')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
             <!-- Submit Button -->
             <div class="form-group mt-4">
                 <button type="submit" class="btn btn-primary">Submit</button>

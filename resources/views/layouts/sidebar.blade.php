@@ -92,7 +92,7 @@
                             <li>
                                 <a href="#sidebarLoan" data-bs-toggle="collapse">
                                     <i data-feather="mail"></i>
-                                    <span>Loan</span>
+                                    <span>Loan Schedule</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarLoan">
@@ -112,15 +112,17 @@
                             <li>
                                 <a href="#sidebarClient" data-bs-toggle="collapse">
                                     <i data-feather="mail"></i>
-                                    <span>Client</span>
+                                    <span>Register Client</span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarClient">
                                     <ul class="nav-second-level">
                                         <!-- Link for Add Client -->
-                                        <li><a href="/client">Add Client</a></li>
+                                        <li><a href="/client">Register Now</a></li>
                                         <!-- Link for Manage Client -->
-                                        <li><a href="/show/client">Manage Client</a></li>
+                                        <li><a href="/show/client">Register Deatils</a></li>
+                                        <!-- Link for Manage Client -->
+                                        {{-- <li><a href="{{ route('client.show') }}">Register Application</a></li> --}}
                                     </ul>
                                 </div>
                             </li>
