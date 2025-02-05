@@ -199,6 +199,11 @@ class ClientController extends Controller
         $data['user_id'] = auth()->id();
         $data['creator'] = auth()->id();
         $data['editor'] = auth()->id();
+
+         // Dynamic slug generation (6-digit unique number)
+    do {
+        $data['slug'] = str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+    } while (Client::where('slug', $data['slug'])->exists());
         if ($request->hasFile('pic')) {
             $data['pic'] = $this->uploadImage($request->file('pic'), $this->clientImagePath);
         }
@@ -227,13 +232,6 @@ class ClientController extends Controller
             return back()->with('error', 'Failed to create client.');
         }
     }
-
-
-    // public function showClientInfo($user_id)
-    // {
-    //     $client = Client::where('user_id', $user_id)->firstOrFail();
-    //     return view('admin.client.user', compact('client'));
-    // }
 
     // Show client details (for user)
     public function showClientInfo(Client $client)

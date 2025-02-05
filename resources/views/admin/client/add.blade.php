@@ -338,16 +338,6 @@
 @endsection --}}
 
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Client</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
     <div class="container mt-5">
         <h2>Create New Client</h2>
 
@@ -364,7 +354,8 @@
 
         <form action="{{ route('clients.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-
+            <div class="row">
+                <div class="col-md-5">
             <!-- Personal Information -->
             <h4 class="mt-4">Personal Information</h4>
             <div class="form-group">
@@ -438,6 +429,8 @@
                 @enderror
             </div>
 
+        </div>
+        <div class="col-md-5">
             <!-- Present Address -->
             <h4 class="mt-4">Present Address</h4>
             <div class="form-group">
@@ -499,6 +492,9 @@
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
             </div>
+
+        </div>
+    </div>
 
             <!-- Contact Information -->
             <h4 class="mt-4">Contact Information</h4>
@@ -615,12 +611,5 @@
             </div>
         </form>
     </div>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
 
 @endsection
