@@ -122,7 +122,13 @@
                                         <!-- Link for Manage Client -->
                                         <li><a href="/show/client">Register Deatils</a></li>
                                         <!-- Link for Manage Client -->
-                                        <li><a href="/show/client">Register Application</a></li>
+                                        @php
+                use App\Models\Client;
+                $client = Client::where('user_id', auth()->id())->first();
+            @endphp
+                                        @if($client)
+                                        <li><a href="{{ route('client.shows', $client->id) }}">Register Application</a></li>
+                                    @endif
                                     </ul>
                                 </div>
                             </li>

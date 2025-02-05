@@ -229,9 +229,19 @@ class ClientController extends Controller
     }
 
 
-    public function showClientInfo($user_id)
+    // public function showClientInfo($user_id)
+    // {
+    //     $client = Client::where('user_id', $user_id)->firstOrFail();
+    //     return view('admin.client.user', compact('client'));
+    // }
+
+    // Show client details (for user)
+    public function showClientInfo(Client $client)
     {
-        $client = Client::where('user_id', $user_id)->firstOrFail();
+        if ($client->user_id !== auth()->id()) {
+            abort(403);
+        }
+
         return view('admin.client.user', compact('client'));
     }
 
