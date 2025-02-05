@@ -338,7 +338,6 @@
 @endsection --}}
 
 @section('content')
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -351,181 +350,314 @@
 <body>
     <div class="container mt-5">
         <h2>Create New Client</h2>
-        <form action="{{ route('create') }}" method="POST" enctype="multipart/form-data">
+
+        <!-- Display Validation Errors -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('clients.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <!-- Personal Information -->
+            <h4 class="mt-4">Personal Information</h4>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+                @error('name')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="father_name">Father's Name</label>
-                <input type="text" class="form-control" id="father_name" name="father_name" required>
+                <input type="text" class="form-control" id="father_name" name="father_name" value="{{ old('father_name') }}" required>
+                @error('father_name')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="mother_name">Mother's Name</label>
-                <input type="text" class="form-control" id="mother_name" name="mother_name" required>
+                <input type="text" class="form-control" id="mother_name" name="mother_name" value="{{ old('mother_name') }}" required>
+                @error('mother_name')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="phone_number">Phone Number</label>
-                <input type="text" class="form-control" id="phone_number" name="phone_number" required>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ old('phone_number') }}" required>
+                @error('phone_number')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="date_of_birth">Date of Birth</label>
-                <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
+                <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
+                @error('date_of_birth')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="nid_number">NID Number</label>
-                <input type="text" class="form-control" id="nid_number" name="nid_number" required>
+                <input type="text" class="form-control" id="nid_number" name="nid_number" value="{{ old('nid_number') }}" required>
+                @error('nid_number')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="nid_pic_font">NID Front Picture</label>
                 <input type="file" class="form-control-file" id="nid_pic_font" name="nid_pic_font">
+                @error('nid_pic_font')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="nid_pic_back">NID Back Picture</label>
                 <input type="file" class="form-control-file" id="nid_pic_back" name="nid_pic_back">
+                @error('nid_pic_back')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="occupation">Occupation</label>
-                <input type="text" class="form-control" id="occupation" name="occupation" required>
+                <input type="text" class="form-control" id="occupation" name="occupation" value="{{ old('occupation') }}" required>
+                @error('occupation')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="monthly_income">Monthly Income</label>
-                <input type="number" class="form-control" id="monthly_income" name="monthly_income" required>
+                <input type="number" class="form-control" id="monthly_income" name="monthly_income" value="{{ old('monthly_income') }}" required>
+                @error('monthly_income')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <!-- Present Address -->
+            <h4 class="mt-4">Present Address</h4>
             <div class="form-group">
                 <label for="present_district">Present District</label>
-                <input type="text" class="form-control" id="present_district" name="present_district" required>
+                <input type="text" class="form-control" id="present_district" name="present_district" value="{{ old('present_district') }}" required>
+                @error('present_district')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="present_upazila">Present Upazila</label>
-                <input type="text" class="form-control" id="present_upazila" name="present_upazila" required>
+                <input type="text" class="form-control" id="present_upazila" name="present_upazila" value="{{ old('present_upazila') }}" required>
+                @error('present_upazila')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="present_village">Present Village</label>
-                <input type="text" class="form-control" id="present_village" name="present_village">
+                <input type="text" class="form-control" id="present_village" name="present_village" value="{{ old('present_village') }}">
+                @error('present_village')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="present_postcode">Present Postcode</label>
-                <input type="text" class="form-control" id="present_postcode" name="present_postcode">
+                <input type="text" class="form-control" id="present_postcode" name="present_postcode" value="{{ old('present_postcode') }}">
+                @error('present_postcode')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <!-- Permanent Address -->
+            <h4 class="mt-4">Permanent Address</h4>
             <div class="form-group">
                 <label for="permanent_district">Permanent District</label>
-                <input type="text" class="form-control" id="permanent_district" name="permanent_district" required>
+                <input type="text" class="form-control" id="permanent_district" name="permanent_district" value="{{ old('permanent_district') }}" required>
+                @error('permanent_district')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="permanent_upazila">Permanent Upazila</label>
-                <input type="text" class="form-control" id="permanent_upazila" name="permanent_upazila" required>
+                <input type="text" class="form-control" id="permanent_upazila" name="permanent_upazila" value="{{ old('permanent_upazila') }}" required>
+                @error('permanent_upazila')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="permanent_village">Permanent Village</label>
-                <input type="text" class="form-control" id="permanent_village" name="permanent_village">
+                <input type="text" class="form-control" id="permanent_village" name="permanent_village" value="{{ old('permanent_village') }}">
+                @error('permanent_village')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="permanent_postcode">Permanent Postcode</label>
-                <input type="text" class="form-control" id="permanent_postcode" name="permanent_postcode">
+                <input type="text" class="form-control" id="permanent_postcode" name="permanent_postcode" value="{{ old('permanent_postcode') }}">
+                @error('permanent_postcode')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <!-- Contact Information -->
+            <h4 class="mt-4">Contact Information</h4>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                @error('email')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="number">Number</label>
-                <input type="text" class="form-control" id="number" name="number" required>
+                <input type="text" class="form-control" id="number" name="number" value="{{ old('number') }}" required>
+                @error('number')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="emergency_contact_name">Emergency Contact Name</label>
-                <input type="text" class="form-control" id="emergency_contact_name" name="emergency_contact_name" required>
+                <input type="text" class="form-control" id="emergency_contact_name" name="emergency_contact_name" value="{{ old('emergency_contact_name') }}" required>
+                @error('emergency_contact_name')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="pic">Client Picture</label>
                 <input type="file" class="form-control-file" id="pic" name="pic">
+                @error('pic')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <!-- Loan Information -->
+            <h4 class="mt-4">Loan Information</h4>
             <div class="form-group">
                 <label for="loan_amount">Loan Amount</label>
-                <input type="number" class="form-control" id="loan_amount" name="loan_amount" required>
+                <input type="number" class="form-control" id="loan_amount" name="loan_amount" value="{{ old('loan_amount') }}" required>
+                @error('loan_amount')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="loan_type">Loan Type</label>
                 <select class="form-control" id="loan_type" name="loan_type" required>
-                    <option value="personal">Personal</option>
-                    <option value="business">Business</option>
-                    <option value="home">Home</option>
-                    <option value="education">Education</option>
-                    <option value="other">Other</option>
+                    <option value="personal" {{ old('loan_type') == 'personal' ? 'selected' : '' }}>Personal</option>
+                    <option value="business" {{ old('loan_type') == 'business' ? 'selected' : '' }}>Business</option>
+                    <option value="home" {{ old('loan_type') == 'home' ? 'selected' : '' }}>Home</option>
+                    <option value="education" {{ old('loan_type') == 'education' ? 'selected' : '' }}>Education</option>
+                    <option value="other" {{ old('loan_type') == 'other' ? 'selected' : '' }}>Other</option>
                 </select>
+                @error('loan_type')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="purpose">Purpose</label>
-                <textarea class="form-control" id="purpose" name="purpose"></textarea>
+                <textarea class="form-control" id="purpose" name="purpose">{{ old('purpose') }}</textarea>
+                @error('purpose')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <!-- Guarantor Information -->
+            <h4 class="mt-4">Guarantor Information</h4>
             <div class="form-group">
                 <label for="guarantor_name">Guarantor Name</label>
-                <input type="text" class="form-control" id="guarantor_name" name="guarantor_name" required>
+                <input type="text" class="form-control" id="guarantor_name" name="guarantor_name" value="{{ old('guarantor_name') }}" required>
+                @error('guarantor_name')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="guarantor_nid">Guarantor NID</label>
-                <input type="text" class="form-control" id="guarantor_nid" name="guarantor_nid" required>
+                <input type="text" class="form-control" id="guarantor_nid" name="guarantor_nid" value="{{ old('guarantor_nid') }}" required>
+                @error('guarantor_nid')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="guarantor_nid_pic_font">Guarantor NID Front Picture</label>
                 <input type="file" class="form-control-file" id="guarantor_nid_pic_font" name="guarantor_nid_pic_font">
+                @error('guarantor_nid_pic_font')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="guarantor_nid_pic_back">Guarantor NID Back Picture</label>
                 <input type="file" class="form-control-file" id="guarantor_nid_pic_back" name="guarantor_nid_pic_back">
+                @error('guarantor_nid_pic_back')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="guarantor_address">Guarantor Address</label>
-                <input type="text" class="form-control" id="guarantor_address" name="guarantor_address" required>
+                <input type="text" class="form-control" id="guarantor_address" name="guarantor_address" value="{{ old('guarantor_address') }}" required>
+                @error('guarantor_address')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="guarantor_occupation">Guarantor Occupation</label>
-                <input type="text" class="form-control" id="guarantor_occupation" name="guarantor_occupation" required>
+                <input type="text" class="form-control" id="guarantor_occupation" name="guarantor_occupation" value="{{ old('guarantor_occupation') }}" required>
+                @error('guarantor_occupation')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="guarantor_monthly_income">Guarantor Monthly Income</label>
-                <input type="number" class="form-control" id="guarantor_monthly_income" name="guarantor_monthly_income">
+                <input type="number" class="form-control" id="guarantor_monthly_income" name="guarantor_monthly_income" value="{{ old('guarantor_monthly_income') }}">
+                @error('guarantor_monthly_income')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="guarantor_phone_number">Guarantor Phone Number</label>
-                <input type="text" class="form-control" id="guarantor_phone_number" name="guarantor_phone_number" required>
+                <input type="text" class="form-control" id="guarantor_phone_number" name="guarantor_phone_number" value="{{ old('guarantor_phone_number') }}" required>
+                @error('guarantor_phone_number')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="guarantor_email">Guarantor Email</label>
-                <input type="email" class="form-control" id="guarantor_email" name="guarantor_email">
+                <input type="email" class="form-control" id="guarantor_email" name="guarantor_email" value="{{ old('guarantor_email') }}">
+                @error('guarantor_email')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="guarantor_pic">Guarantor Picture</label>
                 <input type="file" class="form-control-file" id="guarantor_pic" name="guarantor_pic">
+                @error('guarantor_pic')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="guarantor_relation">Guarantor Relation</label>
-                <input type="text" class="form-control" id="guarantor_relation" name="guarantor_relation" required>
+                <input type="text" class="form-control" id="guarantor_relation" name="guarantor_relation" value="{{ old('guarantor_relation') }}" required>
+                @error('guarantor_relation')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
             <!-- Additional Information -->
+            <h4 class="mt-4">Additional Information</h4>
             <div class="form-group">
                 <label for="has_previous_loan">Has Previous Loan?</label>
                 <select class="form-control" id="has_previous_loan" name="has_previous_loan">
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
+                    <option value="0" {{ old('has_previous_loan') == '0' ? 'selected' : '' }}>No</option>
+                    <option value="1" {{ old('has_previous_loan') == '1' ? 'selected' : '' }}>Yes</option>
                 </select>
+                @error('has_previous_loan')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <!-- Submit Button -->
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </form>
     </div>
 

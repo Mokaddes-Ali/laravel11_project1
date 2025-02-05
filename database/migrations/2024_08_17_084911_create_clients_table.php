@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('clients', function (Blueprint $table) {
@@ -35,7 +32,7 @@ return new class extends Migration
             $table->string('number')->unique();
             $table->string('emergency_contact_name');
             $table->string('pic')->nullable();
-            $table->string('loan_amount');
+            $table->decimal('loan_amount', 10, 2);
             $table->enum('loan_type', ['personal', 'business', 'home', 'education', 'other']);
             $table->text('purpose')->nullable();
             $table->string('guarantor_name');
@@ -54,28 +51,24 @@ return new class extends Migration
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->unsignedBigInteger('creator')->nullable();
             $table->unsignedBigInteger('editor')->nullable();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
-                // Foreign key constraints with cascadeOnUpdate and restrictOnDelete
-               
-             $table->foreign('creator')
-                      ->references('id')
-                      ->on('users')
-                      ->cascadeOnUpdate()
-                      ->restrictOnDelete();
+            // Foreign key constraints
+            $table->foreign('creator')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
 
-             $table->foreign('editor')
-                      ->references('id')
-                      ->on('users')
-                      ->cascadeOnUpdate()
-                      ->restrictOnDelete();
-
+            $table->foreign('editor')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('clients');

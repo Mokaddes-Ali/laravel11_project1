@@ -9,10 +9,11 @@ class Client extends Model
 {
     use HasFactory;
 
-    protected $table = 'clients'; // টেবিলের নাম নির্ধারণ করা
-    protected $primaryKey = 'id'; // প্রাইমারি কী নির্ধারণ করা
-    public $timestamps = true; // timestamps ব্যবহৃত হচ্ছে কিনা
+    protected $table = 'clients'; // Table name
+    protected $primaryKey = 'id'; // Primary key
+    public $timestamps = true; // Enable timestamps
 
+    // Fields that can be mass-assigned
     protected $fillable = [
         'name',
         'father_name',
@@ -55,23 +56,18 @@ class Client extends Model
         'status',
         'creator',
         'editor',
+        'user_id',
     ];
 
-    // **Creator সম্পর্কিত সম্পর্ক নির্ধারণ**
+    // Relationship with User (Creator)
     public function creator()
     {
         return $this->belongsTo(User::class, 'creator');
     }
 
-    // **Editor সম্পর্কিত সম্পর্ক নির্ধারণ**
+    // Relationship with User (Editor)
     public function editor()
     {
         return $this->belongsTo(User::class, 'editor');
-    }
-
-    // **Loan সম্পর্কিত সম্পর্ক নির্ধারণ**
-    public function loan()
-    {
-        return $this->belongsTo(Loan::class, 'loan_amount');
     }
 }

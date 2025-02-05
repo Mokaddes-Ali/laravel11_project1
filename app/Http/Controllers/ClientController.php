@@ -125,10 +125,10 @@ use Illuminate\Support\Facades\File;
 
 class ClientController extends Controller
 {
-    // Define base paths for different image types
-    private $clientImagePath = 'images/clients/';
-    private $nidImagePath = 'images/nid/';
-    private $guarantorImagePath = 'images/guarantors/';
+    // Paths for storing images
+    protected $clientImagePath = 'uploads/clients';
+    protected $nidImagePath = 'uploads/nids';
+    protected $guarantorImagePath = 'uploads/guarantors';
 
     public function index()
     {
@@ -141,9 +141,19 @@ class ClientController extends Controller
         return view('admin.client.show', compact('all'));
     }
 
-    public function create(Request $request)
+
+
+    // Show the form for creating a new client
+    public function create()
     {
-        $request->validate([
+        return view('admin.client.add');
+    }
+
+    // Store a newly created client in the database
+    public function store(Request $request)
+    {
+        // Validate the request
+      $request->validate([
             'name' => 'required|max:40',
             'father_name' => 'required|max:40',
             'mother_name' => 'required|max:40',
@@ -186,22 +196,21 @@ class ClientController extends Controller
             'slug' => 'nullable|max:50',
         ]);
 
+
+
+        // Handle file uploads
         $data = $request->except(['_token', 'pic', 'nid_pic_font', 'nid_pic_back', 'guarantor_nid_pic_font', 'guarantor_nid_pic_back', 'guarantor_pic']);
 
-        // Handle client image upload
+        $data['user_id'] = auth()->id();
         if ($request->hasFile('pic')) {
             $data['pic'] = $this->uploadImage($request->file('pic'), $this->clientImagePath);
         }
-
-        // Handle NID images upload
         if ($request->hasFile('nid_pic_font')) {
             $data['nid_pic_font'] = $this->uploadImage($request->file('nid_pic_font'), $this->nidImagePath);
         }
         if ($request->hasFile('nid_pic_back')) {
             $data['nid_pic_back'] = $this->uploadImage($request->file('nid_pic_back'), $this->nidImagePath);
         }
-
-        // Handle guarantor images upload
         if ($request->hasFile('guarantor_nid_pic_font')) {
             $data['guarantor_nid_pic_font'] = $this->uploadImage($request->file('guarantor_nid_pic_font'), $this->guarantorImagePath);
         }
@@ -212,17 +221,18 @@ class ClientController extends Controller
             $data['guarantor_pic'] = $this->uploadImage($request->file('guarantor_pic'), $this->guarantorImagePath);
         }
 
-        $data['created_at'] = now();
-        $data['updated_at'] = now();
+        // Insert data into the database
+        $client = Client::create($data);
 
-        $insert = Client::insertGetId($data);
-
-        if ($insert) {
-            return redirect()->route('show')->with('success', 'Data inserted successfully');
+        if ($client) {
+            return redirect()->route('client.show')->with('success', 'Client created successfully.');
         } else {
-            return back()->with('fail', 'Data insertion failed');
+            return back()->with('error', 'Failed to create client.');
         }
     }
+
+
+
 
     public function edit($id)
     {

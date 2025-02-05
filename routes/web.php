@@ -41,11 +41,16 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/client', [ClientController::class, 'index'])->name('index');
-    Route::post('/client/submit', [ClientController::class, 'create'])->name('create');
-    Route::get('/show/client', [ClientController::class, 'show']) -> name('show');
-    Route::get('/edit/client/{id}', [ClientController::class, 'edit']);
-    Route::post('/client/update', [ClientController::class, 'update']);
-    Route::get('/delete/{id}', [ClientController::class, 'destroy']);
+    // Route::post('/client/submit', [ClientController::class, 'create'])->name('create');
+    Route::get('/show/client', [ClientController::class, 'show']) -> name('client.show');
+    // Route::get('/edit/client/{id}', [ClientController::class, 'edit']);
+    // Route::post('/client/update', [ClientController::class, 'update']);
+    // Route::get('/delete/{id}', [ClientController::class, 'destroy']);
+
+
+// Client routes
+Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
+Route::post('/clients/store', [ClientController::class, 'store'])->name('clients.store');
 });
 
 Route::middleware('auth')->group(function () {
