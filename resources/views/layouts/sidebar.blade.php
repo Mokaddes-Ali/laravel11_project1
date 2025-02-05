@@ -122,7 +122,7 @@
                                         <!-- Link for Manage Client -->
                                         <li><a href="/show/client">Register Deatils</a></li>
                                         <!-- Link for Manage Client -->
-                                        {{-- <li><a href="{{ route('client.show') }}">Register Application</a></li> --}}
+                                        <li><a href="/show/client">Register Application</a></li>
                                     </ul>
                                 </div>
                             </li>
