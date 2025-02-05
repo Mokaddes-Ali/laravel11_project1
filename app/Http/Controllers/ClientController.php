@@ -176,9 +176,6 @@ class ClientController extends Controller
             'number' => 'required|unique:clients',
             'emergency_contact_name' => 'required|max:40',
             'pic' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
-            'loan_amount' => 'required|numeric',
-            'loan_type' => 'required|in:personal,business,home,education,other',
-            'purpose' => 'nullable|max:255',
             'guarantor_name' => 'required|max:40',
             'guarantor_nid' => 'required|max:20',
             'guarantor_nid_pic_font' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
@@ -190,7 +187,6 @@ class ClientController extends Controller
             'guarantor_email' => 'nullable|email',
             'guarantor_pic' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
             'guarantor_relation' => 'required|max:40',
-            'has_previous_loan' => 'nullable|boolean',
             'creator' => 'nullable|exists:users,id',
             'editor' => 'nullable|exists:users,id',
             'slug' => 'nullable|max:50',
@@ -202,6 +198,8 @@ class ClientController extends Controller
         $data = $request->except(['_token', 'pic', 'nid_pic_font', 'nid_pic_back', 'guarantor_nid_pic_font', 'guarantor_nid_pic_back', 'guarantor_pic']);
 
         $data['user_id'] = auth()->id();
+        $data['creator'] = auth()->id();
+        $data['editor'] = auth()->id();
         if ($request->hasFile('pic')) {
             $data['pic'] = $this->uploadImage($request->file('pic'), $this->clientImagePath);
         }

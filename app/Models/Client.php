@@ -9,9 +9,9 @@ class Client extends Model
 {
     use HasFactory;
 
-    protected $table = 'clients'; // Table name
-    protected $primaryKey = 'id'; // Primary key
-    public $timestamps = true; // Enable timestamps
+    protected $table = 'clients';
+    protected $primaryKey = 'id';
+    public $timestamps = true;
 
     // Fields that can be mass-assigned
     protected $fillable = [
@@ -37,9 +37,6 @@ class Client extends Model
         'number',
         'emergency_contact_name',
         'pic',
-        'loan_amount',
-        'loan_type',
-        'purpose',
         'guarantor_name',
         'guarantor_nid',
         'guarantor_nid_pic_font',
@@ -51,7 +48,6 @@ class Client extends Model
         'guarantor_email',
         'guarantor_pic',
         'guarantor_relation',
-        'has_previous_loan',
         'slug',
         'status',
         'creator',
@@ -69,5 +65,9 @@ class Client extends Model
     public function editor()
     {
         return $this->belongsTo(User::class, 'editor');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
