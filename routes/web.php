@@ -14,8 +14,9 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\LanguageController;
 
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ApplicationController;
 
 Route::get('otp-request', function () {
@@ -37,6 +38,11 @@ Route::get('/dashboard', function () {
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+Route::get('/lang/{lang}', [LanguageController::class, 'changeLanguage'])->name('lang.switch');
+
 
 
 Route::middleware('auth')->group(function () {

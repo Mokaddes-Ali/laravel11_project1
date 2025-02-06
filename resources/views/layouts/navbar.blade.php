@@ -105,10 +105,10 @@
                 <div class="dropdown-menu dropdown-menu-end">
 
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/images/flags/us.jpg" alt="user-image" class="me-1" height="12">
-                        <span class="align-middle">English</span>
-                    </a>
+                    
+                    <a href="{{ route('lang.switch', 'en') }}">English</a>
+<a href="{{ route('lang.switch', 'bn') }}">বাংলা</a>
+
 
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item">

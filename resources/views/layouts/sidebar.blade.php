@@ -41,39 +41,32 @@
 
                             <li>
                                 <a href="#sidebarDashboard" data-bs-toggle="collapse">
-                                    <span class="badge bg-success float-end">02</span>
                                     <i data-feather="home"></i>
-                                    <span> Dashboards </span>
+                                    <span> {{ __('messages.dashboard') }} </span>
                                     <!-- <span class="menu-arrow"></span> -->
                                 </a>
-                                <div class="collapse" id="sidebarDashboard">
-                                    <ul class="nav-second-level">
-                                        <li><a href="index.html">Ecommerce</a></li>
-                                        <li><a href="dashboard-analytics.html">Analytics</a></li>
-                                    </ul>
-                                </div>
                             </li>
 
-                            <li class="menu-title mt-2">Apps</li>
+                            <li class="menu-title mt-2">{{ __('messages.apps') }}</li>
 
                             <li>
                                 <a href="apps-calendar.html">
                                     <i data-feather="calendar"></i>
-                                    <span> Calendar </span>
+                                    <span>{{ __('messages.calendar') }}   </span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="apps-chat.html">
                                     <i data-feather="message-square"></i>
-                                    <span> Chat </span>
+                                    <span>{{ __('messages.chat') }}</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="#sidebarUsers" data-bs-toggle="collapse">
                                     <i data-feather="user"></i>
-                                    <span> Users </span>
+                                    <span> {{ __('messages.users') }} </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarUsers">
