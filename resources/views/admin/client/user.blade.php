@@ -6,17 +6,25 @@
 
     <!-- Status Highlight -->
     <div class="text-center mb-3">
-        <h4>Status:
-            @if ($client->status == 'pending')
-                <span class="badge bg-warning text-dark">Pending</span>
-            @elseif ($client->status == 'approved')
-                <span class="badge bg-success">Approved</span>
-            @elseif ($client->status == 'rejected')
-                <span class="badge bg-danger">Rejected</span>
-            @else
-                <span class="badge bg-secondary">Unknown</span>
-            @endif
-        </h4>
+        <h4>Status:</h4>
+@if ($client->status == 'pending')
+    <span class="badge bg-warning text-dark px-3 py-1 rounded">⏳ Pending</span>
+    <p class="text-warning mt-2 fw-bold">⚠️ Waiting for approval by Admin</p>
+
+@elseif ($client->status == 'approved')
+    <span class="badge bg-success text-white px-3 py-1 rounded">✅ Approved</span>
+    <p class="text-success mt-2 fw-bold">🎉 Successfully reviewed by Admin. Now you can apply for a loan.</p>
+
+@elseif ($client->status == 'rejected')
+    <span class="badge bg-danger text-white px-3 py-1 rounded">❌ Rejected</span>
+    <p class="text-danger mt-2 fw-bold">🚫 Application denied. Please contact our company.</p>
+
+@else
+    <span class="badge bg-secondary text-white px-3 py-1 rounded">❓ Unknown Status</span>
+    <p class="text-secondary mt-2 fw-bold">ℹ️ Status not recognized.</p>
+@endif
+
+
     </div>
 
     <div class="accordion" id="clientAccordion">

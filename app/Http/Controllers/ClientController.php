@@ -137,9 +137,21 @@ class ClientController extends Controller
 
     public function show()
     {
-        $all = Client::all();
+        $all = Client::with('user')->get();
         return view('admin.client.show', compact('all'));
     }
+
+    public function approve(Client $client)
+{
+    $client->update(['status' => 'approved']);
+    return redirect()->route('client.show')->with('success', 'Application approved!');
+}
+
+public function reject(Client $client)
+{
+    $client->update(['status' => 'rejected']);
+    return redirect()->route('client.show')->with('error', 'Application rejected!');
+}
 
 
 

@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/client/update', [ClientController::class, 'update']);
     Route::get('/delete/{id}', [ClientController::class, 'destroy']);
     Route::get('/client/{client}', [ClientController::class, 'showClientInfo'])->name('client.shows');
+    Route::post('/admin/applications/{client}/approve', [ClientController::class, 'approve'])->name('admin.approve');
+    Route::post('/admin/applications/{client}/reject', [ClientController::class, 'reject'])->name('admin.reject');
 
 // Client routes
 Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
