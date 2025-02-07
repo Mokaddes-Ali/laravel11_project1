@@ -120,6 +120,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Notifications\ClientStatusNotification;
+
+use Illuminate\Support\Facades\Mail;
+
+use App\Mail\ClientStatusMail;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -144,12 +150,26 @@ class ClientController extends Controller
     public function approve(Client $client)
 {
     $client->update(['status' => 'approved']);
+
+
+    Mail::to($client->user->email)->send(new ClientStatusMail($client, 'approved'));
+
+
+    $client->user->notify(new ClientStatusNotification($client, 'approved'));
+
     return redirect()->route('client.show')->with('success', 'Application approved!');
 }
 
 public function reject(Client $client)
 {
     $client->update(['status' => 'rejected']);
+
+
+    Mail::to($client->user->email)->send(new ClientStatusMail($client, 'rejected'));
+
+
+    $client->user->notify(new ClientStatusNotification($client, 'rejected'));
+
     return redirect()->route('client.show')->with('error', 'Application rejected!');
 }
 

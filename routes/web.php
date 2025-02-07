@@ -18,6 +18,7 @@ use App\Http\Controllers\LanguageController;
 
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ApplicationController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('otp-request', function () {
     return view('otp.request');
@@ -43,6 +44,11 @@ Route::get('/dashboard', function () {
 
 Route::get('/lang/{lang}', [LanguageController::class, 'changeLanguage'])->name('lang.switch');
 
+
+Route::get('/notifications/mark-all-read', function () {
+    Auth::user()->unreadNotifications->markAsRead();
+    return back();
+})->name('notifications.markAllAsRead');
 
 
 Route::middleware('auth')->group(function () {
