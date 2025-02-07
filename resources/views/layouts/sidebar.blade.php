@@ -206,8 +206,15 @@
         </a>
         <div class="collapse show" id="sidebarClient">
             <ul class="nav-second-level">
-                <li><a href="{{ url('/clients') }}">{{ __('messages.all_clients') }}</a></li>
+                <li><a href="{{ url('/show/client') }}">{{ __('messages.all_clients') }}</a></li>
                 <li><a href="{{ url('/add-client') }}">{{ __('messages.add_client') }}</a></li>
+                @php
+                use App\Models\Client;
+                $client = Client::where('user_id', auth()->id())->first();
+            @endphp
+                                        @if($client)
+                                        <li><a href="{{ route('client.shows', $client->id) }}">Register Application</a></li>
+                                    @endif
             </ul>
         </div>
     </li>

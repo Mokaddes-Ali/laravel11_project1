@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 use Flasher\Laravel\Facade\Flasher;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
 
 class ProfileController extends Controller
 {
@@ -25,21 +26,42 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
+   public function update(ProfileUpdateRequest $request): RedirectResponse
+{
+    $user = Auth::user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+    // Validate request
+    $validated = $request->validated();
+
+    // Handle image upload
+    if ($request->hasFile('profile_image')) {
+        $file = $request->file('profile_image');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $filePath = $file->storeAs('profile_images', $fileName, 'public');
+
+        // Delete old image if exists
+        if ($user->profile_image) {
+            Storage::disk('public')->delete($user->profile_image);
         }
 
-        $request->user()->save();
-
-        // Success Toast Message
-        Flasher::addSuccess('Your profile has been successfully updated.');
-
-        return Redirect::route('profile.edit');
+        $validated['profile_image'] = $filePath;
     }
+
+    // Update user data
+    $user->fill($validated);
+
+    // If email is changed, reset email verification
+    if ($user->isDirty('email')) {
+        $user->email_verified_at = null;
+    }
+
+    $user->save();
+
+    // Success Toast Message
+    Flasher::addSuccess('Your profile has been successfully updated.');
+
+    return Redirect::route('profile.edit');
+}
 
     /**
      * Delete the user's account.

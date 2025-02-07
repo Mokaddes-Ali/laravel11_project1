@@ -2,7 +2,7 @@
  <div id="wrapper">
 
 <!-- Topbar Start -->
-<div class="navbar-custom">
+<div class="navbar-custom bg-dark">
     <div class="container-fluid">
         <ul class="list-unstyled topnav-menu float-end mb-0">
 
@@ -91,13 +91,6 @@
                     <i data-feather="maximize"></i>
                 </a>
             </li>
-
-            <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
-                <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <i data-feather="grid"></i>
-                </a>
-            </li>
-
             <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
                 <a class="nav-link dropdown-toggle arrow-none d-flex align-items-center gap-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     @php($languages = ['en' => 'English', 'bn' => 'বাংলা'])
@@ -201,9 +194,14 @@
 
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                    <span class="pro-user-name ms-1">
-                        Nik Patel <i class="uil uil-angle-down"></i>
+                     <!-- Profile Image Preview -->
+                     <img src="{{ asset('storage/' . ($user->profile_image ?? 'default.png')) }}"
+                     class="rounded-circle"
+                     width="300" height="300"
+                     alt="Profile Image">
+
+                    <span class="pro-user-name ms-1 text-white">
+                        {{ Auth::check() ? Auth::user()->name : 'Guest' }} <i class="uil uil-angle-down"></i>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end profile-dropdown ">

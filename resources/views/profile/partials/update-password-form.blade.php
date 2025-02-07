@@ -3,6 +3,7 @@
         <h2 class="h4 fw-bold text-dark">Update Password</h2>
         <p class="text-muted large">Ensure your account is using a long, random password to stay secure.</p>
     </header>
+    @include('layouts.messages')
 
     <form method="post" action="{{ route('password.update') }}" class="needs-validation" novalidate>
         @csrf

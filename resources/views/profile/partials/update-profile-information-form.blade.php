@@ -69,15 +69,29 @@
         <h2 class="h4 text-dark fw-bold">Profile Information</h2>
         <p class="text-muted">Update your account's profile information and email address.</p>
     </header>
+    @include('layouts.messages')
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
+        <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+            @csrf
+            @method('patch')
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-4">
-        @csrf
-        @method('patch')
+            <!-- Profile Image Preview -->
+            <div class="mb-3 text-center">
+                <img src="{{ asset('storage/' . ($user->profile_image ?? 'default.png')) }}"
+                     class="rounded-circle"
+                     width="100" height="100"
+                     alt="Profile Image">
+            </div>
 
+            <!-- Upload Image -->
+            <div class="mb-3">
+                <label for="profile_image" class="form-label">Profile Image</label>
+                <input type="file" class="form-control" id="profile_image" name="profile_image" accept="image/*">
+                <div class="text-danger">{{ $errors->first('profile_image') }}</div>
+            </div>
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" id="name" name="name" class="form-control" value="{{ old('name', $user->name) }}" required autofocus autocomplete="name">

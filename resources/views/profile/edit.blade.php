@@ -5,6 +5,7 @@
         <div class="text-center mb-2">
             <h2 class="fw-bold">Profile Information</h2>
         </div>
+        @include('layouts.messages')
 
         <div class="row justify-content-center">
             <div class="col-md-10">
