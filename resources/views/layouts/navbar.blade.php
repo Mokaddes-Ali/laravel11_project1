@@ -99,43 +99,23 @@
             </li>
 
             <li class="dropdown d-none d-lg-inline-block topbar-dropdown">
-                <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                <a class="nav-link dropdown-toggle arrow-none d-flex align-items-center gap-1" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                    @php($languages = ['en' => 'English', 'bn' => 'বাংলা'])
+                    <span class="fw-bold">{{ $languages[Session::get('locale', 'en')] }}</span>
                     <i data-feather="globe"></i>
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-end">
-
-                    <!-- item-->
-                    
-                    <a href="{{ route('lang.switch', 'en') }}">English</a>
-<a href="{{ route('lang.switch', 'bn') }}">বাংলা</a>
-
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12">
-                        <span class="align-middle">German</span>
+                    <!-- Language Links -->
+                    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('lang.switch', 'en') }}">
+                        <i data-feather="flag"></i> English
                     </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12">
-                        <span class="align-middle">Italian</span>
+                    <a class="dropdown-item d-flex align-items-center gap-2" href="{{ route('lang.switch', 'bn') }}">
+                        <i data-feather="flag"></i> বাংলা
                     </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12">
-                        <span class="align-middle">Spanish</span>
-                    </a>
-
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item">
-                        <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12">
-                        <span class="align-middle">Russian</span>
-                    </a>
-
                 </div>
             </li>
+
 
             <li class="dropdown notification-list topbar-dropdown">
                 <a class="nav-link dropdown-toggle position-relative" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">

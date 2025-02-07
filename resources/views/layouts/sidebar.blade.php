@@ -63,7 +63,7 @@
                                 </a>
                             </li>
 
-                            <li>
+                            {{-- <li>
                                 <a href="#sidebarUsers" data-bs-toggle="collapse">
                                     <i data-feather="user"></i>
                                     <span> {{ __('messages.users') }} </span>
@@ -166,21 +166,107 @@
                                         <li><a href="/show/expense">List expense</a></li>
                                     </ul>
                                 </div>
-                            </li>
+                            </li> --}}
+
+                             <!-- Users Dropdown -->
+    <li>
+        <a href="#sidebarUsers">
+            <i data-feather="user"></i>
+            <span>{{ __('messages.users') }}</span>
+        </a>
+        <div class="collapse show" id="sidebarUsers">
+            <ul class="nav-second-level">
+                <li><a href="{{ url('/show') }}">{{ __('messages.all_users') }}</a></li>
+                <li><a href="{{ url('/user') }}">{{ __('messages.add_user') }}</a></li>
+                <li><a href="{{ url('/role') }}">{{ __('messages.add_role') }}</a></li>
+                <li><a href="{{ route('roles.index') }}">{{ __('messages.roles_list') }}</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <!-- Loan Dropdown -->
+    <li>
+        <a href="#sidebarLoan">
+            <i data-feather="dollar-sign"></i>
+            <span>{{ __('messages.loan') }}</span>
+        </a>
+        <div class="collapse show" id="sidebarLoan">
+            <ul class="nav-second-level">
+                <li><a href="{{ url('/loan') }}">{{ __('messages.all_loans') }}</a></li>
+                <li><a href="{{ url('/add-loan') }}">{{ __('messages.add_loan') }}</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <!-- Clients Dropdown -->
+    <li>
+        <a href="#sidebarClient">
+            <i data-feather="users"></i>
+            <span>{{ __('messages.clients') }}</span>
+        </a>
+        <div class="collapse show" id="sidebarClient">
+            <ul class="nav-second-level">
+                <li><a href="{{ url('/clients') }}">{{ __('messages.all_clients') }}</a></li>
+                <li><a href="{{ url('/add-client') }}">{{ __('messages.add_client') }}</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <!-- Projects Dropdown -->
+    <li>
+        <a href="#sidebarProjects">
+            <i data-feather="briefcase"></i>
+            <span>{{ __('messages.projects') }}</span>
+        </a>
+        <div class="collapse show" id="sidebarProjects">
+            <ul class="nav-second-level">
+                <li><a href="{{ url('/projects') }}">{{ __('messages.all_projects') }}</a></li>
+                <li><a href="{{ url('/add-project') }}">{{ __('messages.add_project') }}</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <!-- Income Dropdown -->
+    <li>
+        <a href="#sidebarIncome">
+            <i data-feather="credit-card"></i>
+            <span>{{ __('messages.income') }}</span>
+        </a>
+        <div class="collapse show" id="sidebarIncome">
+            <ul class="nav-second-level">
+                <li><a href="{{ url('/income') }}">{{ __('messages.all_income') }}</a></li>
+                <li><a href="{{ url('/add-income') }}">{{ __('messages.add_income') }}</a></li>
+            </ul>
+        </div>
+    </li>
+
+    <!-- Expense Dropdown -->
+    <li>
+        <a href="#sidebarExpense">
+            <i data-feather="shopping-cart"></i>
+            <span>{{ __('messages.expense') }}</span>
+        </a>
+        <div class="collapse show" id="sidebarExpense">
+            <ul class="nav-second-level">
+                <li><a href="{{ url('/expenses') }}">{{ __('messages.all_expenses') }}</a></li>
+                <li><a href="{{ url('/add-expense') }}">{{ __('messages.add_expense') }}</a></li>
+            </ul>
+        </div>
+    </li>
 
 
                             <li>
                                 <a href="/settings">
                                     <i data-feather="file-plus"></i>
-                                    <span> Settings </span>
+                                    <span>{{ __('messages.settings') }}</span>
                                 </a>
 
                                 <a href="/backup">
                                     <i data-feather="file-plus"></i>
-                                    <span>Data Backup</span>
+                                    <span>{{ __('messages.backup') }}</span>
                                 </a>
                                 <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
-                                    <i data-feather="log-out" class="icon-dual icon-xs me-1"></i><span>Logout</span>
+                                    <i data-feather="log-out" class="icon-dual icon-xs me-1"></i><span>{{ __('messages.logout') }}</span>
                                 </a>
                                 <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
