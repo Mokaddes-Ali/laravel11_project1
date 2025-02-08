@@ -29,7 +29,7 @@ class ClientStatusNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail', 'database']; // ইমেইল ও ডাটাবেস দুইভাবেই পাঠানো হবে
+        return ['database'];
     }
 
     /**

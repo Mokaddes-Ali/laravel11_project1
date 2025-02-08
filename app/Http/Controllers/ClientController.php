@@ -192,8 +192,8 @@ public function reject(Client $client)
             'phone_number' => 'required|max:15',
             'date_of_birth' => 'required|date',
             'nid_number' => 'required|unique:clients',
-            'nid_pic_font' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
-            'nid_pic_back' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'nid_pic_font' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
+            'nid_pic_back' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
             'occupation' => 'required|max:40',
             'monthly_income' => 'required|numeric',
             'present_district' => 'required|max:40',
@@ -207,17 +207,17 @@ public function reject(Client $client)
             'email' => 'required|email|unique:clients',
             'number' => 'required|unique:clients',
             'emergency_contact_name' => 'required|max:40',
-            'pic' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'pic' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
             'guarantor_name' => 'required|max:40',
             'guarantor_nid' => 'required|max:20',
-            'guarantor_nid_pic_font' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
-            'guarantor_nid_pic_back' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'guarantor_nid_pic_font' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
+            'guarantor_nid_pic_back' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
             'guarantor_address' => 'required|max:255',
             'guarantor_occupation' => 'required|max:40',
             'guarantor_monthly_income' => 'nullable|numeric',
             'guarantor_phone_number' => 'required|max:15',
             'guarantor_email' => 'nullable|email',
-            'guarantor_pic' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'guarantor_pic' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
             'guarantor_relation' => 'required|max:40',
             'creator' => 'nullable|exists:users,id',
             'editor' => 'nullable|exists:users,id',
@@ -271,7 +271,11 @@ public function reject(Client $client)
         if ($client->user_id !== auth()->id()) {
             abort(403);
         }
+        return view('admin.client.user', compact('client'));
+    }
 
+    public function singleClientshow($id){
+        $client = Client::findOrFail($id);
         return view('admin.client.user', compact('client'));
     }
 
@@ -282,18 +286,18 @@ public function reject(Client $client)
         return view('admin.client.edit', compact('record'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Client $client)
     {
-        $id = $request->id;
+        // Validate the request
         $request->validate([
             'name' => 'required|max:40',
             'father_name' => 'required|max:40',
             'mother_name' => 'required|max:40',
             'phone_number' => 'required|max:15',
             'date_of_birth' => 'required|date',
-            'nid_number' => 'required|unique:clients,nid_number,' . $id,
-            'nid_pic_font' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
-            'nid_pic_back' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'nid_number' => 'required',
+            'nid_pic_font' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
+            'nid_pic_back' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
             'occupation' => 'required|max:40',
             'monthly_income' => 'required|numeric',
             'present_district' => 'required|max:40',
@@ -304,80 +308,71 @@ public function reject(Client $client)
             'permanent_upazila' => 'required|max:40',
             'permanent_postcode' => 'nullable|max:10',
             'permanent_village' => 'nullable|max:40',
-            'email' => 'required|email|unique:clients,email,' . $id,
-            'number' => 'required|unique:clients,number,' . $id,
+            'email' => 'required|email',
+            'number' => 'required|numeric',
             'emergency_contact_name' => 'required|max:40',
-            'pic' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
-            'loan_amount' => 'required|numeric',
-            'loan_type' => 'required|in:personal,business,home,education,other',
-            'purpose' => 'nullable|max:255',
-            'loan_start_date' => 'required|date',
-            'loan_status' => 'nullable|in:pending,approved,rejected,ongoing,completed',
+            'pic' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
             'guarantor_name' => 'required|max:40',
             'guarantor_nid' => 'required|max:20',
-            'guarantor_nid_pic_font' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
-            'guarantor_nid_pic_back' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'guarantor_nid_pic_font' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
+            'guarantor_nid_pic_back' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
             'guarantor_address' => 'required|max:255',
             'guarantor_occupation' => 'required|max:40',
             'guarantor_monthly_income' => 'nullable|numeric',
             'guarantor_phone_number' => 'required|max:15',
             'guarantor_email' => 'nullable|email',
-            'guarantor_pic' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
+            'guarantor_pic' => 'nullable|image|mimes:jpg,gif,webp,png,jpeg|max:2048',
             'guarantor_relation' => 'required|max:40',
-            'has_previous_loan' => 'nullable|boolean',
-            'insurance_taken' => 'nullable|boolean',
-            'creator' => 'nullable|exists:users,id',
-            'editor' => 'nullable|exists:users,id',
-            'loan_applied_date' => 'required|date',
-            'loan_approved_date' => 'nullable|date',
-            'slug' => 'nullable|max:50',
-            'status' => 'nullable|integer',
         ]);
 
+        // Prepare data
         $data = $request->except(['_token', 'pic', 'nid_pic_font', 'nid_pic_back', 'guarantor_nid_pic_font', 'guarantor_nid_pic_back', 'guarantor_pic']);
+        $data['editor'] = auth()->id();
 
-        $client = Client::findOrFail($id);
-
-        // Handle client image upload
+        // Handle image updates
         if ($request->hasFile('pic')) {
-            $this->deleteImage($client->pic, $this->clientImagePath);
+            $this->deleteOldImage($client->pic);
             $data['pic'] = $this->uploadImage($request->file('pic'), $this->clientImagePath);
         }
-
-        // Handle NID images upload
         if ($request->hasFile('nid_pic_font')) {
-            $this->deleteImage($client->nid_pic_font, $this->nidImagePath);
+            $this->deleteOldImage($client->nid_pic_font);
             $data['nid_pic_font'] = $this->uploadImage($request->file('nid_pic_font'), $this->nidImagePath);
         }
         if ($request->hasFile('nid_pic_back')) {
-            $this->deleteImage($client->nid_pic_back, $this->nidImagePath);
+            $this->deleteOldImage($client->nid_pic_back);
             $data['nid_pic_back'] = $this->uploadImage($request->file('nid_pic_back'), $this->nidImagePath);
         }
-
-        // Handle guarantor images upload
         if ($request->hasFile('guarantor_nid_pic_font')) {
-            $this->deleteImage($client->guarantor_nid_pic_font, $this->guarantorImagePath);
+            $this->deleteOldImage($client->guarantor_nid_pic_font);
             $data['guarantor_nid_pic_font'] = $this->uploadImage($request->file('guarantor_nid_pic_font'), $this->guarantorImagePath);
         }
         if ($request->hasFile('guarantor_nid_pic_back')) {
-            $this->deleteImage($client->guarantor_nid_pic_back, $this->guarantorImagePath);
+            $this->deleteOldImage($client->guarantor_nid_pic_back);
             $data['guarantor_nid_pic_back'] = $this->uploadImage($request->file('guarantor_nid_pic_back'), $this->guarantorImagePath);
         }
         if ($request->hasFile('guarantor_pic')) {
-            $this->deleteImage($client->guarantor_pic, $this->guarantorImagePath);
+            $this->deleteOldImage($client->guarantor_pic);
             $data['guarantor_pic'] = $this->uploadImage($request->file('guarantor_pic'), $this->guarantorImagePath);
         }
 
-        $data['updated_at'] = now();
+        // Update client data
+        $updated = $client->update($data);
 
-        $update = $client->update($data);
-
-        if ($update) {
-            return back()->with('success', 'Data updated successfully');
+        if ($updated) {
+            return redirect()->route('client.show')->with('success', 'Client updated successfully.');
         } else {
-            return back()->with('fail', 'Data update failed');
+            return back()->with('error', 'Failed to update client.');
         }
     }
+
+    // Delete old image before replacing
+    private function deleteOldImage($imagePath)
+    {
+        if ($imagePath && file_exists(public_path($imagePath))) {
+            unlink(public_path($imagePath));
+        }
+    }
+
 
     public function destroy($id)
     {

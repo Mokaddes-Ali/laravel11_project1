@@ -35,10 +35,8 @@
             <img src="{{ asset('images/'.$row['pic']) }}" alt="img" width="50" height="50">
         </td>
         <td>{{ $row['status'] }}</td>
-        {{-- <td>
-            <a class="btn btn-primary btn-sm," href="{{ url('/edit/client' , $row -> id) }}">edit</a>
-            <a class="btn btn-danger btn-lg" onclick="return confirm('Are You Sure Delete!')" href="{{ url('/delete', $row -> id)}}">delete</a>
-        </td> --}}
+
+
         <td>
             <form action="{{ route('admin.approve', $row) }}" method="POST">
                 @csrf
@@ -49,6 +47,9 @@
                 @csrf
                 <button type="submit">Reject</button>
             </form>
+            <a class="btn btn-primary btn-sm," href="{{ url('/edit/client' , $row -> id) }}">edit</a>
+            <a class="btn btn-primary btn-sm," href="{{ url('/client/show' , $row -> id) }}">show</a>
+            <a class="btn btn-danger btn-lg" onclick="return confirm('Are You Sure Delete!')" href="{{ url('/delete', $row -> id)}}">delete</a>
         </td>
       </tr>
       @endforeach

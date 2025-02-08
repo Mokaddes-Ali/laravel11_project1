@@ -127,7 +127,12 @@
                                         @if ($client)
                                             <li><a href="{{ route('client.shows', $client->id) }}">Register
                                                     Application</a></li>
-                                        @endif
+
+                                        @else
+                                        <li>
+                                            <a href="javascript:void(0);" onclick="alert('আপনার Client ID নেই, অনুগ্রহ করে রেজিস্টার করুন!')">
+                                                Register Application</a></li>
+                                    @endif
                                     </ul>
                                 </div>
                             </li>
