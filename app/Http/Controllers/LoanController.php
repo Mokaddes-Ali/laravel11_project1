@@ -58,6 +58,7 @@ class LoanController extends Controller
     {
         // Validation
         $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
             'amount' => 'required|numeric|min:1',
             'duration' => 'required|integer|min:1',
             'interest_rate' => 'required|numeric|min:0|max:100',
@@ -76,6 +77,7 @@ class LoanController extends Controller
             $total_amount = $request->amount + ($request->amount * $request->interest_rate / 100);
             $monthly_pay_amount = $total_amount / $request->duration;
             Loan::create([
+                'name' => $request->name,
                 'loan_id' => $loan_id,
                 'amount' => $request->amount,
                 'duration' => $request->duration,
@@ -105,6 +107,7 @@ class LoanController extends Controller
         $loan = Loan::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
+            'name' => 'required|string',
             'amount' => 'required|numeric|min:1',
             'duration' => 'required|integer|min:1',
             'interest_rate' => 'required|numeric|min:0|max:100',
@@ -123,6 +126,7 @@ class LoanController extends Controller
             $monthly_pay_amount = $total_amount / $request->duration;
 
             $loan->update([
+                'name' => $request->name,
                 'amount' => $request->amount,
                 'duration' => $request->duration,
                 'interest_rate' => $request->interest_rate,

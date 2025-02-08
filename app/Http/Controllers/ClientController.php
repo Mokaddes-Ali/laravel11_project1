@@ -224,7 +224,6 @@ public function reject(Client $client)
             'slug' => 'nullable|max:50',
         ]);
 
-
         // Handle file uploads
         $data = $request->except(['_token', 'pic', 'nid_pic_font', 'nid_pic_back', 'guarantor_nid_pic_font', 'guarantor_nid_pic_back', 'guarantor_pic']);
 

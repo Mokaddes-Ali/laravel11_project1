@@ -14,6 +14,22 @@
             @csrf
             @method('PUT')
 
+             <!-- Name Field -->
+             <div class="mb-3">
+                <label for="name" class="form-label">
+                    Name <span class="text-danger">*</span>
+                </label>
+                <input type="text" name="name" id="name"
+                value="{{ old('amount', $loan->name) }}"
+                 class="form-control"
+                    placeholder="Enter loan name" required>
+                @error('name')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
+
+
             <!-- Amount Field -->
             <div class="mb-3">
                 <label for="amount" class="form-label">

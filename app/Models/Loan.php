@@ -12,6 +12,7 @@ class Loan extends Model
 
     // Specify which fields are mass assignable
     protected $fillable = [
+        'name',
         'loan_id',
         'amount',
         'duration',

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('loan_id')->unique();
             $table->decimal('amount', 15, 2);
             $table->integer('duration');

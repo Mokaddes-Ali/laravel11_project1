@@ -12,6 +12,18 @@
         <form action="{{ route('loans.store') }}" method="POST" class="card p-4 shadow-sm">
             @csrf
 
+             <!-- Name Field -->
+             <div class="mb-3">
+                <label for="name" class="form-label">
+                    Name <span class="text-danger">*</span>
+                </label>
+                <input type="text" name="name" id="name" value="{{ old('name') }}" class="form-control"
+                    placeholder="Enter loan name" required>
+                @error('name')
+                    <div class="text-danger small mt-1">{{ $message }}</div>
+                @enderror
+            </div>
+
             <!-- Amount Field -->
             <div class="mb-3">
                 <label for="amount" class="form-label">
