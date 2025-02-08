@@ -5,9 +5,11 @@
 
                     <!-- User box -->
                     <div class="user-box text-center">
-                        <img src="{{asset('admin')}}/assets/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle avatar-md">
+                        <img src="{{ asset('admin') }}/assets/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme"
+                            class="rounded-circle avatar-md">
                         <div class="dropdown">
-                            <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown">Nik Patel</a>
+                            <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block"
+                                data-bs-toggle="dropdown">Nik Patel</a>
                             <div class="dropdown-menu user-pro-dropdown">
 
                                 <a href="pages-profile.html" class="dropdown-item notify-item">
@@ -17,7 +19,8 @@
                                     <i data-feather="settings" class="icon-dual icon-xs me-1"></i><span>Settings</span>
                                 </a>
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i data-feather="help-circle" class="icon-dual icon-xs me-1"></i><span>Support</span>
+                                    <i data-feather="help-circle"
+                                        class="icon-dual icon-xs me-1"></i><span>Support</span>
                                 </a>
                                 <a href="pages-lock-screen.html" class="dropdown-item notify-item">
                                     <i data-feather="lock" class="icon-dual icon-xs me-1"></i><span>Lock Screen</span>
@@ -52,7 +55,7 @@
                             <li>
                                 <a href="apps-calendar.html">
                                     <i data-feather="calendar"></i>
-                                    <span>{{ __('messages.calendar') }}   </span>
+                                    <span>{{ __('messages.calendar') }} </span>
                                 </a>
                             </li>
 
@@ -63,7 +66,7 @@
                                 </a>
                             </li>
 
-                            {{-- <li>
+                            <li>
                                 <a href="#sidebarUsers" data-bs-toggle="collapse">
                                     <i data-feather="user"></i>
                                     <span> {{ __('messages.users') }} </span>
@@ -91,13 +94,15 @@
                                 <div class="collapse" id="sidebarLoan">
                                     <ul class="nav-second-level">
                                         <!-- Link for Create Loan -->
-                                        <li><a href="{{ route('loans.create') }}" class="flex items-center space-x-2 hover:text-blue-400">
-                                            <span>Create Loan</span>
-                                        </a></li>
+                                        <li><a href="{{ route('loans.create') }}"
+                                                class="flex items-center space-x-2 hover:text-blue-400">
+                                                <span>Create Loan</span>
+                                            </a></li>
                                         <!-- Link for Loans List -->
-                                        <li><a href="{{ route('loans.index') }}" class="flex items-center space-x-2 hover:text-blue-400">
-                                            <span>Loans List</span>
-                                        </a></li>
+                                        <li><a href="{{ route('loans.index') }}"
+                                                class="flex items-center space-x-2 hover:text-blue-400">
+                                                <span>Loans List</span>
+                                            </a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -116,12 +121,13 @@
                                         <li><a href="/show/client">Register Deatils</a></li>
                                         <!-- Link for Manage Client -->
                                         @php
-                use App\Models\Client;
-                $client = Client::where('user_id', auth()->id())->first();
-            @endphp
-                                        @if($client)
-                                        <li><a href="{{ route('client.shows', $client->id) }}">Register Application</a></li>
-                                    @endif
+                                            use App\Models\Client;
+                                            $client = Client::where('user_id', auth()->id())->first();
+                                        @endphp
+                                        @if ($client)
+                                            <li><a href="{{ route('client.shows', $client->id) }}">Register
+                                                    Application</a></li>
+                                        @endif
                                     </ul>
                                 </div>
                             </li>
@@ -129,13 +135,42 @@
                             <li>
                                 <a href="#sidebarProjects" data-bs-toggle="collapse">
                                     <i data-feather="briefcase"></i>
-                                 <span> Projects </span>
+                                    <span> Apply Loan </span>
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <div class="collapse" id="sidebarProjects">
                                     <ul class="nav-second-level">
-                                        <li><a href="/project">Add Project</a></li>
-                                        <li><a href="/show/project">All Projects</a></li>
+                                        @if ($client)
+                                        @if ($client->status === 'rejected')
+                                            <li>
+                                                <a href="javascript:void(0);" onclick="alert('আপনার আবেদন বাতিল করা হয়েছে, অনুগ্রহ করে পুনরায় নিবন্ধন করুন!')">
+                                                    Loan Apply
+                                                </a>
+                                            </li>
+                                        @elseif ($client->status === 'pending')
+                                            <li>
+                                                <a href="javascript:void(0);" onclick="alert('আপনার আবেদন এখনো প্রক্রিয়াধীন রয়েছে, অনুগ্রহ করে অপেক্ষা করুন!')">
+                                                    Loan Apply
+                                                </a>
+                                            </li>
+                                        @elseif ($client->status === 'approved')
+                                            <li><a href="/project">Loan Apply</a></li>
+                                        @else
+                                            <li>
+                                                <a href="javascript:void(0);" onclick="alert('কোনো বৈধ স্ট্যাটাস পাওয়া যায়নি, অনুগ্রহ করে প্রশাসকের সাথে যোগাযোগ করুন!')">
+                                                    Loan Apply
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @else
+                                        <li>
+                                            <a href="javascript:void(0);" onclick="alert('আপনার Client ID নেই, অনুগ্রহ করে রেজিস্টার করুন!')">
+                                                Loan Apply
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                        <li><a href="/show/project">See List</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -166,101 +201,7 @@
                                         <li><a href="/show/expense">List expense</a></li>
                                     </ul>
                                 </div>
-                            </li> --}}
-
-                             <!-- Users Dropdown -->
-    <li>
-        <a href="#sidebarUsers">
-            <i data-feather="user"></i>
-            <span>{{ __('messages.users') }}</span>
-        </a>
-        <div class="collapse show" id="sidebarUsers">
-            <ul class="nav-second-level">
-                <li><a href="{{ url('/show') }}">{{ __('messages.all_users') }}</a></li>
-                <li><a href="{{ url('/user') }}">{{ __('messages.add_user') }}</a></li>
-                <li><a href="{{ url('/role') }}">{{ __('messages.add_role') }}</a></li>
-                <li><a href="{{ route('roles.index') }}">{{ __('messages.roles_list') }}</a></li>
-            </ul>
-        </div>
-    </li>
-
-    <!-- Loan Dropdown -->
-    <li>
-        <a href="#sidebarLoan">
-            <i data-feather="dollar-sign"></i>
-            <span>{{ __('messages.loan') }}</span>
-        </a>
-        <div class="collapse show" id="sidebarLoan">
-            <ul class="nav-second-level">
-                <li><a href="{{ url('/loan') }}">{{ __('messages.all_loans') }}</a></li>
-                <li><a href="{{ url('/add-loan') }}">{{ __('messages.add_loan') }}</a></li>
-            </ul>
-        </div>
-    </li>
-
-    <!-- Clients Dropdown -->
-    <li>
-        <a href="#sidebarClient">
-            <i data-feather="users"></i>
-            <span>{{ __('messages.clients') }}</span>
-        </a>
-        <div class="collapse show" id="sidebarClient">
-            <ul class="nav-second-level">
-                <li><a href="{{ url('/show/client') }}">{{ __('messages.all_clients') }}</a></li>
-                <li><a href="{{ url('/add-client') }}">{{ __('messages.add_client') }}</a></li>
-                @php
-                use App\Models\Client;
-                $client = Client::where('user_id', auth()->id())->first();
-            @endphp
-                                        @if($client)
-                                        <li><a href="{{ route('client.shows', $client->id) }}">Register Application</a></li>
-                                    @endif
-            </ul>
-        </div>
-    </li>
-
-    <!-- Projects Dropdown -->
-    <li>
-        <a href="#sidebarProjects">
-            <i data-feather="briefcase"></i>
-            <span>{{ __('messages.projects') }}</span>
-        </a>
-        <div class="collapse show" id="sidebarProjects">
-            <ul class="nav-second-level">
-                <li><a href="{{ url('/projects') }}">{{ __('messages.all_projects') }}</a></li>
-                <li><a href="{{ url('/add-project') }}">{{ __('messages.add_project') }}</a></li>
-            </ul>
-        </div>
-    </li>
-
-    <!-- Income Dropdown -->
-    <li>
-        <a href="#sidebarIncome">
-            <i data-feather="credit-card"></i>
-            <span>{{ __('messages.income') }}</span>
-        </a>
-        <div class="collapse show" id="sidebarIncome">
-            <ul class="nav-second-level">
-                <li><a href="{{ url('/income') }}">{{ __('messages.all_income') }}</a></li>
-                <li><a href="{{ url('/add-income') }}">{{ __('messages.add_income') }}</a></li>
-            </ul>
-        </div>
-    </li>
-
-    <!-- Expense Dropdown -->
-    <li>
-        <a href="#sidebarExpense">
-            <i data-feather="shopping-cart"></i>
-            <span>{{ __('messages.expense') }}</span>
-        </a>
-        <div class="collapse show" id="sidebarExpense">
-            <ul class="nav-second-level">
-                <li><a href="{{ url('/expenses') }}">{{ __('messages.all_expenses') }}</a></li>
-                <li><a href="{{ url('/add-expense') }}">{{ __('messages.add_expense') }}</a></li>
-            </ul>
-        </div>
-    </li>
-
+                            </li>
 
                             <li>
                                 <a href="/settings">
@@ -272,10 +213,13 @@
                                     <i data-feather="file-plus"></i>
                                     <span>{{ __('messages.backup') }}</span>
                                 </a>
-                                <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
-                                    <i data-feather="log-out" class="icon-dual icon-xs me-1"></i><span>{{ __('messages.logout') }}</span>
+                                <a href="{{ route('logout') }}" class="dropdown-item notify-item"
+                                    onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                                    <i data-feather="log-out"
+                                        class="icon-dual icon-xs me-1"></i><span>{{ __('messages.logout') }}</span>
                                 </a>
-                                <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="frm-logout" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
                                     @csrf
                                 </form>
                             </li>
