@@ -116,16 +116,18 @@ public function showPaymentForm($id)
     // ভিউতে loanApplication পাঠানো
     return view('admin.loan_applications.payment_form', compact('loanApplication'));
 }
+
 public function makePayment(Request $request, $loanApplicationId)
 {
     $loanApplication = LoanApplication::findOrFail($loanApplicationId);
-    $amountToPay = $request->amount; // the amount to be paid
+    $amountToPay = $request->amount;
 
     // Stripe Payment Logic
     if ($request->payment_method == 'stripe') {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+
         $paymentIntent = PaymentIntent::create([
-            'amount' => $amountToPay * 100, // Stripe accepts amount in cents
+            'amount' => $amountToPay * 100, // Stripe amount in cents
             'currency' => 'usd',
         ]);
 
@@ -150,21 +152,21 @@ public function makePayment(Request $request, $loanApplicationId)
             'payment_method' => 'cash',
         ]);
 
-        // ✅ Cash payment এর জন্য transaction create করা
         Transaction::create([
             'payment_id' => $payment->id,
             'transaction_amount' => $amountToPay,
-            'transaction_id' => 'CASH-' . uniqid() // Unique transaction ID for cash
+            'transaction_id' => 'CASH-' . uniqid()
         ]);
     }
 
-    // Update loan application paid and due amounts
+    // Update loan application amounts
     $loanApplication->paid_amount += $amountToPay;
     $loanApplication->due_amount = $loanApplication->payable_amount - $loanApplication->paid_amount;
     $loanApplication->save();
 
     return back()->with('message', ucfirst($request->payment_method) . ' Payment Successful');
 }
+
 
     // Show
     public function show(LoanApplication $loanApplication)
