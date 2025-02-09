@@ -152,7 +152,7 @@ class ClientController extends Controller
     $client->update(['status' => 'approved']);
 
 
-    Mail::to($client->user->email)->send(new ClientStatusMail($client, 'approved'));
+    // Mail::to($client->user->email)->send(new ClientStatusMail($client, 'approved'));
 
 
     $client->user->notify(new ClientStatusNotification($client, 'approved'));
@@ -165,7 +165,7 @@ public function reject(Client $client)
     $client->update(['status' => 'rejected']);
 
 
-    Mail::to($client->user->email)->send(new ClientStatusMail($client, 'rejected'));
+    // Mail::to($client->user->email)->send(new ClientStatusMail($client, 'rejected'));
 
 
     $client->user->notify(new ClientStatusNotification($client, 'rejected'));

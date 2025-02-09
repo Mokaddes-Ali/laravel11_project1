@@ -139,6 +139,11 @@
                                 </a>
                             </th>
                             <th scope="col">
+                                <a href="{{ route('loans.index', ['sort' => 'name', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}">
+                                    Loan Name <i class="fas fa-sort"></i>
+                                </a>
+                            </th>
+                            <th scope="col">
                                 <a href="{{ route('loans.index', ['sort' => 'amount', 'direction' => request('direction') == 'asc' ? 'desc' : 'asc']) }}">
                                     Amount <i class="fas fa-sort"></i>
                                 </a>
@@ -172,6 +177,7 @@
                             <tr>
                                 <td>{{ $loan->id }}</td>
                                 <td>{{ $loan->loan_id }}</td>
+                                <td>{{ $loan->name }}</td>
                                 <td>{{ $loan->amount }}</td>
                                 <td>{{ $loan->duration }}</td>
                                 <td>{{ $loan->interest_rate }}%</td>
