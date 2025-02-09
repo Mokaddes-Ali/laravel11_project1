@@ -6,6 +6,10 @@ use App\Models\Loan;
 use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Models\LoanApplication;
+use App\Models\Payment;
+use App\Models\Transaction;
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
 
 class LoanApplicationController extends Controller
 {
@@ -104,6 +108,63 @@ class LoanApplicationController extends Controller
     }
 }
 
+public function showPaymentForm($id)
+{
+    // ID দিয়ে LoanApplication খুঁজে বের করা
+    $loanApplication = LoanApplication::findOrFail($id);
+
+    // ভিউতে loanApplication পাঠানো
+    return view('admin.loan_applications.payment_form', compact('loanApplication'));
+}
+public function makePayment(Request $request, $loanApplicationId)
+{
+    $loanApplication = LoanApplication::findOrFail($loanApplicationId);
+    $amountToPay = $request->amount; // the amount to be paid
+
+    // Stripe Payment Logic
+    if ($request->payment_method == 'stripe') {
+        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        $paymentIntent = PaymentIntent::create([
+            'amount' => $amountToPay * 100, // Stripe accepts amount in cents
+            'currency' => 'usd',
+        ]);
+
+        $payment = Payment::create([
+            'loan_application_id' => $loanApplication->id,
+            'amount_paid' => $amountToPay,
+            'payment_method' => 'stripe',
+        ]);
+
+        Transaction::create([
+            'payment_id' => $payment->id,
+            'transaction_amount' => $amountToPay,
+            'transaction_id' => $paymentIntent->id // Stripe transaction ID
+        ]);
+    }
+
+    // Cash Payment Logic
+    if ($request->payment_method == 'cash') {
+        $payment = Payment::create([
+            'loan_application_id' => $loanApplication->id,
+            'amount_paid' => $amountToPay,
+            'payment_method' => 'cash',
+        ]);
+
+        // ✅ Cash payment এর জন্য transaction create করা
+        Transaction::create([
+            'payment_id' => $payment->id,
+            'transaction_amount' => $amountToPay,
+            'transaction_id' => 'CASH-' . uniqid() // Unique transaction ID for cash
+        ]);
+    }
+
+    // Update loan application paid and due amounts
+    $loanApplication->paid_amount += $amountToPay;
+    $loanApplication->due_amount = $loanApplication->payable_amount - $loanApplication->paid_amount;
+    $loanApplication->save();
+
+    return back()->with('message', ucfirst($request->payment_method) . ' Payment Successful');
+}
 
     // Show
     public function show(LoanApplication $loanApplication)

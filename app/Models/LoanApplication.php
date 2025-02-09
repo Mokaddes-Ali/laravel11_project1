@@ -32,6 +32,12 @@ class LoanApplication extends Model
         return $this->belongsTo(Client::class, 'client_id');
     }
 
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
     public function loan()
     {
         return $this->belongsTo(Loan::class, 'loan_id');
