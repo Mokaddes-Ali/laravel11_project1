@@ -87,6 +87,7 @@ class LoanApplicationController extends Controller
             'loan_id' => $request->loan_id,
             'application_id' => $request->application_id,
             'payable_amount' => $payable_amount,
+            'monthly_installment' => $loan->monthly_pay_amount,
             'loan_purpose' => $request->loan_purpose,
             'loan_perporse' => $request->loan_perporse,
             'collateral_details' => $request->collateral_details,

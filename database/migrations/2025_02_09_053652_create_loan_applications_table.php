@@ -13,6 +13,7 @@ class CreateLoanApplicationsTable extends Migration
             $table->unsignedBigInteger('loan_id');
             $table->string('application_id')->unique();
             $table->unsignedBigInteger('payable_amount');
+            $table->unsignedBigInteger('monthly_installment');
             $table->decimal('paid_amount', 15, 2)->default(0);
             $table->decimal('due_amount', 15, 2)->default(0);
             $table->decimal('expend_amount', 15, 2)->default(0);

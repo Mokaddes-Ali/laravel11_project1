@@ -14,6 +14,7 @@ class LoanApplication extends Model
         'loan_id',
         'application_id',
         'payable_amount',
+        'monthly_installment',
         'paid_amount',
         'due_amount',
         'expend_amount',

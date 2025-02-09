@@ -71,6 +71,14 @@
     <input type="text" class="form-control" id="payable_amount" name="payable_amount" readonly>
 </div>
 
+<!-- monthly_installment Field -->
+<div class="mb-3">
+    <label for="monthly_installment" class="form-label">Payable Amount</label>
+    <input type="text" class="form-control" id="monthly_installment" name="monthly_installment" readonly>
+</div>
+
+
+
 <!-- JavaScript Code -->
 <script>
     document.getElementById('loan_id').addEventListener('change', function () {
@@ -87,11 +95,13 @@
 
             // Set Payable Amount Automatically
             document.getElementById('payable_amount').value = selectedOption.getAttribute('data-amount');
+            document.getElementById('monthly_installment').value = selectedOption.getAttribute('data-monthly');
 
             document.getElementById('loan_details').style.display = 'block';
         } else {
             document.getElementById('loan_details').style.display = 'none';
             document.getElementById('payable_amount').value = ''; // Clear payable amount if no loan selected
+            document.getElementById('monthly_installment').value = ''; // Clear payable amount if no loan selected
         }
     });
 </script>
