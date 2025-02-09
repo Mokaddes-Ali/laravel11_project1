@@ -159,7 +159,7 @@
                                                 </a>
                                             </li>
                                         @elseif ($client->status === 'approved')
-                                            <li><a href="/project">Loan Apply</a></li>
+                                            <li><a href="/loan-applications/create">Loan Apply</a></li>
                                         @else
                                             <li>
                                                 <a href="javascript:void(0);" onclick="alert('কোনো বৈধ স্ট্যাটাস পাওয়া যায়নি, অনুগ্রহ করে প্রশাসকের সাথে যোগাযোগ করুন!')">

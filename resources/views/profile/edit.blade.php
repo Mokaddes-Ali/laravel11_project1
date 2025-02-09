@@ -8,7 +8,7 @@
         @include('layouts.messages')
 
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <div class="row g-4">
                     <div class="col-md-6">
                         <div class="card shadow-sm">
@@ -23,12 +23,12 @@
                                 @include('profile.partials.update-password-form')
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="card shadow-sm mt-2">
-                    <div class="card-body">
+                        <div class="card shadow-sm mt-2">
+                            <div class="card-body">
 
-                        @include('profile.partials.delete-user-form')
+                                @include('profile.partials.delete-user-form')
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

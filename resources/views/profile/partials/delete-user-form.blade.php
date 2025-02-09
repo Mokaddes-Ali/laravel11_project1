@@ -1,10 +1,10 @@
 <section class="">
-    <header class="mb-4">
+    <header class="mb-2">
         <h2 class="h4 text-dark">
             {{ __('Delete Account') }}
         </h2>
         <p class="text-muted large">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
+            {{ __('Once your account is deleted.') }}
         </p>
     </header>
 

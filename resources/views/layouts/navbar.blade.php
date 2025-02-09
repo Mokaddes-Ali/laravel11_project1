@@ -114,7 +114,11 @@
                 <a class="nav-link dropdown-toggle position-relative" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i data-feather="bell"></i>
                     <span class="badge bg-danger rounded-circle noti-icon-badge">
-                        {{ auth()->user()->unreadNotifications->count() }}
+                        @if(auth()->check()) <!-- Check if the user is authenticated -->
+                            {{ auth()->user()->unreadNotifications->count() }}
+                        @else
+                            0
+                        @endif
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-lg">
@@ -128,20 +132,25 @@
                         </h5>
                     </div>
                     <div class="noti-scroll" data-simplebar>
-                        @foreach(auth()->user()->unreadNotifications as $notification)
-                            <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
-                                <div class="notify-icon bg-primary"><i class="uil uil-info-circle"></i></div>
-                                <p class="notify-details">{{ $notification->data['message'] }}
-                                    <small class="text-muted">{{ $notification->data['time'] }}</small>
-                                </p>
-                            </a>
-                        @endforeach
+                        @if(auth()->check()) <!-- Check if the user is authenticated -->
+                            @foreach(auth()->user()->unreadNotifications as $notification)
+                                <a href="javascript:void(0);" class="dropdown-item notify-item border-bottom">
+                                    <div class="notify-icon bg-primary"><i class="uil uil-info-circle"></i></div>
+                                    <p class="notify-details">{{ $notification->data['message'] }}
+                                        <small class="text-muted">{{ $notification->data['time'] }}</small>
+                                    </p>
+                                </a>
+                            @endforeach
+                        @else
+                            <p>No notifications available.</p>
+                        @endif
                     </div>
                     <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
                         View all <i class="fe-arrow-right"></i>
                     </a>
                 </div>
             </li>
+
 
 
             <li class="dropdown notification-list topbar-dropdown">

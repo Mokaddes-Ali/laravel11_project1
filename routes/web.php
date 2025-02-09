@@ -19,6 +19,7 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\ApplicationController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\LoanApplicationController;
 
 Route::get('otp-request', function () {
     return view('otp.request');
@@ -67,6 +68,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
 Route::post('/clients/store', [ClientController::class, 'store'])->name('clients.store');
 });
+
+
+Route::resource('loan-applications', LoanApplicationController::class);
+Route::get('/get-loan-details/{id}', [LoanApplicationController::class, 'getLoanDetails']);
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/project', [ProjectController::class, 'index'])->name('index');
