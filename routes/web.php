@@ -74,7 +74,7 @@ Route::resource('loan-applications', LoanApplicationController::class);
 Route::get('/get-loan-details/{id}', [LoanApplicationController::class, 'getLoanDetails']);
 
 
-Route::post('/loan-application/{id}/pay', [LoanApplicationController::class, 'makePayment'])->name('loanApplication.pay');
+Route::post('/loanApplication/pay/{id}', [LoanApplicationController::class, 'makePayment'])->name('loanApplication.pay');
 Route::get('/loan/{id}/pay', [LoanApplicationController::class, 'showPaymentForm'])->name('loanApplication.payForm');
 
 

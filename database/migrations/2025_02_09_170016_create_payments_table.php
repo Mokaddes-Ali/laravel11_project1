@@ -14,6 +14,8 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('loan_application_id');
             $table->decimal('amount_paid', 15, 2);
             $table->enum('payment_method', ['cash', 'stripe']);
+            $table->string('email')->nullable();
+            $table->string('card_holder_name')->nullable();
             $table->timestamps();
 
             // Foreign key constraints

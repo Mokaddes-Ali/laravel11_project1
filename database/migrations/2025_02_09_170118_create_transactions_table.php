@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTransactionsTable extends Migration
 {
-    public function up(): void
+    public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
@@ -15,10 +15,10 @@ class CreateTransactionsTable extends Migration
             $table->string('transaction_id');
             $table->timestamps();
 
-            // Foreign key constraints
-            $table->foreign('payment_id')->references('id')->on('payments')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
         });
     }
+
 
     public function down(): void
     {

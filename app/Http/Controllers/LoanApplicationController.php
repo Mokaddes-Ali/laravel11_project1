@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Stripe\Stripe;
 use App\Models\Loan;
 use App\Models\Client;
+use App\Models\Payment;
+use Stripe\PaymentIntent;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\LoanApplication;
-use App\Models\Payment;
-use App\Models\Transaction;
-use Stripe\Stripe;
-use Stripe\PaymentIntent;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PaymentConfirmation;
 
 class LoanApplicationController extends Controller
 {
@@ -117,55 +119,271 @@ public function showPaymentForm($id)
     return view('admin.loan_applications.payment_form', compact('loanApplication'));
 }
 
+// public function makePayment(Request $request, $loanApplicationId)
+// {
+//     $loanApplication = LoanApplication::findOrFail($loanApplicationId);
+//     $amountToPay = $request->amount;
+
+//     // Stripe Payment Logic
+//     if ($request->payment_method == 'stripe') {
+//         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+
+//         $paymentIntent = PaymentIntent::create([
+//             'amount' => $amountToPay * 100, // Stripe amount in cents
+//             'currency' => 'usd',
+//         ]);
+
+//         $payment = Payment::create([
+//             'loan_application_id' => $loanApplication->id,
+//             'amount_paid' => $amountToPay,
+//             'payment_method' => 'stripe',
+//         ]);
+
+//         Transaction::create([
+//             'payment_id' => $payment->id,
+//             'transaction_amount' => $amountToPay,
+//             'transaction_id' => $paymentIntent->id // Stripe transaction ID
+//         ]);
+//     }
+
+//     // Cash Payment Logic
+//     if ($request->payment_method == 'cash') {
+//         $payment = Payment::create([
+//             'loan_application_id' => $loanApplication->id,
+//             'amount_paid' => $amountToPay,
+//             'payment_method' => 'cash',
+//         ]);
+
+//         Transaction::create([
+//             'payment_id' => $payment->id,
+//             'transaction_amount' => $amountToPay,
+//             'transaction_id' => 'CASH-' . uniqid()
+//         ]);
+//     }
+
+//     // Update loan application amounts
+//     $loanApplication->paid_amount += $amountToPay;
+//     $loanApplication->due_amount = $loanApplication->payable_amount - $loanApplication->paid_amount;
+//     $loanApplication->save();
+
+//     return back()->with('message', ucfirst($request->payment_method) . ' Payment Successful');
+// }
+
+
+
+// public function makePayment(Request $request, $loanApplicationId)
+// {
+//     $loanApplication = LoanApplication::findOrFail($loanApplicationId);
+//     $amountToPay = $request->amount;
+
+//     if ($request->payment_method == 'stripe') {
+//         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+
+//         $paymentIntent = PaymentIntent::create([
+//             'amount' => $amountToPay * 100, // Stripe amount in cents
+//             'currency' => 'usd',
+//         ]);
+
+//         $payment = Payment::create([
+//             'loan_application_id' => $loanApplication->id,
+//             'amount_paid' => $amountToPay,
+//             'payment_method' => 'stripe',
+//         ]);
+
+//         Transaction::create([
+//             'payment_id' => $payment->id,
+//             'transaction_amount' => $amountToPay,
+//             'transaction_id' => $paymentIntent->id // Stripe transaction ID
+//         ]);
+
+//         return response()->json(['clientSecret' => $paymentIntent->client_secret]); // client_secret পাঠানো হচ্ছে
+//     }
+
+//     if ($request->payment_method == 'cash') {
+//         $payment = Payment::create([
+//             'loan_application_id' => $loanApplication->id,
+//             'amount_paid' => $amountToPay,
+//             'payment_method' => 'cash',
+//         ]);
+
+//         Transaction::create([
+//             'payment_id' => $payment->id,
+//             'transaction_amount' => $amountToPay,
+//             'transaction_id' => 'CASH-' . uniqid()
+//         ]);
+
+//         $loanApplication->paid_amount += $amountToPay;
+//         $loanApplication->due_amount = $loanApplication->payable_amount - $loanApplication->paid_amount;
+//         $loanApplication->save();
+
+//         return back()->with('success', 'Cash Payment Successful!');
+//     } else {
+//         return back()->with('error', 'Payment failed! Please try again.');
+//     }
+
+// }
+
+// public function makePayment(Request $request, $loanApplicationId)
+// {
+//     $loanApplication = LoanApplication::findOrFail($loanApplicationId);
+//     $amountToPay = $request->amount;
+//     $email = $request->email;
+//     $cardHolderName = $request->card_holder_name;
+
+//     if ($request->payment_method == 'stripe') {
+//         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+
+//         $paymentIntent = PaymentIntent::create([
+//             'amount' => $amountToPay * 100, // Stripe amount in cents
+//             'currency' => 'usd',
+//             'payment_method_types' => ['card'],
+//         ]);
+
+//         $transactionId = $paymentIntent->id;
+
+//         // Save to database
+//         $payment = Payment::create([
+//             'loan_application_id' => $loanApplication->id,
+//             'amount_paid' => $amountToPay,
+//             'payment_method' => 'stripe',
+//             'email' => $email,
+//             'card_holder_name' => $cardHolderName
+//         ]);
+
+//         Transaction::create([
+//             'payment_id' => $payment->id,
+//             'transaction_amount' => $amountToPay,
+//             'transaction_id' => $transactionId
+//         ]);
+
+//         // Send Email Notification
+//         Mail::to($email)->send(new PaymentConfirmation($payment));
+
+//         return response()->json(['message' => 'Payment successful!', 'clientSecret' => $paymentIntent->client_secret]);
+//     } elseif ($request->payment_method == 'cash') {
+//         // Save Cash Payment
+//         $payment = Payment::create([
+//             'loan_application_id' => $loanApplication->id,
+//             'amount_paid' => $amountToPay,
+//             'payment_method' => 'cash',
+//             'email' => $email
+//         ]);
+
+//         Mail::to($email)->send(new PaymentConfirmation($payment));
+
+//         return redirect()->back()->with('success', 'Cash payment recorded successfully!');
+//     }
+
+//     return redirect()->back()->with('error', 'Invalid payment method.');
+// }
+
+
+
+
 public function makePayment(Request $request, $loanApplicationId)
 {
     $loanApplication = LoanApplication::findOrFail($loanApplicationId);
     $amountToPay = $request->amount;
+    $email = $request->email;
+    $cardHolderName = $request->card_holder_name;
 
-    // Stripe Payment Logic
+    $fromEmail = 'noreply@yourcompany.com'; // Company email
+    $fromName = 'Your Company Name'; // Company name
+
     if ($request->payment_method == 'stripe') {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
         $paymentIntent = PaymentIntent::create([
             'amount' => $amountToPay * 100, // Stripe amount in cents
             'currency' => 'usd',
+            'payment_method_types' => ['card'],
         ]);
 
+        $transactionId = $paymentIntent->id;
+
+        // Save to database
         $payment = Payment::create([
             'loan_application_id' => $loanApplication->id,
             'amount_paid' => $amountToPay,
             'payment_method' => 'stripe',
+            'email' => $email,
+            'card_holder_name' => $cardHolderName
         ]);
 
         Transaction::create([
             'payment_id' => $payment->id,
             'transaction_amount' => $amountToPay,
-            'transaction_id' => $paymentIntent->id // Stripe transaction ID
+            'transaction_id' => $transactionId
         ]);
-    }
 
-    // Cash Payment Logic
-    if ($request->payment_method == 'cash') {
+        // Send Email Notification
+        Mail::send('emails.payment_confirmation', ['payment' => $payment], function ($message) use ($email, $fromEmail, $fromName) {
+            $message->from($fromEmail, $fromName)
+                    ->to($email)
+                    ->subject('Payment Confirmation - Loan Application');
+        });
+
+        return response()->json(['message' => 'Payment successful!', 'clientSecret' => $paymentIntent->client_secret]);
+    } elseif ($request->payment_method == 'cash') {
+        // Save Cash Payment
         $payment = Payment::create([
             'loan_application_id' => $loanApplication->id,
             'amount_paid' => $amountToPay,
             'payment_method' => 'cash',
+            'email' => $email
         ]);
 
-        Transaction::create([
-            'payment_id' => $payment->id,
-            'transaction_amount' => $amountToPay,
-            'transaction_id' => 'CASH-' . uniqid()
-        ]);
+        // Send Email Notification for Cash Payment
+        Mail::send('emails.payment_confirmation', ['payment' => $payment], function ($message) use ($email, $fromEmail, $fromName) {
+            $message->from($fromEmail, $fromName)
+                    ->to($email)
+                    ->subject('Cash Payment Confirmation - Loan Application');
+        });
+
+        return redirect()->back()->with('success', 'Cash payment recorded successfully!');
     }
 
-    // Update loan application amounts
-    $loanApplication->paid_amount += $amountToPay;
-    $loanApplication->due_amount = $loanApplication->payable_amount - $loanApplication->paid_amount;
-    $loanApplication->save();
-
-    return back()->with('message', ucfirst($request->payment_method) . ' Payment Successful');
+    return redirect()->back()->with('error', 'Invalid payment method.');
 }
+
+
+// public function makePayment(Request $request, $loanApplicationId)
+//     {
+//         $loanApplication = LoanApplication::findOrFail($loanApplicationId);
+//         $amountToPay = $request->amount * 100; // Convert to cents
+
+//         if ($request->payment_method === 'stripe') {
+//             Stripe::setApiKey(env('STRIPE_SECRET'));
+
+//             $paymentIntent = PaymentIntent::create([
+//                 'amount' => $amountToPay,
+//                 'currency' => 'usd',
+//                 'payment_method_types' => ['card'],
+//             ]);
+
+//             return response()->json(['clientSecret' => $paymentIntent->client_secret]);
+//         }
+
+//         // Cash Payment Logic
+//         if ($request->payment_method === 'cash') {
+//             $payment = Payment::create([
+//                 'loan_application_id' => $loanApplication->id,
+//                 'amount_paid' => $amountToPay / 100,
+//                 'payment_method' => 'cash',
+//             ]);
+
+//             Transaction::create([
+//                 'payment_id' => $payment->id,
+//                 'transaction_amount' => $amountToPay / 100,
+//                 'transaction_id' => 'CASH-' . uniqid(),
+//             ]);
+
+//             return response()->json(['message' => 'Cash Payment Successful']);
+//         }
+
+//         return response()->json(['error' => 'Invalid payment method'], 400);
+//     }
+
 
 
     // Show
