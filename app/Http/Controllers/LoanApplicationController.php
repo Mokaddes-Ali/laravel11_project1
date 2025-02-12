@@ -456,10 +456,10 @@ public function makePayment(Request $request, $loanApplicationId)
 {
     // Validate the incoming request
     $request->validate([
-        'amount' => 'required|numeric|min:1', // Ensure amount is a number and greater than 0
-        'email' => 'required|email', // Ensure email is valid
-        'payment_method' => 'required|in:stripe,cash', // Only allow 'stripe' or 'cash' as valid payment methods
-        'card_holder_name' => 'required_if:payment_method,stripe|string|max:255', // Only require card holder name if payment method is 'stripe'
+        'amount' => 'required|numeric|min:1',
+        'email' => 'required|email',
+        'payment_method' => 'required|in:stripe,cash',
+        'card_holder_name' => 'required|string|max:255',
     ]);
 
     $loanApplication = LoanApplication::findOrFail($loanApplicationId);
