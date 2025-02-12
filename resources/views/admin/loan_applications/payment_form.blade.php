@@ -363,6 +363,7 @@
 {{-- @extends('layouts.master')
 
 
+
 {{-- <!-- JavaScript for SweetAlert2 -->
 <script>
     function showSuccessAlert(event) {
@@ -382,6 +383,7 @@
         });
     }
 </script> --}}
+
 {{--
 <script>
     document.getElementById('paymentMethod').addEventListener('change', function () {
